@@ -68,7 +68,7 @@
 \begin{document}
 	\thispagestyle{empty}
 	%make title bold and 14 pt font (Latex default is non-bold, 16 pt)
-	\title{\Large \textbf{Transferability of Mie n-6 force fields for predicting liquid shear viscosity at saturation and elevated pressures}}
+	\title{\Large \textbf{The role of force field uncertainty in the prediction of high pressure viscosities.}}
 	\author[1]{\large {\underline{Richard Messerly}}}%%[12 pt regular, presenting speaker underlined]
 	
 	\affil[1]{\textit{Thermodynamics Research Center (TRC), National Institute of Standards and Technology (NIST),
@@ -83,65 +83,45 @@
 	
 \section*{Key points}
 
-Mie and TAMie potentials are much better at saturation viscosities, despite not being fit directly to them
-Viscosity density curve is much harder to reproduce
-Viscosity pressure is adequately predicted with Potoff and TAMie
-Branched alkanes have slightly worse performance
-
-Propane is accurate to nearly 1 GPa
-Butane agrees more closely with newer REFPROP correlation
-C12 has similar results for Potoff and TraPPE?
-
-Entropy scaling for isooctane?
-
-Wrong torsional parameters for some isocompounds?
+Force field parameter uncertainty is negligible compared to Green-Kubo uncertainty
+We quantify both Mie and torsional uncertainties
 
 \section*{Outline}
 
 \section{Introduction}
 
 \begin{enumerate}
-	\item Viscosity is an important property for designing chemical systems
-	\item Viscosity data typically do not cover the entire range of $P \rho T$ of interest
-	\item Prediction methods are typically quite poor for viscosity
-	\item Molecular simulation is an attractive alternative, but two main challenges
+	\item Introduce the industrial fluid properties simulation challenge
+	\item Discuss the details of the 10th challenge
+	\item Explain why this challenge is important/interesting:
 	\begin{enumerate}
-		\item Difficulty of obtaining reproducible results from simulation
-		\item Unreliable force fields
+		\item Viscosity is an important property for designing chemical systems
+		\item Viscosity data typically do not cover the entire range of $P \rho T$ of interest
+		\item Prediction methods are typically quite poor for viscosity
+		\item Molecular simulation is an attractive alternative, but two main challenges
+		\begin{enumerate}
+			\item Difficulty of obtaining reproducible results from simulation
+			\item Unreliable force fields
+		\end{enumerate}
 	\end{enumerate}
-    \item This manuscript applies the recent Best Practices to improve reproducibility such that it is possible to elucidate the difference in force fields
-    \item Previous studies have suggested that UA models may be inadequate, while Gordon showed that a Mie potential could accomplish both VLE and viscosity
-    \item This study tests whether the modern Mie potentials that are optimized for saturation thermodynamic properties are transferable to transport properties, e.g. shear viscosity
+	\item We performed a systematic investigation of several united-atom force fields and determined Potoff to be the most reliable
+	\item Although Potoff over predicts viscosity and pressure with respect to density, it is quite reliable at predicting viscosity with respect to pressure
+	\item The uncertainty in force field parameters is key for rigorously quantifying the uncertainty
 \end{enumerate}
 
 \section{Methods}
 
-\subsection{Force fields}
-
-Copy the majority of this section from a previous publication
-
-\begin{enumerate}
-	\item United-atom and AUA models are the focus
-	\item LJ 12-6 and Mie n-6
-	\item Four force fields (although some have slightly different ethane parameters)
-	\item None of these force fields specify bond types, so we used fixed bonds
-	\item Torsions are the same for each force field
-\end{enumerate}
-
 \subsection{Simulation set-up}
 
 \begin{enumerate}
-	\item Two types of simulations performed, saturation and 293 K for compressed systems
-	\item Saturation simulations use the REFPROP densities such that, in some cases, the force field is actually in a metastable state
-	\item Performed some simulations at reported saturation conditions
 	\item NPT performed for each replicate such that a distribution of box sizes is obtained
-	\item Depending on the system, a simulation of 1, 2, 4, or 8 ns was used for the production stage
+	\item Depending on the system, a simulation of 1, 2, 4, 8, 16, or 32 ns was used for the production stage
 	\item Details are in supporting information
 \end{enumerate}
 
 \subsection{Data analysis}
 
-Refer to Best Practices document
+Refer to Zhang, Best Practices, and Special Issue manuscript
 
 \begin{enumerate}
 	\item Use 40\% sigma for cut-off
@@ -151,77 +131,35 @@ Refer to Best Practices document
 	\item 12 time origins
 \end{enumerate}
 
-We have tried to 
+\subsection{Force fields}
+
+Copy the majority of this section from a previous publication
+
+\begin{enumerate}
+	\item Potoff force field proved to be most reliable in previous study
+	\item United-atom, Mie 16-6
+	\item AUA4m considered modifying torsional barriers for CH$_2$-CH$_2$ by 15~\% and 40~\% for internal and terminal torsions, respectively.
+	\item Include uncertainty in $\epsilon$, $\sigma$, and $U^{\rm tors}$
+	\item Plots of MCMC samples and maybe the Mie potentials and torsional barriers explicitly
+\end{enumerate}
 
 \section{Results}
 
-\subsection{Saturated Liquid}
-
-\subsubsection{n-Alkanes}
-
 \begin{enumerate}
-	\item Ethane is exception where Mie potential significantly over-predicts viscosity
-	\item Propane, butane, n-octane all see significant improvement with Mie and TAMie
-	\item C12 has spurious results
+	\item Potoff results
+	\item Mie uncertainties are negligible
+	\item Torsional uncertainties are negligible
+	\item Mie and torsional uncertainties are negligible
+	\item Report estimated pressure coefficient
 \end{enumerate}
 
 Figures:
 
 \begin{enumerate}
-	\item Ethane
-	\item C3, C4, C8
-	\item C12, C16
-\end{enumerate}
-
-\subsubsection{Branched alkanes}
-
-\begin{enumerate}
-	\item Mie potential provides less improvement in these cases
-\end{enumerate}
-
-Figures:
-
-\begin{enumerate}
-	\item IC4, NEOC5
-	\item IC5, IC8
-	\item IC6, 23DMB, 3MP
-\end{enumerate}
-
-\subsection{High pressure fluid}
-
-\subsubsection{n-Alkanes}
-
-\begin{enumerate}
-	\item Propane has accurate viscosity-P but not viscosity-rho
-	\item Butane appears to agree more closely with recent REFPROP correlation
-\end{enumerate}
-
-Figures:
-
-\begin{enumerate}
-	\item Propane $\eta-\rho$ $\eta-P$
-	\item Butane $\eta-\rho$ $\eta-P$
-	\item n-Octane $\eta-\rho$ $\eta-P$
-%	\item n-Dodecane $\eta-\rho$ $\eta-P$?
-\end{enumerate}
-
-\subsubsection{Branched alkanes}
-
-\begin{enumerate}
-	\item Similar to n-alkanes? 
-	\item Wrong torsions matters?
-\end{enumerate}
-
-Figures:
-
-\begin{enumerate}
-	\item Isobutane $\eta-\rho$ $\eta-P$
-	\item Isopentane $\eta-\rho$ $\eta-P$
-%	\item Isohexane $\eta-\rho$ $\eta-P$?
-	\item Isooctane $\eta-\rho$ $\eta-P$
-%	\item Neopentane $\eta-\rho$ $\eta-P$?
-	\item 3-methylpentane $\eta-\rho$ $\eta-P$?
-%	\item 2,3-dimethylbutane $\eta-\rho$ $\eta-P$?
+	\item Viscosity vs pressure
+	\item Bootstrap uncertainties
+	\item Validation of bootstrap approach for ethane?
+	\item Convergence of Green-Kubo plateau for 1000 MPa
 \end{enumerate}
 
 \section{Discussion/Limitations}
@@ -229,16 +167,15 @@ Figures:
 \begin{enumerate}
 	\item Discussion
 	\begin{enumerate}
-		\item Mie potentials parameterized with VLE data provide significant improvement over LJ 12-6
-		\item Potoff over-predicts $\eta-\rho$ dependence while TAMie is fairly accurate
-		\item Potoff appears to be slightly more accurate for $\eta-P$
 		\item Branched alkanes are not as accurate, perhaps assumption of transferability or torsional parameters
+		\item Force field parameter uncertainties are not as significant as often perceived
+		\item Fixed bond lengths, 1.4 nm cut-off with tail corrections, 400 molecules, were all validated previously
 	\end{enumerate}
     \item Limitations
     \begin{enumerate}
     	\item Largest viscosity simulations are slow to converge and unclear if simulations are sufficiently long
     	\item Tail-corrections could impact dynamics
-    	\item Using REFPROP saturation conditions instead of force fields
+    	\item Finite size effects
     \end{enumerate}
 \end{enumerate}
 
@@ -259,95 +196,10 @@ Figures:
 
 \subsection{Tabulated values}
 
-\begin{enumerate}
-	\item Ethane
-	\begin{enumerate}
-		\item Saturation
-        \begin{enumerate}
-        	\item Potoff
-        	\item TraPPE
-        	\item AUA4
-        	\item TAMie
-        \end{enumerate}
-		\item T293 highP
-		\begin{enumerate}
-			\item Potoff
-			\item TraPPE
-			\item AUA4
-			\item TAMie
-		\end{enumerate}
-	\end{enumerate}
-    \item Propane
-   	\begin{enumerate}
-    	\item Saturation
-    	\begin{enumerate}
-    		\item Potoff
-    		\item TraPPE
-    		\item AUA4
-    		\item TAMie
-    	\end{enumerate}
-    	\item T293 highP
-    	\begin{enumerate}
-    		\item Potoff
-    		\item TraPPE
-    		\item AUA4
-    		\item TAMie
-    	\end{enumerate}
-    \end{enumerate}
-    \item n-Butane
-    \begin{enumerate}
-    	\item Saturation
-    	\begin{enumerate}
-    		\item Potoff
-    		\item TraPPE
-    		\item AUA4
-    		\item TAMie
-    	\end{enumerate}
-    	\item T293 highP
-    	\begin{enumerate}
-    		\item Potoff
-    		\item TraPPE
-    		\item AUA4
-    		\item TAMie
-    	\end{enumerate}
-    \end{enumerate}
-    Repeat for all other compounds with corresponding potentials    
-\end{enumerate}
+\subsection{Green-Kubo plateau plots}
 
-\subsection{Finite-size effects}
-
-\begin{enumerate}
-	\item Simulation results for 100, 200, 400, and 800 molecules
-\end{enumerate}
-
-\subsection{Simulation length effects}
-
-\begin{enumerate}
-	\item Verified that 1 ns is long enough for larger compounds
-\end{enumerate}
-
-\subsection{Validation Runs}
-
-\begin{enumerate}
-	\item Ethane NIST
-	\item n-Octane Literature
-\end{enumerate}
-
-\subsection{Bond types, Harmonic vs LINCS}
-
-\begin{enumerate}
-	\item Propane and n-butane with harmonic (arbirary bond constant) shows systematic increase
-\end{enumerate}
-
-\subsection{Green-Kubo analysis}
-
-\begin{enumerate}
-	\item Raw data, i.e., multiple replicates with the average
-	\item Exclude low time data and have a heurestic for determining the cut-off time
-\end{enumerate}
+\subsection{Bayesian bootstrap analysis}
 
 Example analysis, i.e., bootstrap distribution, replicates
-
-\subsection{MCMC?}
 
 \end{document}
