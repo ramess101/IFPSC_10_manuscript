@@ -147,7 +147,7 @@
 	\addFileDependency{#1.aux}%
 }
 
-\myexternaldocument{Special_issue_supporting_information}
+\myexternaldocument{IFPSC_10_supporting_information}
 
 % The figures are in a figures/ subdirectory.
 \graphicspath{{figures/}}
@@ -178,9 +178,7 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		\title{Improvements and limitations of Mie $\lambda$-6 potential for prediction of saturated and compressed liquid viscosity}
-		%\title{Improvements and limitations of Mie $\lambda$-6 potential for prediction of liquid viscosity at saturation and elevated pressures}
-		%\title{Improvements and limitations of Mie $\lambda$-6 force fields for predicting liquid shear viscosity at saturation and elevated pressures}
+		\title{The role of force field parameter uncertainty in the prediction of high pressure viscosities.}
 		
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
@@ -228,28 +226,8 @@
 		%	\affiliation{Thermodynamics Research Center, National Institute of Standards and Technology, Boulder, Colorado, 80305}
 		
 		\begin{abstract}
-			%% Text of abstract
-			%%% MCA abstract:
-%			To determining reliable methodologies and models for the estimation of viscosities, equilibrium molecular dynamics simulations for normal and branched alkanes ranging from two to sixteen carbons were performed with the GROMACS package. Viscosities along the liquid/vapor saturation curve and at 293 K and high-pressure conditions were generated using the TraPPE, Potoff, and TAMie force fields. Viscosities were calculated from simulations using the Green-Kubo method. Reliable data and uncertainties were determined by performing many replicate simulations and analyzing the data distributions. Potoff and TAMie, modern force fields making use of the Mie $\lambda$-6 (the generalized Lennard-Jones 12-6 potential), outperform the older TraPPE force field which makes use of the traditional Lennard-Jones 12-6 potential. Simulations carried out with the Potoff or TAMie potentials more closely follow trends in viscosity. The TraPPE force field consistently under predicts viscosities. Although simulations with the Potoff force field over estimate viscosity with respect to density, a fortuitous cancellation of errors results in good prediction of viscosity with respect to pressure. The performance of the TAMie force field is usually better than TraPPE but slightly worse than Potoff. All force fields perform somewhat better for normal alkanes than for branched alkanes and the differences in performance between force fields is more noticeable in the case of normal alkanes.
-		
-		%%% JRE abstract:	
-%			While many common force fields are developed based only liquid density and heat of vaporization at 25 C, several more recent force fields have taken into account vapor pressure and liquid density over substantial portions of the coexistence curve for multiple compounds simultaneously, enhancing transferability. This manuscript explores the hypothesis that greater accuracy in characterizing the coexistence properties may lead to greater accuracy for viscosity predictions. Three united atom force fields are considered in detail: the TraPPE-UA model of Siepmann and coworkers, the TAMie model of Gross and coworkers, the AUA4 model of Ungerer and coworkers, and the TraMie model of Potoff and coworkers. Equilibrium molecular dynamics simulations are performed in the NVT ensemble using the Green-Kubo method for viscosity characterization. Simulations are performed for linear alkanes with three to twelve carbons and branched alkanes with four to nine carbons.  Simulation conditions follow the saturated liquid from reduced temperatures of 0.5-0.9 and along key isotherms in the dense liquid region. In general, the more accurate force fields for coexistence properties do indeed predict viscosity more accurately. For saturated liquids, both the TraMie and TAMie models provide roughly 10~\% accuracy for linear alkanes, while deviations are closer to 20-30~\% for AUA4 and TraPPE-UA models. For branched alkanes the behavior is more complicated but TraMie still provides roughly 15~\% accuracy while TraPPE-UA adn AUA4 accuracy is around 25-35~\% deviations. TAMie force fields for branched alkanes were unavailable at thee time of this study.For compressed liquids,  the Mie potential models perform better once again, but tend to over estimate the viscosity at very high pressures. Coincidentally, these models also tend to over estimate the pressure, such that plots of viscosity vs. pressure are  accurate to within about 10~\% up to 200 MPa. Experimental viscosity data tend to be sparse above 200 MPa, but accurate predictions are obtained for propane to 1000 MPa. Uncertainty estimates increase substantially for high pressures at low reduced temperatures. Nevertheless, a prediction is made for the viscosity of 2,2,4, trimethylhexane at 293K and 1000 MPa, in compliance with the guidelines of the 10th IFPSC. In the course of the study, the sensitivity to bonded and non-bonded interactions is observed and several suggestions are made for future force field developments.
-			
-%			While many common force fields are developed based on liquid density and heat of vaporization at room temperature, several more recent force fields have taken into account saturated vapor pressure and saturated liquid density over substantial portions of the vapor-liquid coexistence curve for multiple compounds simultaneously, enhancing transferability. 
 
-			Over the past decade, the Mie $\lambda$-6 (generalized Lennard-Jones) potential has grown in popularity due to its improved accuracy for predicting vapor-liquid coexistence densities and pressure compared to the traditional Lennard-Jones 12-6 potential. This manuscript explores the hypothesis that greater accuracy in characterizing the coexistence properties may lead to greater accuracy for viscosity predictions. Four united-atom force fields are considered in detail: the Transferable Potentials for Phase Equilibria (TraPPE-UA and the recently developed TraPPE-2) model of Siepmann and coworkers, the Transferable Anisotropic Mie (TAMie) model of Gross and coworkers, the fourth generation anisotropic-united-atom (AUA4) model of Ungerer and coworkers, and the model of Potoff and coworkers. 
-			
-			Equilibrium molecular dynamics simulations are analyzed using the Green-Kubo method for viscosity characterization. Simulations are performed for linear alkanes with two to twenty-two carbons and branched alkanes with four to eight carbons. Simulation conditions follow the saturated liquid from reduced temperatures of 0.5 to 0.85 and along the 293 K isotherm in the dense liquid region. 
-			
-			In general, the more accurate force fields for coexistence properties do indeed predict viscosity more accurately. For saturated liquids, both Mie-based potential models (Potoff and TAMie) provide roughly 10~\% accuracy for linear alkanes, while deviations are between 20 and 50~\% for TraPPE-UA. For branched alkanes, the performance is slightly diminished, but Potoff still provides roughly 15 to 20~\% accuracy, while the TAMie force field results in deviations of 20 to 40~\%, and TraPPE-UA has deviations of approximately 25 to 60~\%. The AUA4 deviations are 10 to 20~\% for ethane and 30 to 60~\% for 2,2-dimethylpropane, the only compounds tested with the AUA4 force field. The TraPPE-2 deviations for ethane are similar to those using the original TraPPE force field, namely, between 10 and 20~\%. The percent deviations for each compound and force field tend to increase with decreasing temperature, with the exception of the Potoff deviations for propane, which are nearly constant to the triple point temperature. 
-			
-			For compressed liquids, the Mie-based potential models perform better once again than the Lennard-Jones-based force fields, but tend to over estimate the viscosity at very high densities. As the Potoff and TAMie models also tend to over estimate the pressure at high densities, a fortuitous cancellation of errors leads to predictions of viscosity with respect to pressure that are accurate to within about 10~\%. The comparison with experimental viscosity data is limited to pressures below 200 MPa for most normal and branched alkanes. However, accurate predictions are obtained for propane near 1000 MPa with the Potoff force field. 
-			
-			%Uncertainties increase substantially for simulations at high pressures and/or low reduced temperatures. 
-			
-			%Nevertheless, a prediction is made for the viscosity of 2,2,4-trimethylpentane at 293K and 1000 MPa. 
-			
-			%, in compliance with the guidelines of the 10th IFPSC. In the course of the study, the sensitivity to bonded and non-bonded interactions is observed and several suggestions are made for future force field developments.
+Uncertainty estimates increase substantially for high pressures at low reduced temperatures. Nevertheless, a prediction is made for the viscosity of 2,2,4, trimethylhexane at 293K and 1000 MPa, in compliance with the guidelines of the 10th IFPSC. 		
 			
 		\end{abstract}
 		
@@ -261,283 +239,41 @@
 			%% MSC codes here, in the form: \MSC code \sep code
 			%% or \MSC[2008] code \sep code (2000 is the default)
 			
-			Thermophysical Properties \sep Shear Viscosity \sep Molecular Dynamics Simulation \sep Force Fields \sep Green-Kubo
+			Uncertainty Quantification \sep Bayesian Inference \sep Thermophysical Properties \sep Shear Viscosity \sep Molecular Dynamics Simulation \sep Force Fields \sep Green-Kubo
 			
 		\end{keyword}
 		
 	\end{frontmatter}	
-	
-%	\section*{Key points}
-%	
-%	Mie and TAMie potentials are much better at saturation viscosities, despite not being fit directly to them
-%	Viscosity density curve is much harder to reproduce
-%	Viscosity pressure is adequately predicted with Potoff and TAMie
-%	Branched alkanes have slightly worse performance
-%	
-%	Propane is accurate to nearly 1000 MPa
-%	Butane agrees more closely with newer REFPROP correlation
-%	C12 has similar results for Potoff and TraPPE?
-%	
-%	Entropy scaling for isooctane?
-%	
-%	Wrong torsional parameters for some isocompounds?
-%	
-%	\section*{Outline}
-	
+		
 	\section{Introduction}
 	
 	The design of efficient and reliable technical processes requires accurate estimates of thermophysical properties. Shear viscosity $(\eta)$ is an important property for characterizing flow, e.g., sizing pumps, assessing flow assurance in fossil fuel recovery, and lubricating bearings in tribological applications. There are primarily three different means by which shear viscosity values are obtained: experimental measurement, semi-empirical prediction models, and molecular simulation (molecular dynamics, MD). Significant limitations exist for each of these methods. 
 	
 	For example, experimental measurements can be expensive, time-consuming, and challenging at extreme temperatures $(T)$ and pressures $(P)$. Experimental data tend to be distributed among several prototypes of linear, branched, ring, and polar molecules, with many gaps among a homologous series. Most experimental data are available below 200 MPa, while tribological applications may require estimates at pressures as high as 1000 MPa. Flow assurance applications are generally at pressures below 200 MPa, but at temperatures of 423 to 523 K. The ever expanding conditions of interest and economic constraints on new measurements foster increased research in predictive methods.
 	
-	%Many of the oft cited viscosity data were measured before 1950.
-	%150 to 250 $^{\rm o}$C
-	
-%    Although most compounds lack \textit{reliable} experimental data covering a wide range of temperatures, pressures, and densities $(\rho)$,
-    
     The National Institute of Standards and Technology (NIST) Reference Fluid Properties (REFPROP) database software provides ``reference quality'' viscosity correlations for experimentally well-studied compounds (around 100 species) \cite{LEMMON-RP10}. Most compounds, however, do not have sufficient \textit{reliable} experimental data covering a wide range of temperatures, pressures, and densities $(\rho)$ for developing ``reference quality'' correlations. These less-studied compounds require predictive methods that pool together data from several related molecular species. 
     
     Semi-empirical prediction models are typically not reliable over the industrially relevant ranges of $P \rho T$ \cite{PGL}. For example, corresponding states methods are recommended for vapors, dense fluids, and high temperature liquids. These methods rely on the similarity of trends in the properties relative to reference compounds, e.g., methane and \textit{n}-octane. Corresponding states methods are less reliable for more complex molecular structures, e.g., branched compounds. Typical compilations indicate that deviations from experiment may vary by 5 to 50~\%, with little guidance about when to expect lower or higher accuracy. 
     
     For low temperature liquids, group contribution schemes are favored, but these tend to extrapolate poorly when applied to compounds or conditions outside the training set. More recent advances such as machine learning \cite{Mulero2017,Lee2017} and entropy scaling \cite{Lotgering2015} have shown great promise in prediction of historically challenging properties, such as viscosity, thermal conductivity, and surface tension. However, machine learning relies on large amounts of experimental data and often suffers from dubious extrapolation. While entropy scaling has a stronger theoretical basis, it requires a reliable reference viscosity and an adequate equation-of-state, which may not be readily available for the compound of interest.
 	
-	%due to its weak theoretical basis.
-	
-	%  tend to look like a mixed bag, with some methods recommended at high temperatures and others at low temperatures, and still more correlations recommended for pressure effects.
-	%   If an effect like branching, for example, alters the trend, the these methods tend to break down.
-	
-	%Among the recommended semi-empirical methods, many require a known viscosity, like the saturated liquid viscosity, in order to predict the viscosity at unsaturated conditions. For purposes of the current investigation, we have set a goal of predicting the viscosity of 2,2,4 trimethylhexane at 1000 MPa. Therefore, neither the saturation viscosity nor the variation with pressure are known. Furthermore, the degree of branching suggests that corresponding states methods may be unreliable.
-	
-%	Semi-empirical models often struggle from poor extrapolation due to model deficiencies, over-fitting, and the scarcity of \textit{reliable} experimental data over a wide range of $P \rho T$ state space.
-	
-%	Molecular dynamics requires extremely reliable force fields and robust simulation methods.
-	
-%	Unfortunately, the range of available (and reliable) experimental viscosity data does not cover the entire range of $P \rho T$ of interest. 
-	
 	As an alternative to experiment and semi-empirical prediction models, molecular simulation is an attractive means for estimating viscosity. However, there are two fundamental challenges impeding the use of molecular simulation as a mainstream chemical engineering tool for viscosity prediction. The first challenge is that obtaining reproducible results is more difficult for transport properties, such as viscosity, than for thermodynamic properties. Recently, a ``Best Practices Guide'' was developed to address this challenge, namely, to improve reproducibility of viscosity estimates \cite{Maginn2018}. We apply these ``Best Practices'' and address some outstanding issues mentioned therein.
 	
 	The second challenging aspect of obtaining accurate simulation estimates is that viscosity is extremely sensitive to the force field. In addition to the strong dependence on the non-bonded interactions, the bonded potential plays a much greater role for viscosity than for thermodynamic properties. For example, varying the torsional potential has a significant impact on viscosity \cite{Nieto2006}, while vapor-liquid coexistence is relatively unaffected \cite{Bernard2009}. Therefore, the ability to predict viscosities with molecular simulation requires both robust methods and adequate force fields. 
 	
-	%First, obtaining reproducible results is more difficult for transport properties, such as viscosity, than for static properties. Second, viscosity is extremely sensitive to the force field. In addition to the strong dependence on the non-bonded interactions, the bonded potential plays a much greater role for viscosity than for static properties. For example, varying the torsional potential has a significant impact on viscosity, \cite{Nieto2006} while vapor-liquid coexistence is relatively unaffected \cite{Bernard2009}. Therefore, the ability to predict viscosities with molecular simulation requires both robust methods and adequate force fields. 
-	
-	% JRE1: and varies exponentially along the saturated liquid curve, and more generally with respect to increasing density.
-	
-	%RAM1: I don't feel like this fits in the molecular simulation discussion unless we mention how the force field must also predict saturation densities and PVT behavior.
-	
-%    Viscosity estimates can be obtained from both equilibrium molecular dynamics (EMD) and non-equilibrium molecular dynamics (NEMD) simulations. Recently, a ``Best Practices Guide'' for EMD was developed to improve reproducibility. 
-
-	 %However, the focus of this study is the second challenge, namely, determining the most accurate force field(s). 
-	 
-%	 We investigate the accuracy of united-atom (UA) Mie $\lambda$-6 force fields, a popular class designed for the engineering purpose of predicting thermophysical properties. Specifically, the force fields we compare are the Transferable Potential for Phase Equilibria (TraPPE-UA and TraPPE-UA2), Transferable Anisotropic Mie (TAMie), Potoff, and fourth generation anisotropic-united-atom (AUA4). The suitability of these force fields for quantitative viscosity prediction has been widely debated in the literature.
-
-	 We investigate the accuracy of four force fields, namely, Transferable Potentials for Phase Equilibria (TraPPE-UA, also referred to simply as TraPPE \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. Each force field is a variation of the united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) model, a popular class designed for the engineering purpose of predicting thermophysical properties. However, the suitability of these force fields for quantitative viscosity prediction, especially at high pressures, has been widely debated in the literature.
-	 
-%	 Recently, it was shown that the Mie 14-6 and 16-6 potentials of TAMie and Potoff, respectively, are overly repulsive at high densities/pressures.
-	
-%	Recently, a ``Best Practices Guide'' was developed to address the first challenge, namely, to improve reproducibility \cite{Maginn2018}. We apply the ``Best Practices'' and address some outstanding issues mentioned therein. However, the focus of this study is the second challenge, namely, determining the most accurate force field(s). We investigate the accuracy of united-atom (UA) Mie $\lambda$-6 force fields, a popular class designed for the engineering purpose of predicting thermophysical properties. Specifically, the force fields we compare are the Transferable Potential for Phase Equilibria TraPPE-UA (and TraPPE-UA2), Transferable Anisotropic Mie (TAMie), Potoff, and fourth generation anisotropic-united-atom (AUA4). Recently, it was shown that the Mie 14-6 and 16-6 potentials of TAMie and Potoff, respectively, are overly repulsive at high densities/pressures. The suitability of these force fields for quantitative viscosity prediction has been widely debated in the literature. 
-	
-%	By contrast, Reference \citenum{Gordon2006} suggests that great improvement is obtained by utilizing a Mie $\lambda$-6 potential over the traditional Lennard-Jones 12-6 potential. Recently, it was shown that Mie $\lambda$-6 potentials are overly repulsive at high densities/pressures. For these reasons, we study how well the united-atom Mie $\lambda$-6 potentials perform both at saturation and elevated pressures.
-	
-%	However, this study focused on viscosities of saturated liquids.
-	
-	%Some studies have suggested that united-atom models are not capable of accurately reproducing viscosity and, therefore, anisotropic-united-atom or all-atom models are needed \cite{Allen1997,Payal2012,Mondello1997}.
+	We investigate the accuracy of four force fields, namely, Transferable Potentials for Phase Equilibria (TraPPE-UA, also referred to simply as TraPPE \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. Each force field is a variation of the united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) model, a popular class designed for the engineering purpose of predicting thermophysical properties. However, the suitability of these force fields for quantitative viscosity prediction, especially at high pressures, has been widely debated in the literature.
 	
 	For example, depending on the compound structure and state conditions, some studies suggest that UA LJ 12-6 models (e.g., TraPPE) are inadequate for estimating viscosities and recommend the use of anisotropic-united-atom (AUA) or all-atom (AA) models for this purpose \cite{Allen1997,Payal2012,Mondello1997,Ungerer2007}. Considering the significant increase in computational cost of AA simulations, two promising alternatives have been investigated, namely, the Mie $\lambda$-6 potentials and/or modified torsional models. For example, Nieto-Draghi et al. demonstrate significant improvement in viscosity prediction for the AUA4 model by increasing the torsional barriers \cite{Nieto2006}. In addition, the UA Mie $\lambda$-6 model has been shown to accurately predict saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ without significant degradation of other vapor-liquid saturation properties \cite{Gordon2006}, i.e., saturated liquid density $(\rho_{\rm liq}^{\rm sat})$, saturated vapor density $(\rho_{\rm vap}^{\rm sat})$, and saturated vapor pressure $(P_{\rm vap}^{\rm sat})$.   
-	
-%For example, some studies suggest that, depending on the compound structure and state conditions, united-atom models are inadequate for estimating viscosities and recommend the use of anisotropic-united-atom (AUA) or all-atom (AA) models for this purpose \cite{Allen1997,Payal2012,Mondello1997,Ungerer2007}. However, these studies focused primarily on UA Lennard-Jones (LJ) 12-6 force fields. Reference \citenum{Gordon2006} provides evidence that the UA Mie $\lambda$-6 potential can accurately predict saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ without significant deprecation of other vapor-liquid saturation properties, i.e., saturated liquid density $(\rho_{\rm liq}^{\rm sat})$, saturated vapor density $(\rho_{\rm vap}^{\rm sat})$, and saturated vapor pressure $(P_{\rm vap}^{\rm sat})$. Alternatively, Reference \citenum{Nieto2006} demonstrated significant improvement in viscosity prediction by modifying the AUA4 torsional potential (AUA4m). Considering the significant increase in computational cost of AA simulations, Mie $\lambda$-6 and/or modified torsional potentials are a desirable alternative to AA force fields. 
-	
-	% of the AUA4 for demonstrated that modifying the torsional potential (AUA4m) that improves viscosity prediction of viscosity. Furthermore, 
-	
-%	Due to the increased complexity of AUA models and the computational cost of AA models, other methods for improving  
-	
-%	 it is argued that united-atom or anisotropic-united-atom (AUA) models may be inadequate for predicting viscosity \cite{Ungerer2007}. 
-	
-%	Reference \citenum{Hoang2017} demonstrates that including viscosity data in the force field development can improve the identification of a unique set of transferable Mie $\lambda$-6 parameters, while improving viscosity predictions simultaneously.
-	
-%	Reference \citenum{Ungerer2007} discusses different test cases (i.e. state points, compound structures) where united-atom or anisotropic-united-atom models are adequate and inadequate for predicting viscosity.
-%	
-%    Furthermore, Reference \citenum{Hoang2017} demonstrated that it is important to include viscosity data when parameterizing a Mie $\lambda$-6 force field to obtain a unique set of transferable parameters.
-    
-%    The force fields compared in this study were optimized solely with static vapor-liquid coexistence data, e.g., saturated liquid densities and saturated vapor pressures. Therefore, an additional purpose of this study is to determine the transferability of these force fields that were not parameterized without viscosity data.
-        
-%    The force fields compared in this study were optimized solely with vapor-liquid coexistence data, i.e., dynamic properties, such as viscosity, were not included in their parameterization. While the Potoff and TAMie force fields have shown considerable promise in predicting static properties (primarily $P_{\rm vap}^{\rm sat}$), their ability to predict dynamic properties has not been investigated previously. Reference \citenum{Hoang2017} demonstrates that including viscosity data in the force field development can improve the identification of a unique set of transferable Mie $\lambda$-6 parameters, while improving viscosity predictions simultaneously. Notwithstanding the potential benefits of including viscosity as a property of interest during force field development, we assess the accuracy of TraPPE-UA, TAMie, Potoff, and AUA4 for estimating viscosity as they currently stand, including their torsional potential models.  
-        
+	        
 	Hoang et al. demonstrate that including viscosity data in the force field development can improve the identification of a unique set of transferable Mie $\lambda$-6 parameters, while simultaneously improving viscosity predictions \cite{Hoang2017}. By contrast, the force fields compared in the present work were optimized solely with vapor-liquid coexistence data, i.e., dynamic properties, such as viscosity, were not included in their parameterization. Notwithstanding the potential benefits of including viscosity as a property of interest during force field development, we assess the accuracy of TraPPE-UA, TAMie, Potoff, and AUA4 for estimating viscosity as they currently stand, including their torsional potential models. While the Potoff and TAMie force fields have shown considerable promise in predicting static properties (in particular, $P_{\rm vap}^{\rm sat}$), their ability to predict dynamic properties has not been investigated previously. 
         
-    %One purpose of this study is to determine if the state-of-the-art Mie potentials are adequate of predicting viscosity without modifying the torsional potential.
-    
     The outline for the present work is the following. Section \ref{Methods} explains the force fields, simulation methodology, and data analysis. Section \ref{Results} presents the simulation results for each force field, compound, and state point studied. Section \ref{Discussion/Limitations} discusses some important observations and limitations. Section \ref{Conclusions} recaps the primary conclusions from this work.
-    
-	%it has  does not signific while vapor-liquid coexistence does not depend strongly on the torsional potential,    
-	
-%	\begin{enumerate}
-%		\item Viscosity is an important property for designing chemical systems
-%		\item Viscosity data typically do not cover the entire range of $P \rho T$ of interest
-%		\item Prediction methods are typically quite poor for viscosity
-%		\item Molecular simulation is an attractive alternative, but two main challenges
-%		\begin{enumerate}
-%			\item Difficulty of obtaining reproducible results from simulation
-%			\item Unreliable force fields
-%		\end{enumerate}
-%		\item This manuscript applies the recent Best Practices to improve reproducibility such that it is possible to elucidate the difference in force fields
-%		\item Previous studies have suggested that UA models may be inadequate, while Gordon showed that a Mie potential could accomplish both VLE and viscosity
-%		\item This study tests whether the modern Mie potentials that are optimized for saturation thermodynamic properties are transferable to transport properties, e.g. shear viscosity
-%	\end{enumerate}
-	
+    	
 	\section{Methods} \label{Methods}
 	
-	\subsection{Force fields} \label{Force Field}
-	
-	A united-atom (UA) or anisotropic-united-atom (AUA) representation is used for each compound studied, i.e., normal and branched alkanes are represented with CH$_3$, CH$_2$, CH, and C sites. UA models assume that the UA interaction site is that of the carbon atom, while AUA models assume that the AUA interaction site is shifted away from the carbon atom and towards the hydrogen atom(s). Note that TraPPE and Potoff are UA force fields while TraPPE-2 (a recent improvement of TraPPE for ethane and ethylene), AUA4, and TAMie are AUA force fields. 
-	
-%	The UA and AUA groups required for normal and branched alkanes are sp$^3$ hybridized CH$_3$, CH$_2$, CH, and C sites. For most literature models, a single (transferable) parameter set is assigned for each interaction site. However, two exceptions exist for the force fields studied. First, TAMie implements a different set of CH$_3$ parameters for ethane. Second, Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The Potoff ``generalized'' CH and C parameter set is an attempt at a completely transferable set. However, since the ``generalized'' parameters performed poorly for some compounds, the S/L parameter set was proposed, where the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. 
-	
-%	Note that only the terminal CH$_3$ sites are shifted in the TAMie force field. By contrast, AUA4 displaces the interaction location of non-terminal CH$_2$ and CH sites as well. For simplicity, we only utilize the AUA4 force field with compounds that are composed exclusively of CH$_3$ and C interaction sites, i.e., ethane and 2,2-dimethylpropane. Table \ref{tab:bond-lengths} provides the effective bond-lengths for terminal CH$_3$ sites. The bond-length for all non-terminal sites is 0.154 nm.
-%	
-%	\begin{table}[h!]
-%		\caption{Effective bond-lengths in units of nm for terminal (CH$_3$) UA or AUA interaction sites. Empty table entries for TraPPE-2 denote that the force field does not contain the corresponding interaction site type. Empty table entries in AUA4 arise because this force field uses a more complicated construction than the simple effective bond-length approach. Specifically, AUA4 requires CH$_2$ and CH interaction sites that are not along the C-C bond axis.} \label{tab:bond-lengths}
-%		\begin{center}
-%			\begin{tabular}{|c|c|c|c|c|c|}
-%				\hline
-%				Bond & TraPPE, Potoff & TAMie & AUA4 & TraPPE-2 \\ \hline
-%				CH$_3$-CH$_3$ & 0.154 & 0.194 & 0.1967 & 0.230 \\ 
-%				CH$_3$-CH$_2$ & 0.154 & 0.174 & -- & -- \\ 
-%				CH$_3$-CH & 0.154 & 0.174 & -- & -- \\
-%				CH$_3$-C & 0.154 & 0.174 & 0.1751 & -- \\
-%				\hline
-%			\end{tabular}
-%		\end{center} 
-%	\end{table}
-%
-%    A fixed bond-length is used for each bond between UA or AUA sites. Note that, although static thermodynamic properties are generally insensitive to the choice of fixed or flexible bonds, dynamic properties, such as viscosity, are much more sensitive. For this reason, we test the degree of variability that arises by implementing a harmonic oscillator model. The results are provided as Supporting Information.
-
-%    Although static thermodynamic properties (e.g., $\rho_{\rm liq}^{\rm sat}$) are generally insensitive to the choice of fixed or flexible bonds, dynamic properties (e.g., $\eta$) are much more sensitive. For this reason, we test the degree of variability that arises by implementing a harmonic oscillator model. The results are provided as Supporting Information. 
-    
-%    The results presented in this work utilize fixed bond-lengths, where each bond not involving a CH$_3$ site utilizes a 0.154 nm bond-length. The anisotropic-united-atom models (TAMie, AUA4, and TraPPE-2) use a slightly larger ``effective'' bond-length for CH$_3$ bonds (see Table \ref{tab:bond-lengths}). While the TAMie force field modifies only the terminal CH$_3$ sites, AUA4 displaces the interaction location of CH$_2$ and CH sites as well. For simplicity, we only utilize the AUA4 force field with compounds that are composed exclusively of CH$_3$ and C interaction sites, i.e., ethane and 2,2-dimethylpropane.
-    
-    The results presented in this work are obtained using fixed bond-lengths. Each force field utilizes a 0.154 nm bond-length for bonds not involving a CH$_3$ site. The anisotropic-united-atom models (TAMie, AUA4, and TraPPE-2) use a slightly longer ``effective'' bond-length for CH$_3$ bonds (see Table \ref{tab:bond-lengths}). While the TAMie force field modifies only the terminal CH$_3$ sites, AUA4 displaces the interaction location of CH$_2$ and CH sites as well. For simplicity, we only utilize the AUA4 force field with compounds that are composed exclusively of CH$_3$ and C interaction sites, i.e., ethane and 2,2-dimethylpropane.
-    
-    \begin{table}[h!]
-    	\caption{Effective bond-lengths in units of nm for terminal (CH$_3$) UA or AUA interaction sites. Empty table entries for TraPPE-2 \cite{TraPPEUA2} denote that the force field does not contain the corresponding interaction site type. Empty table entries in AUA4 \cite{AUA4} arise because this force field uses a more complicated construction than the simple effective bond-length approach. Specifically, AUA4 requires CH$_2$ and CH interaction sites that are not along the C-C bond axis.} \label{tab:bond-lengths}
-    	\begin{center}
-    		\begin{tabular}{|c|c|c|c|c|c|}
-    			\hline
-    			Bond & TraPPE, Potoff & TAMie & AUA4 & TraPPE-2 \\ \hline
-    			CH$_3$-CH$_3$ & 0.154 & 0.194 & 0.1967 & 0.230 \\ 
-    			CH$_3$-CH$_2$ & 0.154 & 0.174 & -- & -- \\ 
-    			CH$_3$-CH & 0.154 & 0.174 & -- & -- \\
-    			CH$_3$-C & 0.154 & 0.174 & 0.1751 & -- \\
-    			\hline
-    		\end{tabular}
-    	\end{center} 
-    \end{table}
-    
-    
-%    The anisotropic-united-atom models (TAMie, AUA4, and TraPPE-2) use a slightly larger bond-length for CH$_3$ bonds. The ethane bond-length for TAMie, AUA4, and TraPPE-2 are 0.194, 0.1967, and 0.230 nm, respectively. The TAMie bond-lengths are 0.174 nm for all other CH$_3$ sites and the AU4 2,2,-dimethylpropane bond-lengths are 0.1751 nm. For simplicity, we only utilize the AUA4 force field with compounds that are composed exclusively of CH$_3$ and C interaction sites, i.e., ethane and 2,2-dimethylpropane.
-    
-    The same angle and dihedral potentials are used for each force field. Angular bending interactions are evaluated using a harmonic potential:
-	\begin{equation}
-	u^{\rm bend} = \frac{k_\theta}{2} \left(\theta-\theta_0\right)^2
-	\end{equation}
-	where $u^{\rm bend}$ is the bending energy, $\theta$ is the instantaneous bond angle, $\theta_0$ is the equilibrium bond angle (see Table \ref{tab:angles}), and $k_\theta$ is the harmonic force constant with $k_\theta/k_{\rm B} = 62500$ K/rad$^2$ for all bonding angles, where $k_{\rm B}$ is the Boltzmann constant. 
-	 
-	 %$k_{\rm B}$ is the Boltzmann constant,
-	 
-	\begin{table}[h!]
-		\caption{Equilibrium bond angles $(\theta_0)$ \cite{Martin1999}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:angles}
-		\begin{center}
-			\begin{tabular}{|c|c|}
-				\hline
-				Bending sites & $\theta_0$ (degrees) \\ \hline
-				CH$_i$-CH$_2$-CH$_j$ & 114.0 \\ 
-				CH$_i$-CH-CH$_j$ & 112.0 \\ 
-				CH$_i$-C-CH$_j$ & 109.5 \\  
-				\hline
-			\end{tabular}
-		\end{center} 
-	\end{table}
-	
-	Dihedral torsional interactions are determined using a cosine series:
-	\begin{equation}
-	u^{\rm tors} = c_0 + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + c_3 [1+\cos{3\phi}]
-	\end{equation}
-	where $u^{\rm tors}$ is the torsional energy, $\phi$ is the dihedral angle and $c_n$ are the Fourier constants listed in Table \ref{tab:torsions}.
-	
-	\begin{table}[h!]
-		\caption{Fourier constants $(c_n/k_{\rm B})$ in units of K \cite{Martin1999}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:torsions}
-		\begin{center}
-			\begin{tabular}{|c|c|c|c|c|}
-				\hline
-				Torsion sites & $c_0/k_{\rm B}$ & $c_1/k_{\rm B}$ & $c_2/k_{\rm B}$ & $c_3/k_{\rm B}$ \\ \hline
-				CH$_i$-CH$_2$-CH$_2$-CH$_j$ & 0.0 & 355.03 & -68.19 & 791.32 \\ 
-				CH$_i$-CH$_2$-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 \\
-				CH$_i$-CH$_2$-C-CH$_j$ & 0.0 & 0.0 & 0.0 & 461.29 \\
-				CH$_i$-CH-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 \\
-				\hline
-			\end{tabular}
-		\end{center} 
-	\end{table}
-
-	Non-bonded interactions between sites located in two different molecules or separated by more than three bonds within the same molecule are calculated using a Mie $\lambda$-6 potential (of which the Lennard-Jones, LJ, 12-6 is a subclass) \cite{Herdes2015}:
-	\begin{equation} \label{eq:Mie}
-	u^{\rm vdw}(\epsilon,\sigma,\lambda;r) = \left(\frac{\lambda}{\lambda - 6}\right)\left(\frac{\lambda}{6}\right)^{\frac{6}{\lambda - 6}} \epsilon \left[\left(\frac{\sigma}{r}\right)^{\lambda} - \left(\frac{\sigma}{r}\right)^6\right]
-	\end{equation} 
-	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. The non-bonded Mie $\lambda$-6 force field parameters for TraPPE, TraPPE-2, Potoff, AUA4, and TAMie are provided in Table \ref{tab:nonbonded params}. 
-	
-	\begin{table}[h!]
-		\caption{Non-bonded (intermolecular) parameters for TraPPE \cite{TraPPE,Martin1999} (and TraPPE-2 \cite{TraPPEUA2}), Potoff \cite{Mie,Potoff_branched}, AUA4 \cite{AUA4,Nieto2008}, and TAMie \cite{TAMie,Weidler2016} force fields. The ``short/long'' Potoff CH and C parameters are included in parentheses. The ethane-specific parameters for TAMie are included in parentheses.} \label{tab:nonbonded params}
-		\begin{center}
-			\begin{tabular}{|c|c|c|c|c|c|c|}
-				\hline
-				\multicolumn{1}{|c}{} & \multicolumn{3}{|c}{TraPPE  (TraPPE-2)} & \multicolumn{3}{|c|}{Potoff (S/L)}  \\ \hline
-				United-atom & $\epsilon/k_{\rm B}$ (K) & $\sigma$ (nm) & $\lambda$ & $\epsilon/k_{\rm B}$ (K) & $\sigma$ (nm) & $\lambda$ \\ \hline
-				CH$_3$ & 98 (134.5)  & 0.375 (0.352) & 12 & 121.25 & 0.3783 & 16  \\ 
-				CH$_2$ & 46 & 0.395 & 12 & 61 & 0.399 & 16 \\ 
-				CH & 10 & 0.468 & 12 & 15 (15/14) & 0.46 (0.47/0.47) & 16\\
-				C & 0.5 & 0.640 & 12 & 1.2 (1.45/1.2) & 0.61 (0.61/0.62) & 16\\
-				\hline
-				\multicolumn{1}{|c}{} & \multicolumn{3}{|c}{AUA4} & \multicolumn{3}{|c|}{TAMie} \\ \hline
-				CH$_3$ & 120.15  & 0.3607 & 12 & 136.318 (130.780) & 0.36034 (0.36463) & 14 \\ 
-				CH$_2$ & 86.29 & 0.3461 & 12 & 52.9133 & 0.40400 & 14 \\ 
-				CH & 50.98 & 0.3363 & 12 & 14.5392 & 0.43656 & 14\\
-				C & 15.04 & 0.244 & 12 & -- & -- & --\\
-				\hline
-			\end{tabular}
-		\end{center} 
-	\end{table}
-
-    Note that TAMie implements an ethane-specific set of CH$_3$ parameters. TraPPE and TraPPE-2 are both considered in this study for ethane. Also, Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. Due to their superior accuracy, we only provide results for the Potoff S/L parameter set.
-    
-    %The Potoff ``generalized'' CH and C parameter set is an attempt at a completely transferable set. However, since the ``generalized'' parameters performed poorly for some compounds, the S/L parameter set was proposed, where the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively.
-	
-	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen1987} for $\epsilon$ and $\sigma$ and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
-	\begin{equation} \label{eq:Lorentz-Berthelot_eps}
-	\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}
-	\end{equation}
-	\begin{equation} \label{eq:Lorentz-Berthelot_sig}
-	\sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}
-	\end{equation}
-	\begin{equation} \label{eq:Lorentz-Berthelot_lam}
-	\lambda_{ij} = \frac{\lambda_{ii} + \lambda_{jj}}{2}
-	\end{equation}
-	where the $ij$ subscript refers to cross-interactions and the subscripts $ii$ and $jj$ refer to same-site interactions. 
-	
-	%\subsection{Force fields}
-	%
-	%Copy the majority of this section from a previous publication
-	%
-	%\begin{enumerate}
-	%	\item United-atom and AUA models are the focus
-	%	\item LJ 12-6 and Mie $\lambda$-6
-	%	\item Four force fields (although some have slightly different ethane parameters)
-	%	\item None of these force fields specify bond types, so we used fixed bonds
-	%	\item Torsions are the same for each force field
-	%\end{enumerate}
 	
 	\subsection{Simulation set-up}
-	
-%	in the $NVT$ ensemble (constant number of molecules, $N$, constant volume, $V$, and constant temperature, $T$)
-	
+		
 	Viscosity estimates can be obtained from both equilibrium molecular dynamics (EMD) and non-equilibrium molecular dynamics (NEMD) simulations. The ``Best Practices Guide'' is currently limited to EMD methods and purports that NEMD might be necessary for high viscosities (greater than 0.02 Pa-s). One purpose of the present work is to demonstrate that, by applying these guidelines, EMD can also provide meaningful estimates for highly viscous systems. 
 	
 %	 that EMD is capable of providing reproducible estimates of viscosity   recommended for estimating viscosity with the Green-Kubo analysis of EMD. 
@@ -677,81 +413,118 @@
 	
 	\subsection{Data analysis}
 	
-	We implement the Green-Kubo ``time-decomposition'' analysis to extract viscosity from EMD simulations. We refer the interested reader to References \citenum{Maginn2018} and \citenum{Zhang2015} for details regarding this method. In brief, the Green-Kubo integral is computed with respect to time according to
-%	\begin{equation} \label{eq:Green_Kubo}
-%	\frac{V}{3 k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \sum_{\alpha \ne \beta} \int_{0}^{\infty}dt\left\langle \tau_{\alpha\beta,n}(t) \tau_{\alpha\beta,n}(0)\right\rangle_{t_0}
-%	\end{equation} 
+	The analysis for the Potoff Mie $\lambda$-6 force field simulation results is identical to that prescribed in our previous study BLANK. In brief, we implement the Green-Kubo ``time-decomposition'' analysis \cite{Maginn2018,Zhang2015}
 	\begin{equation} \label{eq:Green_Kubo}
-	\eta(t) = \frac{V}{3 k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \sum_{\alpha \ne \beta} \int_{0}^{t}dt'\left\langle \tau_{\alpha\beta,n}(t') \tau_{\alpha\beta,n}(0)\right\rangle_{t_0}
+	\eta(t) = \frac{V}{k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \sum_{\alpha \ne \beta} \int_{0}^{t}dt'\left\langle \tau_{\alpha\beta,n}(t') \tau_{\alpha\beta,n}(0)\right\rangle_{t_0,\alpha\beta}
 	\end{equation} 
-	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\langle \cdots \rangle_{t_0}$ denotes an average over time origins $(t_0)$, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, and $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate. 
+	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over time origins $(t_0)$ and $\tau_{\alpha\beta}$. 
 	
-	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for accurate integration of Equation \ref{eq:Green_Kubo}. To improve precision, Equation \ref{eq:Green_Kubo} averages several (between 30 and 60) independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components (hence the factor of 3 in the denominator of Equation \ref{eq:Green_Kubo}).
-	
-	%	Since Equation \ref{eq:Green_Kubo} requires information as $t \rightarrow \infty$ and the ``running integral'' can become quite noisy at long times, it is important to fit the ``running integral'' to a function that can be extrapolated to the ``true'' infinite time limit $(\eta^{\infty})$. Per ``Best Practices'', we use a double-exponential function for this purpose
+	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for accurate integration of Equation \ref{eq:Green_Kubo}. To improve precision, Equation \ref{eq:Green_Kubo} averages several (between 30 and 60) independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components.
 	
 	The ``true'' viscosity, i.e., the infinite-time-limit viscosity, is obtained by evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$. However, the long-time tail of the Green-Kubo integral is often quite noisy and does not converge smoothly. For this purpose, we fit the ``running integral'' to a double-exponential function
 	\begin{equation} \label{eq: Double exponential}
 	\eta(t) = A \alpha \tau_1 \left(1-\exp{(-t/\tau_1)}\right) + A (1-\alpha) \tau_2 \left(1-\exp{(-t/\tau_2)}\right)
 	\end{equation}
 	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$ is the infinite-time-limit viscosity. 
-	
-%	Obtaining the ``true'' infinite time limit viscosity $(\eta^{\infty})$ requires evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$. Following ``Best Practices'', we fit a double-exponential function to the ``running integral''
-%	\begin{equation} \label{eq: Double exponential}
-%	\eta(t) = A \alpha \tau_1 \left(1-\exp{(-t/\tau_1)}\right) + A (1-\alpha) \tau_2 \left(1-\exp{(-t/\tau_2)}\right)
-%	\end{equation}
-%	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$.
-	
+		
 	Since the Green-Kubo ``running integral'' suffers from extreme fluctuations at long times, Equation \ref{eq: Double exponential} is fit by minimizing a weighted sum-squared error objective function. Weights are equal to the inverse of the standard deviation $(\sigma_{\eta})$ of the replicate simulations. The time dependence of $\sigma_{\eta}$ is modeled with $A t^{b}$, where $A$ and $b$ are fitting parameters.
 	
 	Despite weighting the data by $\sigma_{\eta}$, it can be challenging to obtain good fits of Equation \ref{eq: Double exponential} when all the data are included. For this reason, data are excluded where $\sigma_{\eta} > 0.4 \times \eta^{\infty}$ \cite{Maginn2018,Zhang2015}. Occasionally, this heuristic results in a cut-off that is too short, in particular for systems with slow dynamics, which also leads to very poor fits. In such cases, it is necessary to modify the heuristic, e.g., exclude data where $\sigma_{\eta} > 0.8 \times \eta^{\infty}$. As erroneously large fluctuations also exist at very short times, only data for $t > 3$ ps are included in the fitting of Equation \ref{eq: Double exponential} \cite{Maginn2018,Zhang2015}. 
 	 
-%	To account for the increasing fluctuations in the ``running integral'' with respect to time, Equation \ref{eq: Double exponential} is fit by minimizing a weighted sum-squared error objective function. The weight model, $A t^{-b}$, is fit to the standard deviation $(\sigma_{\eta})$ of the replicate simulations. In addition, following a heuristic proposed by Zhang et al., data are excluded where $\sigma_{\eta} > 40$~\% $\eta^{\infty}$. Occasionally this heuristic resulted in a cut-off time that was too short, which lead to very poor fits. In such cases, it was necessary to manually increase the cut-off time. Large fluctuations also exist at very short times. Following ``Best Practices,'' only data for $t > 3$ ps are included in the fitting of Equation \ref{eq: Double exponential}. 
-	
 	The uncertainty in $\eta^{\infty}$ is obtained by bootstrap re-sampling. Specifically, the fitting process described previously is repeated hundreds of times using randomly selected subsets of replicate simulations. Furthermore, each bootstrap repetition uses a randomly selected long-time cut-off between 0.35 $\times \eta^{\infty}$ and 0.45 $\times \eta^{\infty}$ to account for uncertainty in the 0.4 $\times \eta^{\infty}$ heuristic. A 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of this process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
 	
-%	, and  are employed for a single MD run. The average of 30 to 60 independent replicate simulations $(N_{\rm reps})$ is fit to a double-exponential function by minimizing a weighted sum-squared error objective function.  
+	\subsection{Force fields} \label{Force Field}
 	
-%	Following the ``Best Practices'' recommendation, we implement the Green-Kubo ``time-decomposition'' analysis to extract viscosity from EMD simulations. We refer the interested reader to References BLANK and BLANK for further details. In brief, the Green-Kubo integral is computed with respect to time for each independent MD simulation from the three off-diagonal components of the stress tensor
-%	\begin{equation}
-%	\frac{V}{3 k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \sum_{\alpha \ne \beta} \int_{0}^{\infty}dt\left\langle \tau_{\alpha\beta,n}(t) \tau_{\alpha\beta,n}(0)\right\rangle_{t_0}
-%	\end{equation} 
-%	where $V$ is the volume, $k_{\rm B}$ is the Boltzmann constant, $\langle \cdots \rangle_{t_0}$ denotes an average over time origins, $\alpha$ and $\beta = x, y, $ or $z$ Cartesian coordinates, and $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate. 
+	As we demonstrated in our previous study BLANK, the Potoff Mie $\lambda$-6 force field provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes. In particular, this force field predicts the viscosity within 10~\% for 2,2,4-trimethylpentane up to 200 MPa and for propane up to 1000 MPa. By contrast, the TraPPE and TAMie models are c appears to ex being the  to 
 	
-%	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) to adequately integrate the initial rapid decay of the autocorrelation function. Twelve different time-origins $(t_0)$ are employed for a single MD run. The average of 30 to 60 independent replicate simulations $(N_{\rm reps})$ is fit to a double-exponential function by minimizing a weighted sum-squared error objective function. The weighting model, $A t^{-b}$, is fit to the standard deviation $(\sigma_{\eta})$ of the replicate simulations. Data are excluded at very short times, less than 3 ps, and at long times, when $\eta_{\sigma} > 40$~\% $\eta^{\infty}$. Uncertainties are obtained by bootstrap re-sampling replicate simulations and by varying the time cut-off between 30~\% and 50~\%. 
+	For these reasons, we utilize the Potoff Mie $\lambda$-6 force field as the basis for our predictions of $\eta$. In addition, we quantify the uncertainties in the non-bonded and torsional parameters. We subsequently propagate these force field parameter uncertainties when predicting $\eta$. 
 	
-	%In addition, each bootstrap re-sampling utilizes a random cut-off time of 30~\% - 50~\%.
+	The Potoff Mie $\lambda$-6 force field utilizes united-atom (UA) sites, where 2,2,4-trimethylhexane is represented with CH$_3$, CH$_2$, CH, and C UA sites. Neighboring UA sites are separated by a fixed 0.154 nm bond length. Note that we observed in our previous study that the use of flexible bonds can impact $\eta$ by several percent. 
 	
-%	According to the recommendation found in Reference BLANK, we utilize the Green-Kubo ``time-decomposition'' method proposed by Zhang et al. We refer the interested reader to References BLANK and BLANK for further details. In brief, the Green-Kubo integral is computed with respect to time for each independent MD simulation. Twelve different time-origins are employed for a single MD run. The average of 30 to 60 independent replicate simulations is fit to a double-exponential function using a weighted sum-squared error approach. The weighting model, $A t^{-b}$, is fit to the standard deviation $(\sigma_{\eta})$ of the replicate simulations. As recommended, data are excluded at very short times, less than 3 ps, and at long times, where $\eta_{\sigma} > 40$~\% $\eta^{\infty}$.  
+	The angular contribution to energy is computed using a harmonic potential:
+	\begin{equation}
+	u^{\rm bend} = \frac{k_\theta}{2} \left(\theta-\theta_0\right)^2
+	\end{equation}
+	where $u^{\rm bend}$ is the bending energy, $\theta$ is the instantaneous bond angle, $\theta_0$ is the equilibrium bond angle (see Table \ref{tab:angles}), and $k_\theta$ is the harmonic force constant with $k_\theta/k_{\rm B} = 62500$ K/rad$^2$ for all bonding angles, where $k_{\rm B}$ is the Boltzmann constant. 
 	
-	  
+	\begin{table}[h!]
+		\caption{Equilibrium bond angles $(\theta_0)$ \cite{Martin1999}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:angles}
+		\begin{center}
+			\begin{tabular}{|c|c|}
+				\hline
+				Bending sites & $\theta_0$ (degrees) \\ \hline
+				CH$_i$-CH$_2$-CH$_j$ & 114.0 \\ 
+				CH$_i$-CH-CH$_j$ & 112.0 \\ 
+				CH$_i$-C-CH$_j$ & 109.5 \\  
+				\hline
+			\end{tabular}
+		\end{center} 
+	\end{table}
 	
-%	 The fit is    simul 12 different time-origins.
-%	
-%	The average Green-Kubo integral is obtained 
-%	
-%	A double-exponential function is fit to the average of 30 to 60 replicat
-%	
-%	In brief, the algorithm for obtaining $\eta$ is
-%	
-%	\begin{enumerate}
-%		\item Divide a single MD simulation into 12 equal time blocks (i.e., 12 different time-origins)
-%		\item Average 
-%	\end{enumerate}
-%	
-%	 $\eta$ is estimated by fitting a double-exponential function to the average Green-Kubo viscosit
-%	
-%	Refer to Best Practices document
-%	
-%	\begin{enumerate}
-%		\item Use 40\% sigma for cut-off
-%		\item Fit sigma to power model
-%		\item Fit viscosity to double exponential
-%		\item Bootstrap uncertainties by resampling replicate simulations
-%		\item 12 time origins
-%	\end{enumerate}
-%	
-%	We have tried to 
+	Dihedral torsional interactions are determined using a cosine series:
+	\begin{equation}
+	u^{\rm tors} = c_0 + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + c_3 [1+\cos{3\phi}]
+	\end{equation}
+	where $u^{\rm tors}$ is the torsional energy, $\phi$ is the dihedral angle and $c_n$ are the Fourier constants listed in Table \ref{tab:torsions}. Note that $\phi$ is defined using a convention similar to IUPAC where $\phi = 180 \deg$ for the \textit{trans} conformation.
+	
+	\begin{table}[h!]
+		\caption{Fourier constants $(c_n/k_{\rm B})$ in units of K \cite{Martin1999}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:torsions}
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|}
+				\hline
+				Torsion sites & $c_0/k_{\rm B}$ & $c_1/k_{\rm B}$ & $c_2/k_{\rm B}$ & $c_3/k_{\rm B}$ \\ \hline
+				CH$_i$-CH$_2$-CH$_2$-CH$_j$ & 0.0 & 355.03 & -68.19 & 791.32 \\ 
+				CH$_i$-CH$_2$-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 \\
+				CH$_i$-CH$_2$-C-CH$_j$ & 0.0 & 0.0 & 0.0 & 461.29 \\
+				CH$_i$-CH-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 \\
+				\hline
+			\end{tabular}
+		\end{center} 
+	\end{table}
+	
+	Non-bonded interactions between sites located in two different molecules or separated by more than three bonds within the same molecule are calculated using a Mie $\lambda$-6 potential (of which the Lennard-Jones, LJ, 12-6 is a subclass) \cite{Herdes2015}:
+	\begin{equation} \label{eq:Mie}
+	u^{\rm vdw}(\epsilon,\sigma,\lambda;r) = \left(\frac{\lambda}{\lambda - 6}\right)\left(\frac{\lambda}{6}\right)^{\frac{6}{\lambda - 6}} \epsilon \left[\left(\frac{\sigma}{r}\right)^{\lambda} - \left(\frac{\sigma}{r}\right)^6\right]
+	\end{equation} 
+	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. 
+	
+	\begin{table}[h!]
+		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses.} \label{tab:nonbonded params}
+		\begin{center}
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\multicolumn{1}{|c}{} & \multicolumn{3}{|c}{TraPPE  (TraPPE-2)} & \multicolumn{3}{|c|}{Potoff (S/L)}  \\ \hline
+				United-atom & $\epsilon/k_{\rm B}$ (K) & $\sigma$ (nm) & $\lambda$ & $\epsilon/k_{\rm B}$ (K) & $\sigma$ (nm) & $\lambda$ \\ \hline
+				CH$_3$ & 98 (134.5)  & 0.375 (0.352) & 12 & 121.25 & 0.3783 & 16  \\ 
+				CH$_2$ & 46 & 0.395 & 12 & 61 & 0.399 & 16 \\ 
+				CH & 10 & 0.468 & 12 & 15 (15/14) & 0.46 (0.47/0.47) & 16\\
+				C & 0.5 & 0.640 & 12 & 1.2 (1.45/1.2) & 0.61 (0.61/0.62) & 16\\
+				\hline
+				\multicolumn{1}{|c}{} & \multicolumn{3}{|c}{AUA4} & \multicolumn{3}{|c|}{TAMie} \\ \hline
+				CH$_3$ & 120.15  & 0.3607 & 12 & 136.318 (130.780) & 0.36034 (0.36463) & 14 \\ 
+				CH$_2$ & 86.29 & 0.3461 & 12 & 52.9133 & 0.40400 & 14 \\ 
+				CH & 50.98 & 0.3363 & 12 & 14.5392 & 0.43656 & 14\\
+				C & 15.04 & 0.244 & 12 & -- & -- & --\\
+				\hline
+			\end{tabular}
+		\end{center} 
+	\end{table}
+	
+	Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. Due to their superior accuracy, we only provide results for the Potoff S/L parameter set.
+	
+	The Potoff ``generalized'' CH and C parameter set is an attempt at a completely transferable set. However, since the ``generalized'' parameters performed poorly for some compounds, the S/L parameter set was proposed, where the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively.
+	
+	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen1987} for $\epsilon$ and $\sigma$ and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
+	\begin{equation} \label{eq:Lorentz-Berthelot_eps}
+	\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}
+	\end{equation}
+	\begin{equation} \label{eq:Lorentz-Berthelot_sig}
+	\sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}
+	\end{equation}
+	\begin{equation} \label{eq:Lorentz-Berthelot_lam}
+	\lambda_{ij} = \frac{\lambda_{ii} + \lambda_{jj}}{2}
+	\end{equation}
+	where the $ij$ subscript refers to cross-interactions and the subscripts $ii$ and $jj$ refer to same-site interactions. 
 	
 	\section{Results} \label{Results}
 	
