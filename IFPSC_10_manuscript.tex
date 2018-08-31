@@ -247,88 +247,66 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 		
 	\section{Introduction}
 	
-	The Industrial Fluid Properties Simulation Challenge is an open competition organized by the Computational Molecular Science and Engineering Forum (CoMSEF) of the American Institute of Chemical Engineers (AIChE), the American Chemical Society (ACS), Army Research Lab, National Institute of Standards and Technology, The Dow Chemical Company, 3M, and United Technologies Research Center. The goals of the competition are to drive improvements in the practice of molecular modeling, formalize methods for the evaluation and validation of simulation results with experimental data, and ensure relevance of simulation activities to industrial requirements.  The Simulation Challenge was initiated by the workshop on "Predicting the Thermophysical Properties of Fluids by Molecular Simulation" (link) and is part of the overall vision of the Industrial Fluid Properties Simulation Collective.
+	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10). The 10$^{\rm th}$ challenge is to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane over a wide range of pressures $(P)$, from 0.1 MPa (atmospheric) to 1000 MPa, at 293 K.
 	
-	The 10th Industrial Fluid Properties Simulation Challenge will test the capability of molecular dynamics simulation to provide the property of liquids most important to elastohydrodynamic lubrication (EHL), the pressure-viscosity relation.  The temperature dependence at elevated pressure could be the subject of a future challenge.
+%	IFPSC is organized by several groups, namely, the Computational Molecular Science and Engineering Forum (CoMSEF) of the American Institute of Chemical Engineers (AIChE), the American Chemical Society (ACS), Army Research Lab, National Institute of Standards and Technology (NIST), The Dow Chemical Company, 3M, and United Technologies Research Center. 
+    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. Experimental measurements have been performed by Scott Bair of Georgia Tech with a sample of greater than 98\% purity (Aldrich product number 92470, lot BCBR3588V). The estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
 	
-	A fundamental requirement of elastohydrodynamic lubrication (EHL) is a description of the viscosity of the liquid as a function of pressure [1].  The classical film thickness formulas all require a value for a property known as a pressure-viscosity coefficient; although the definition of this property is not always clear [2]. The shape of a traction (friction) curve has been the subject of much speculation for at least forty years [3]. The shape of a traction curve when plotted as friction coefficient or average shear stress versus the logarithm of sliding speed or slide-to-roll ratio depends strongly on the pressure dependence of viscosity at the Hertz pressure [4], more fragile liquids having a less steep logarithmic portion. Although the pressure dependence of viscosity is clearly essential to the field, until about ten years ago, experimentally measured values of this property were not a typical part of EHL analysis.  The reasons for the previous neglect may be debated, but the demand for this information is now growing.
+	Classical film thickness formulas rely heavily on the pressure-viscosity coefficient, which is essentially an Arrhenius-like activation parameter. However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometery measurements for nearly a century. This super-Arrhenius trend is typically manifest by an inflection point in a plot of log$_{\rm 10}(\eta)$ with respect to pressure. While this behavior is common in experimental measurements, we are not aware of any molecular simulation studies that have addressed this issue. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior. 
 	
-	Molecular dynamics simulations have the promise of generating pressure-viscosity data for liquids which have not yet been synthesized but only if the accuracy of the method can be validated.  There has been a claim of success in predicting the pressure dependence of viscosity for squalane [5], although the temperature dependence is not accurately recovered in this example [6]. There has been extensive experimental work on squalane viscosity at elevated pressure [7,8] so that simulations have a known “target” value of viscosity. As of this time, there has been no success in recovering the super-Arrhenius pressure dependence that is important to friction [9].
+	To determine an adequate force field for predicting the viscosity-pressure trend, we investigated four different force fields, namely, Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. Each force field uses a united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) functional form. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa. The compounds in question were \textit{n}-alkanes ranging in carbon number from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane. The results for 2,2,4-trimethylpentane at high pressures were especially useful as this compound is a close analogue to the challenge compound and has been well studied experimentally.
 	
-	A Lubricant Viscosity Simulation Challenge is now proposed to assess the possibility of employing molecular dynamics simulations to predict the pressure dependence of viscosity in a simple hydrocarbon molecule.  This should be a material for which there is no presently published viscosity data, with the exception perhaps of viscosity at ambient pressure. It should, for simulation convenience, be composed of a minimum number of carbons.  Linear alkanes are excluded because they are not glass-formers and would be crystallized at EHL pressures.  The material should possess all of the pressure-viscosity trends of lubricating oil.  A candidate fulfilling these requirements is 2,2,4 Trimethylhexane.
-		
-	Prof. Scott Bair (Georgia Tech) has characterized the viscosity of 2,2,4 Trimethylhexane (>98\%), Aldrich product number 92470, lot BCBR3588V.  The viscometers were calibrated with di (2ethylhexyl) sebacate based on the correlation of Paredes et al. [10].  Estimated uncertainties are 3\% for viscosity, 0.3°C for temperature and the greater of 1MPa and 0.4% for pressure.
+	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by greater than 30~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities BLANK, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 2,2,4-trimethylpentane to within 10~\% accuracy. For this reason, we chose to implement the Potoff Mie 16-6 force field for the challenge of predicting $\eta$ and the pressure-viscosity coefficient of 2,2,4-trimethylhexane. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for the compounds studied.
+	 
+	One of the entry guidelines for the challenge is ``an analysis of the uncertainty in the calculated results.'' Traditional calculation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to the data post-processing. This class is referred to as ``numerical uncertainty'' (alternatively referred to as ``statistical uncertainty''). Two other classes of uncertainty, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty'') have been traditionally ignored, although they likely have a greater impact than numerical uncertainty. The latter refers to the uncertainty associated with the choice of force field functional form, while the former refers to the uncertainty in the force field parameters for a given force field functional form. 
 	
-	Entrants are challenged to predict the viscosity at pressures of 0.1, 25, 50, 100, 150, 250, 400, 500, 600, 700, 800, 900, and 1000 MPa, all at temperature of 20°C (293K).  Entries will be judged based on comparison to the benchmark data at those state conditions and to the pressure viscosity coefficient.
+	Quantifying the force field functional form uncertainty is an extremely difficult task, as it often requires considering and performing simulations with numerous functional forms. For this reason, we investigate numerical and parameter uncertainties without addressing functional form uncertainties. Specifically, the chosen functional form is the same as the Potoff force field, namely, a united-atom, fixed bond length, harmonic angular potential, cosine series torsional potential, and a Mie 16-6 non-bonded potential (see Section \ref{Force Field} for details). As previous studies demonstrate the high sensitivity of viscosity on the non-bonded and torsional potentials, we limit our parameter uncertainty investigation to the non-bonded and torsional parameters.
 	
-	\begin{enumerate}
-		\item Introduce the industrial fluid properties simulation challenge
-		\item Discuss the details of the 10th challenge
-		\item Explain why this challenge is important/interesting:
-		\begin{enumerate}
-			\item Viscosity is an important property for designing chemical systems
-			\item Viscosity data typically do not cover the entire range of $P \rho T$ of interest
-			\item Prediction methods are typically quite poor for viscosity
-			\item Molecular simulation is an attractive alternative, but two main challenges
-			\begin{enumerate}
-				\item Difficulty of obtaining reproducible results from simulation
-				\item Unreliable force fields
-			\end{enumerate}
-		\end{enumerate}
-		\item We performed a systematic investigation of several united-atom force fields and determined Potoff to be the most reliable
-		\item Although Potoff over predicts viscosity and pressure with respect to density, it is quite reliable at predicting viscosity with respect to pressure
-		\item The uncertainty in force field parameters is key for rigorously quantifying the uncertainty
-	\end{enumerate}
+	The outline for the present work is the following. Section \ref{Methods} explains the force field, simulation methodology, and data analysis. Section \ref{Results} presents the simulation results, with an emphasis on uncertainty quantification. Section \ref{Discussion/Limitations} discusses some important observations and limitations. Section \ref{Conclusions} recaps the primary conclusions from this work.
 	
-	One of the entry guidelines for the challenge is ``an analysis of the uncertainty in the calculated results.'' Traditional calculation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to the data post-processing. This class is referred to as ``numerical uncertainty.'' Two other classes of uncertainty exist which are often more important, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty''). The latter refers to the uncertainty associated with the choice of force field functional form. Parameter uncertainty refers to the uncertainty in the force field parameters, for a given force field functional form. 
-	
-	Quantifying the force field functional form uncertainty is a difficult task, as it often requires considering and performing simulations with numerous functional forms. In this study, we investigate both numerical and parameter uncertainties, where the chosen functional form is the same as the Potoff force field, namely, a united-atom, fixed bond length, harmonic angular potential, cosine series torsional potential, and a Mie 16-6 non-bonded potential (see Section \ref{Force Field} for details). As previous studies demonstrate the high sensitivity of viscosity on the non-bonded and torsional potentials, we limit our parameter uncertainty investigation to the non-bonded and torsional parameters.  
-	
-	The design of efficient and reliable technical processes requires accurate estimates of thermophysical properties. Shear viscosity $(\eta)$ is an important property for characterizing flow, e.g., sizing pumps, assessing flow assurance in fossil fuel recovery, and lubricating bearings in tribological applications. There are primarily three different means by which shear viscosity values are obtained: experimental measurement, semi-empirical prediction models, and molecular simulation (molecular dynamics, MD). Significant limitations exist for each of these methods. 
-	
-	For example, experimental measurements can be expensive, time-consuming, and challenging at extreme temperatures $(T)$ and pressures $(P)$. Experimental data tend to be distributed among several prototypes of linear, branched, ring, and polar molecules, with many gaps among a homologous series. Most experimental data are available below 200 MPa, while tribological applications may require estimates at pressures as high as 1000 MPa. Flow assurance applications are generally at pressures below 200 MPa, but at temperatures of 423 to 523 K. The ever expanding conditions of interest and economic constraints on new measurements foster increased research in predictive methods.
-	
-    The National Institute of Standards and Technology (NIST) Reference Fluid Properties (REFPROP) database software provides ``reference quality'' viscosity correlations for experimentally well-studied compounds (around 100 species) \cite{LEMMON-RP10}. Most compounds, however, do not have sufficient \textit{reliable} experimental data covering a wide range of temperatures, pressures, and densities $(\rho)$ for developing ``reference quality'' correlations. These less-studied compounds require predictive methods that pool together data from several related molecular species. 
-    
-    Semi-empirical prediction models are typically not reliable over the industrially relevant ranges of $P \rho T$ \cite{PGL}. For example, corresponding states methods are recommended for vapors, dense fluids, and high temperature liquids. These methods rely on the similarity of trends in the properties relative to reference compounds, e.g., methane and \textit{n}-octane. Corresponding states methods are less reliable for more complex molecular structures, e.g., branched compounds. Typical compilations indicate that deviations from experiment may vary by 5 to 50~\%, with little guidance about when to expect lower or higher accuracy. 
-    
-    For low temperature liquids, group contribution schemes are favored, but these tend to extrapolate poorly when applied to compounds or conditions outside the training set. More recent advances such as machine learning \cite{Mulero2017,Lee2017} and entropy scaling \cite{Lotgering2015} have shown great promise in prediction of historically challenging properties, such as viscosity, thermal conductivity, and surface tension. However, machine learning relies on large amounts of experimental data and often suffers from dubious extrapolation. While entropy scaling has a stronger theoretical basis, it requires a reliable reference viscosity and an adequate equation-of-state, which may not be readily available for the compound of interest.
-	
-	As an alternative to experiment and semi-empirical prediction models, molecular simulation is an attractive means for estimating viscosity. However, there are two fundamental challenges impeding the use of molecular simulation as a mainstream chemical engineering tool for viscosity prediction. The first challenge is that obtaining reproducible results is more difficult for transport properties, such as viscosity, than for thermodynamic properties. Recently, a ``Best Practices Guide'' was developed to address this challenge, namely, to improve reproducibility of viscosity estimates \cite{Maginn2018}. We apply these ``Best Practices'' and address some outstanding issues mentioned therein.
-	
-	The second challenging aspect of obtaining accurate simulation estimates is that viscosity is extremely sensitive to the force field. In addition to the strong dependence on the non-bonded interactions, the bonded potential plays a much greater role for viscosity than for thermodynamic properties. For example, varying the torsional potential has a significant impact on viscosity \cite{Nieto2006}, while vapor-liquid coexistence is relatively unaffected \cite{Bernard2009}. Therefore, the ability to predict viscosities with molecular simulation requires both robust methods and adequate force fields. 
-	
-	We investigate the accuracy of four force fields, namely, Transferable Potentials for Phase Equilibria (TraPPE-UA, also referred to simply as TraPPE \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. Each force field is a variation of the united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) model, a popular class designed for the engineering purpose of predicting thermophysical properties. However, the suitability of these force fields for quantitative viscosity prediction, especially at high pressures, has been widely debated in the literature.
-	
-	For example, depending on the compound structure and state conditions, some studies suggest that UA LJ 12-6 models (e.g., TraPPE) are inadequate for estimating viscosities and recommend the use of anisotropic-united-atom (AUA) or all-atom (AA) models for this purpose \cite{Allen1997,Payal2012,Mondello1997,Ungerer2007}. Considering the significant increase in computational cost of AA simulations, two promising alternatives have been investigated, namely, the Mie $\lambda$-6 potentials and/or modified torsional models. For example, Nieto-Draghi et al. demonstrate significant improvement in viscosity prediction for the AUA4 model by increasing the torsional barriers \cite{Nieto2006}. In addition, the UA Mie $\lambda$-6 model has been shown to accurately predict saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ without significant degradation of other vapor-liquid saturation properties \cite{Gordon2006}, i.e., saturated liquid density $(\rho_{\rm liq}^{\rm sat})$, saturated vapor density $(\rho_{\rm vap}^{\rm sat})$, and saturated vapor pressure $(P_{\rm vap}^{\rm sat})$.   
-	        
-	Hoang et al. demonstrate that including viscosity data in the force field development can improve the identification of a unique set of transferable Mie $\lambda$-6 parameters, while simultaneously improving viscosity predictions \cite{Hoang2017}. By contrast, the force fields compared in the present work were optimized solely with vapor-liquid coexistence data, i.e., dynamic properties, such as viscosity, were not included in their parameterization. Notwithstanding the potential benefits of including viscosity as a property of interest during force field development, we assess the accuracy of TraPPE-UA, TAMie, Potoff, and AUA4 for estimating viscosity as they currently stand, including their torsional potential models. While the Potoff and TAMie force fields have shown considerable promise in predicting static properties (in particular, $P_{\rm vap}^{\rm sat}$), their ability to predict dynamic properties has not been investigated previously. 
+%	The 10th Industrial Fluid Properties Simulation Challenge will test the capability of molecular dynamics simulation to provide the property of liquids most important to elastohydrodynamic lubrication (EHL), the pressure-viscosity relation.  The temperature dependence at elevated pressure could be the subject of a future challenge.
+%	
+%	A fundamental requirement of elastohydrodynamic lubrication (EHL) is a description of the viscosity of the liquid as a function of pressure [1].  The classical film thickness formulas all require a value for a property known as a pressure-viscosity coefficient; although the definition of this property is not always clear [2]. The shape of a traction (friction) curve has been the subject of much speculation for at least forty years [3]. The shape of a traction curve when plotted as friction coefficient or average shear stress versus the logarithm of sliding speed or slide-to-roll ratio depends strongly on the pressure dependence of viscosity at the Hertz pressure [4], more fragile liquids having a less steep logarithmic portion. Although the pressure dependence of viscosity is clearly essential to the field, until about ten years ago, experimentally measured values of this property were not a typical part of EHL analysis.  The reasons for the previous neglect may be debated, but the demand for this information is now growing.
+%	
+%	Molecular dynamics simulations have the promise of generating pressure-viscosity data for liquids which have not yet been synthesized but only if the accuracy of the method can be validated.  There has been a claim of success in predicting the pressure dependence of viscosity for squalane [5], although the temperature dependence is not accurately recovered in this example [6]. There has been extensive experimental work on squalane viscosity at elevated pressure [7,8] so that simulations have a known “target” value of viscosity. As of this time, there has been no success in recovering the super-Arrhenius pressure dependence that is important to friction [9].
+%	
+%	A Lubricant Viscosity Simulation Challenge is now proposed to assess the possibility of employing molecular dynamics simulations to predict the pressure dependence of viscosity in a simple hydrocarbon molecule.  This should be a material for which there is no presently published viscosity data, with the exception perhaps of viscosity at ambient pressure. It should, for simulation convenience, be composed of a minimum number of carbons.  Linear alkanes are excluded because they are not glass-formers and would be crystallized at EHL pressures.  The material should possess all of the pressure-viscosity trends of lubricating oil.  A candidate fulfilling these requirements is 2,2,4 Trimethylhexane.
+%		
+%	Prof. Scott Bair (Georgia Tech) has characterized the viscosity of 2,2,4 Trimethylhexane (>98\%), Aldrich product number 92470, lot BCBR3588V.  The viscometers were calibrated with di (2ethylhexyl) sebacate based on the correlation of Paredes et al. [10].  Estimated uncertainties are 3\% for viscosity, 0.3°C for temperature and the greater of 1MPa and 0.4\% for pressure.
+%	
+%	Entrants are challenged to predict the viscosity at pressures of 0.1, 25, 50, 100, 150, 250, 400, 500, 600, 700, 800, 900, and 1000 MPa, all at temperature of 20°C (293K).  Entries will be judged based on comparison to the benchmark data at those state conditions and to the pressure viscosity coefficient.
+%	
+%	\begin{enumerate}
+%		\item Introduce the industrial fluid properties simulation challenge
+%		\item Discuss the details of the 10th challenge
+%		\item Explain why this challenge is important/interesting:
+%		\begin{enumerate}
+%			\item Viscosity is an important property for designing chemical systems
+%			\item Viscosity data typically do not cover the entire range of $P \rho T$ of interest
+%			\item Prediction methods are typically quite poor for viscosity
+%			\item Molecular simulation is an attractive alternative, but two main challenges
+%			\begin{enumerate}
+%				\item Difficulty of obtaining reproducible results from simulation
+%				\item Unreliable force fields
+%			\end{enumerate}
+%		\end{enumerate}
+%		\item We performed a systematic investigation of several united-atom force fields and determined Potoff to be the most reliable
+%		\item Although Potoff over predicts viscosity and pressure with respect to density, it is quite reliable at predicting viscosity with respect to pressure
+%		\item The uncertainty in force field parameters is key for rigorously quantifying the uncertainty
+%	\end{enumerate}  
         
-    The outline for the present work is the following. Section \ref{Methods} explains the force fields, simulation methodology, and data analysis. Section \ref{Results} presents the simulation results for each force field, compound, and state point studied. Section \ref{Discussion/Limitations} discusses some important observations and limitations. Section \ref{Conclusions} recaps the primary conclusions from this work.
-    	
 	\section{Methods} \label{Methods}
 	
 	
 	\subsection{Simulation set-up}
 		
-	Viscosity estimates can be obtained from both equilibrium molecular dynamics (EMD) and non-equilibrium molecular dynamics (NEMD) simulations. The ``Best Practices Guide'' is currently limited to EMD methods and purports that NEMD might be necessary for high viscosities (greater than 0.02 Pa-s). One purpose of the present work is to demonstrate that, by applying these guidelines, EMD can also provide meaningful estimates for highly viscous systems. 
-	
-%	 that EMD is capable of providing reproducible estimates of viscosity   recommended for estimating viscosity with the Green-Kubo analysis of EMD. 
-	
-%	Equilibrium molecular dynamics simulations are performed using GROMACS version 2018 \cite{GROMACS_2018}. Each simulation uses the Velocity Verlet integrator with a 2 fs time-step, Nos{\'e}-Hoover thermostat with a time constant of 1 ps, a cut-off distance for non-bonded interactions with tail corrections for energy and pressure \cite{GROMACS_note}, and fixed bond-lengths constrained using LINCS with a LINCS-order of eight. We implement the non-bonded cut-off distance recommended for each force field, namely, TraPPE, TAMie, and AUA4 utilize a 1.4 nm cut-off while a cut-off of 1.0 nm is employed for Potoff (with the exception of \textit{n}-hexadecane which was unstable with this short cut-off distance). Coulombic interactions are not computed as none of the force fields require partial charges for the compounds studied.   
-%	
-	
-	%Each simulation uses the Velocity Verlet integrator with a 2 fs time-step, Nos{\'e}-Hoover thermostat with a time constant of 1 ps, a cut-off distance for non-bonded interactions with tail corrections for energy and pressure \cite{GROMACS_note}, and fixed bond-lengths constrained using LINCS with a LINCS-order of eight. We implement the non-bonded cut-off distance recommended for each force field, namely, TraPPE, TAMie, and AUA4 utilize a 1.4 nm cut-off while a cut-off of 1.0 nm is employed for Potoff (with the exception of \textit{n}-hexadecane which was unstable with this short cut-off distance). Coulombic interactions are not computed as none of the force fields require partial charges for the compounds studied.   
-	
-%	The equilibration time is 1 ns, while the production time depends on the system, i.e., the compound and state point, where larger compounds, lower temperatures, and higher densities necessitate longer simulations. For most systems, 1 ns is a sufficient production time, while an 8 ns production time is required for the most viscous systems, e.g., 2,2,4-trimethylpentane at elevated pressures. As recommended by BLANK, we investigate several different production times (1, 2, 4, and 8 ns) for some select systems to verify that our simulations are sufficiently long.
-	
-	Equilibrium molecular dynamics simulations are performed using GROMACS version 2018 with ``mixed'' (single and double) precision \cite{GROMACS_2018}. GROMACS is compiled using GNU 7.3.0, OpenMPI enabled, and GPU support disabled. Approximately three-fourths of the simulations are run using Linux 4.4.0-112-generic x86\_64 on an Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz machine while the remaining one-fourth are run using Linux 4.15.0-22-generic x86\_64 on an Intel(R) Xeon(R) CPU E5-2450 0 @ 2.10GHz machine. Example GROMACS input files (.top, .gro. and .mdp) with corresponding shell and python scripts for preparing, running, and analyzing simulations are provided as Supporting Information. 
+	Historically, non-equilibrium molecular dynamics (NEMD) has been preferred for highly viscous systems. However, in our recent publication we successfully predicted the viscosity of 2,2,4-trimethylpentane at 293 K and 1000 MPa (the highest pressure required for the challenge) with equilibrium molecular dynamics (EMD). Consistent with our previous study, we use EMD for all pressures in the challenge.
+		
+	Equilibrium molecular dynamics simulations are performed using GROMACS version 2018 with ``mixed'' (single and double) precision \cite{GROMACS_2018}. GROMACS is compiled using GNU 7.3.0, OpenMPI enabled, and GPU support disabled. The simulations are run using Linux 4.4.0-112-generic x86\_64 on an Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz machine. Example GROMACS input files (.top, .gro. and .mdp) with corresponding shell and python scripts for preparing, running, and analyzing simulations are provided as Supporting Information. 
 	
 	%In addition, the shell and python scripts used for preparing and analyzing simulations are available on GitHub \cite{BLANK}. 
 	
-	Simulation specifications are provided in Table \ref{tab:sim_specs}. Note that each force field utilizes a 1.4 nm non-bonded cut-off distance, with the exception of Potoff which employs a 1.0 nm cut-off (as recommended in Reference \citenum{Mie}) except for certain compounds (see Section \ref{Cut-off distance}). Analytical tail corrections are applied in all cases \cite{GROMACS_note}. For most systems, 1 ns is a sufficient production time, while longer simulations are required for the more viscous systems, e.g., 16 ns for 2,2,4-trimethylpentane at 1000 MPa. Sections \ref{Finite-size effects} and \ref{Cut-off distance} provide a detailed analysis for the number of molecules and the cut-off lengths, respectively. Sections \ref{SI:Simulation time} and \ref{fixed flexible} of Supporting Information investigate, respectively, the sensitivity of our results to the production time and constrained bonds. To validate our methods, a comparison with other reference simulation values \cite{NIST_SRSW,Kioupis2000,Nieto2006} is provided in Section \ref{Validation Runs} of Supporting Information. 
-
-%	Validation results for the production times, 2 fs time-step, and constrained bonds are provided in Sections \ref{SI:Simulation time}, \ref{Validation Runs}, and \ref{fixed flexible} of Supporting Information, respectively.
+    We utilize the same simulation specifications as our previous study BLANK. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections \cite{GROMACS_note}. Our previous study also shows that finite size effects are negligible for a 400 molecule system. 
 	 
 	\begin{table}[htb!]
 		\caption{General simulation specifications.} \label{tab:sim_specs}
@@ -336,9 +314,7 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 			\begin{tabular}{|c|c|}
 				\hline
 				Time-step (fs) & 2 \\
-				Equilibration time (ns) & 1 \\
-				Production time (ns) & 1, 2, 4, 8, or 16 \\
-				Cut-off length (nm) & 1.4 (1.0 for Potoff) \\
+				Cut-off length (nm) & 1.4 \\
 				Tail-corrections & $U$ and $P$ \\
 				Constrained bonds & LINCS \cite{Hess1998,Hess2008} \\
 				LINCS-order & 8 \\			     
@@ -347,129 +323,71 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 			\end{tabular}
 		\end{center}
 	\end{table}
-	
-%	\begin{table}[h!]
-%		\caption{Integrator, thermostat and barostat specifications.} \label{tab:thermostats_barostats}
-%		\begin{center}
-%			\begin{tabular}{|c|c|c|c|c|}
-%				\hline
-%				& $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
-%				Integrator & Velocity Verlet & Leap frog & Velocity Verlet & Velocity Verlet \\ \hline 
-%				Thermostat & Velocity rescale & Nos{\'e}-Hoover & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ \hline 
-%				Thermostat time-constant (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
-%				Barostat & Berendsen & Parrinello-Rahman & N/A & N/A \\ \hline
-%				Barostat time-constant (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
-%				Barostat compressibility & 4.5e-5 & 4.5e-5 & N/A & N/A \\
-%				\hline
-%			\end{tabular}
-%		\end{center} 
-%	\end{table}
-	
-	%Also, notice that the production time depends on the system, i.e., the compound and state point, where larger compounds, lower temperatures, and higher densities necessitate longer simulations.
-	
-	%	\begin{table}[h!]
-	%		\caption{Thermostat and barostat specifications.} \label{tab:thermostats_barostats}
-	%		\begin{center}
-	%			\begin{tabular}{|c|c|c|c|c|}
-	%				\hline
-	%				 & $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
-	%				Thermostat & Velocity rescale & Nos{\'e}-Hoover & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ 
-	%				Thermostat time-constant (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\
-	%				Barostat & Berendsen & Parrinello-Rahman & N/A & N/A \\
-	%				Barostat time-constant (ps) & 1.0 & 5.0 & N/A & N/A \\
-	%				Barostat compressibility & 4.5e-5 & 4.5e-5 & N/A & N/A \\
-	%				\hline
-	%			\end{tabular}
-	%		\end{center} 
-	%	\end{table}
-	
-%	\begin{table}[htb!]
-%		\caption{General simulation specifications.} \label{tab:sim_specs}
-%		\begin{center}
-%			\begin{tabular}{|c|c|}
-%				\hline
-%				Integrator & Velocity Verlet \\
-%				Time-step (fs) & 2 \\
-%				Equilibration time (ns) & 1 \\
-%				Production time (ns) & 1, 2, 4, or 8 \\
-%				Cut-off length (nm) & 1.4 (1.0 Potoff) \\
-%				Tail-corrections & Energy and Pressure \cite{GROMACS_note} \\
-%				Constraints & LINCS \\
-%				LINCS-order & 8 \\			     
-%				\hline        
-%			\end{tabular}
-%		\end{center}
-%	\end{table}
 
-%	When $\eta$ is desired at a prescribed $T$ and $\rho$, three simulation stages are required: energy minimization, $NVT$ equilibration, and $NVT$ production. When $\eta$ is desired at a prescribed $T$ and $P$, five simulation stages are required: energy minimization, $NPT$ equilibration, $NPT$ production, $NVT$ equilibration, and $NVT$ production. Note that, according to ``Best Practices'', the final production stage simulations are always performed using the $NVT$ ensemble. 
+	We perform a sequence of six simulation stages: energy minimization, $NPT$ equilibration, $NPT$ production, energy minimization, $NVT$ equilibration, and $NVT$ production. Table \ref{tab:thermostats_barostats} lists the integrators, thermostats, barostats, and simulation time used for each $NPT$ and $NVT$ equilibration and production stage. These specifications are also the same as our previous study, with the exception of the $NVT$ production simulation times, which are state point dependent. The specific production times for the $NVT$ production stage are provided in Table \ref{tab:production times}.
+
+	\begin{table}[htbp!]
+		\caption{Simulation specifications for equilibration (Equil.) and production (Prod.) stages.} \label{tab:thermostats_barostats}
+		%    	\begin{center}
+		\begin{tabular}{|p{2.6cm}|c|c|c|c|}
+			\hline
+			& $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
+			Simulation time (ns) & 1 & 1 & 1 & 1 to 32 \\ \hline
+			Integrator & Velocity Verlet & Leap frog & Velocity Verlet & Velocity Verlet \\ \hline 
+			Thermostat & Velocity rescale & Nos{\'e}-Hoover & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ \hline 
+			Thermostat time-constant (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
+			Barostat & Berendsen & Parrinello-Rahman & N/A & N/A \\ \hline
+			Barostat time-constant (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
+			Barostat compressibility (1/bar) & 4.5E-5 & 4.5E-5 & N/A & N/A \\
+			\hline
+		\end{tabular}
+		%    	\end{center} 
+	\end{table}
+
+	\begin{table}[htb!]
+		\caption{State point specific production times. Pressure is prescribed only in $NPT$ equilibration and production stages.} \label{tab:production times}
+		\begin{center}
+			\begin{tabular}{|c|c|}
+				\hline
+				Pressure (MPa) & $NVT$ Prod. time (ns) \\ \hline
+				0.1 & 1 \\
+				25 & 1 \\
+				50 & 1 \\
+				100 & 1 \\			     
+				150 & 1 \\
+				250 & 2 \\
+				400 & 4 \\
+				500 & 8 \\
+				600 & 8 \\			     
+				700 & 16 \\
+				800 & 16 \\
+				900 & 24 \\
+				1000 & 32 \\
+				\hline        
+			\end{tabular}
+		\end{center}
+	\end{table}
 	
-	When $\eta$ is desired at a prescribed $T$ and $P$, six simulation stages are required: energy minimization, $NPT$ equilibration, $NPT$ production, energy minimization, $NVT$ equilibration, and $NVT$ production. When $\eta$ is desired at a prescribed $T$ and $\rho$, the $NPT$ stages are unnecessary and only three simulation stages are required: energy minimization, $NVT$ equilibration, and $NVT$ production. Note that the final production stage simulations are always performed using the $NVT$ ensemble \cite{Maginn2018}. Details regarding the thermostats and barostats employed are provided in Section \ref{Additional simulation details} of Supporting Information.
-	
-	We utilize 30 to 60 independent replicates to improve the precision and to provide more rigorous estimates of uncertainty \cite{Maginn2018,Zhang2015}. To ensure independence between replicates, the entire series of simulation stages are repeated for each replicate. Each energy minimization stage starts with a different pseudo-random configuration while the initial velocities are also randomized for each equilibration stage.
-	
-	% ran replicates use randomly velocities for the equilibration stage(s).
-	
-	% (constant number of molecules, $N$, constant volume, $V$, and constant temperature, $T$). 
-	
-	%, 30 to 60 independent replicate simulations are performed for each system
-	
-	%This is the logical choice when the viscosity is desired at a given temperature and density but not  By contrast, when the viscosity is desired at a prescribed pressure, 
-	
-%	As recommended in Reference BLANK, we investigate system size effects by comparing results with 100, 200, 400, and 800 molecules. This analysis is provided as Supporting Information. 
-%	
-%	Example input files are provided as Supporting Information.
-	
-	%  A system size of 400 molecules is used for ethane, propane, and \textit{n}-butane, while all other compounds use 800 molecules. 
-	
-	%$(\eta_{P > P_{\rm vap}^{\rm sat}}^{\rm 293 K})$.
-		
-	We investigate two different classes of viscosity, namely, saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ and compressed liquid viscosities at a temperature of 293 K $(\eta_{\rm liq}^{\rm comp})$. Saturated liquid viscosities are estimated by performing $NVT$ ensemble simulations at the saturation temperature $(T^{\rm sat})$ and saturated liquid density $(\rho_{\rm liq}^{\rm sat})$. The simulation densities correspond to the REFPROP $\rho_{\rm liq}^{\rm sat}$, which is admittedly not necessarily the same as the force field $\rho_{\rm liq}^{\rm sat}$. This point is discussed in greater detail in Section \ref{Discussion/Limitations}. 
-	
-%	There are at least three reasons why we perform simulations at the REFPROP $\rho_{\rm liq}^{\rm sat}$ instead of the force field $\rho_{\rm liq}^{\rm sat}$. First, this approach allows for a fair comparison of the force fields' ability to predict viscosity, without penalizing force fields which are less accurate at predicting $\rho_{\rm liq}^{\rm sat}$ or rewarding force fields that mask their deficiencies in predicting viscosity by over- or under estimating $\rho_{\rm liq}^{\rm sat}$. Second, since each of the studied force fields utilized $\rho_{\rm liq}^{\rm sat}$ data in their optimization, deviations between the REFPROP and force field values are small, typically less than 1~\%. However, small differences in density have been reported to result in large differences in viscosity. For this reason, a small set of validation simulations are performed to determine the variability caused by utilizing the REFPROP densities. The force field saturated liquid densities were obtained from the literature.      
-%	
-%	The use of REFPROP $\rho_{\rm liq}^{\rm sat}$ caused some simulations to be in a meta-stable state. Specifically, this occurs when the force field vapor pressure is less than the REFPROP vapor pressure. Fortunately, this is uncommon as Potoff, TAMie, and AUA4 are quite reliable for estimating $P_{\rm vap}^{\rm sat}$ and TraPPE significantly over estimates $P_{\rm vap}^{\rm sat}$.
-	
-	Two different simulation protocols are implemented for estimating compressed liquid viscosities $(\eta_{\rm liq}^{\rm comp})$. Specifically, we perform simulations with each force field either at the same $\rho$ or the same $P$. For the purpose of comparing the accuracy of force fields, these two methods are essentially equivalent. From a practical standpoint, estimating $\eta$ at a given $P$ requires performing preliminary $NPT$ ensemble simulations to determine the corresponding box size.
-	
-	% Since comparing force fields at the same density does not require a preliminary $NPT$ simulation to determine the box size, this approach has a small computational benefit. There is a small computational benefit t is computationally less expensive to perform simulations at the same densities, since this does not require a preliminary NPT there is no clear advantage for either approach. 
-	
-%	The $\eta_{\rm liq}^{\rm sat}$
-%	 
-%	Estimates for viscosity are obtained alo
-	
-%	Molecular dynamics simulations for this study are performed in the $NVT$ ensemble (constant number of molecules, $N$, constant volume, $V$, and constant temperature, $T$) using GROMACS version 2018 \cite{GROMACS_2018}. Each simulation uses the Velocity Verlet integrator with a 2 fs time-step, 1.4 nm cut-off for non-bonded interactions with tail corrections for energy and pressure \cite{GROMACS_note}, Nos{\'e}-Hoover thermostat with a time constant of 1 ps, and fixed bond-lengths constrained using LINCS with a LINCS-order of eight. Coulombic interactions are not computed as none of the force fields require partial charges for the compounds studied. The equilibration time is 0.1 ns for ethane and propane, 0.2 ns for \textit{n}-butane, and 0.5 ns for all other compounds. The production time is 1 ns for ethane, 2 ns for propane and \textit{n}-butane, and 4 ns for all other compounds. Replicate simulations are performed for \textit{n}-octane to validate that a single MD run of this length agrees with the average of several replicates, to within the combined uncertainty. A system size of 400 molecules is used for ethane, propane, and \textit{n}-butane, while all other compounds use 800 molecules. Example input files are provided as Supporting Information.
-	
-%	\begin{enumerate}
-%		\item Two types of simulations performed, saturation and 293 K for compressed systems
-%		\item Saturation simulations use the REFPROP densities such that, in some cases, the force field is actually in a metastable state
-%		\item Performed some simulations at reported saturation conditions
-%		\item NPT performed for each replicate such that a distribution of box sizes is obtained
-%		\item Depending on the system, a simulation of 1, 2, 4, or 8 ns was used for the production stage
-%		\item Details are in supporting information
-%	\end{enumerate}
+	A large number of replicate simulations are required at each state point to improve the precision and to provide more rigorous estimates of uncertainty \cite{Maginn2018,Zhang2015}. We utilize between 30 and 80 independent replicates when simulating the Potoff force field, while we use 200 replicates for the MCMC parameter sets. To ensure independence between replicates, the entire series of simulation stages are repeated for each replicate. The initial energy minimization stage starts with a different pseudo-random configuration while the initial velocities are randomized for each equilibration stage. 
 	
 	\subsection{Data analysis}
 	
-	The analysis for the Potoff Mie $\lambda$-6 force field simulation results is identical to that prescribed in our previous study BLANK. In brief, we implement the Green-Kubo ``time-decomposition'' analysis \cite{Maginn2018,Zhang2015}
+	The analysis for the Potoff Mie $\lambda$-6 force field simulation results is identical to that prescribed in our previous study (see Reference BLANK). In brief, we implement the Green-Kubo ``time-decomposition'' analysis \cite{Maginn2018,Zhang2015}
 	\begin{equation} \label{eq:Green_Kubo}
 	\eta(t) = \frac{V}{k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \int_{0}^{t}dt'\left\langle \tau_{\alpha\beta,n}(t') \tau_{\alpha\beta,n}(0)\right\rangle_{t_0,\alpha\beta}
 	\end{equation} 
 	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over time origins $(t_0)$ and $\tau_{\alpha\beta}$. 
 	
-	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for accurate integration of Equation \ref{eq:Green_Kubo}. To improve precision, Equation \ref{eq:Green_Kubo} averages several (between 30 and 60) independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components.
+	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps), Equation \ref{eq:Green_Kubo} averages the independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components.
 	
-	The ``true'' viscosity, i.e., the infinite-time-limit viscosity, is obtained by evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$. However, the long-time tail of the Green-Kubo integral is often quite noisy and does not converge smoothly. For this purpose, we fit the ``running integral'' to a double-exponential function
+	The ``true'' viscosity, i.e., the infinite-time-limit viscosity, is obtained by evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$. As the long-time tail does not converge, we fit the ``running integral'' to a double-exponential function
 	\begin{equation} \label{eq: Double exponential}
 	\eta(t) = A \alpha \tau_1 \left(1-\exp{(-t/\tau_1)}\right) + A (1-\alpha) \tau_2 \left(1-\exp{(-t/\tau_2)}\right)
 	\end{equation}
-	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$ is the infinite-time-limit viscosity. 
-		
-	Since the Green-Kubo ``running integral'' suffers from extreme fluctuations at long times, Equation \ref{eq: Double exponential} is fit by minimizing a weighted sum-squared error objective function. Weights are equal to the inverse of the standard deviation $(\sigma_{\eta})$ of the replicate simulations. The time dependence of $\sigma_{\eta}$ is modeled with $A t^{b}$, where $A$ and $b$ are fitting parameters.
-	
-	Despite weighting the data by $\sigma_{\eta}$, it can be challenging to obtain good fits of Equation \ref{eq: Double exponential} when all the data are included. For this reason, data are excluded where $\sigma_{\eta} > 0.4 \times \eta^{\infty}$ \cite{Maginn2018,Zhang2015}. Occasionally, this heuristic results in a cut-off that is too short, in particular for systems with slow dynamics, which also leads to very poor fits. In such cases, it is necessary to modify the heuristic, e.g., exclude data where $\sigma_{\eta} > 0.8 \times \eta^{\infty}$. As erroneously large fluctuations also exist at very short times, only data for $t > 3$ ps are included in the fitting of Equation \ref{eq: Double exponential} \cite{Maginn2018,Zhang2015}. 
+	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$ is the infinite-time-limit viscosity. We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
 	 
-	The uncertainty in $\eta^{\infty}$ is obtained by bootstrap re-sampling. Specifically, the fitting process described previously is repeated hundreds of times using randomly selected subsets of replicate simulations. Furthermore, each bootstrap repetition uses a randomly selected long-time cut-off between 0.35 $\times \eta^{\infty}$ and 0.45 $\times \eta^{\infty}$ to account for uncertainty in the 0.4 $\times \eta^{\infty}$ heuristic. A 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of this process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
-	
+	The uncertainty in $\eta^{\infty}$ is obtained by bootstrap re-sampling. Specifically, the fitting process described previously is repeated hundreds of times using randomly selected subsets of replicate simulations. For the Potoff force field, the number of replicates in the subset is equal to the total number of replicates. The methodology is different for the MCMC simulations. In this case, two different rounds of re-sampling are performed. First, only 40 replicates are subsampled from the total of 200 replicates. This is done to randomize the MCMC parameter sets. Second, standard bootstrapping with replacement is performed from these 40 replicates. Both layers of this process are repeated hundreds of times. For both Potoff and MCMC force fields, a 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
+		
 	\subsection{Force fields} \label{Force Field}
 	
 	As we demonstrated in our previous study BLANK, the Potoff Mie $\lambda$-6 force field provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes. In particular, this force field predicts the viscosity within 10~\% for 2,2,4-trimethylpentane up to 200 MPa and for propane up to 1000 MPa. By contrast, the TraPPE and TAMie models are c appears to ex being the  to 
@@ -514,13 +432,13 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 	where $u^{\rm tors}$ is the torsional energy, $\phi$ is the dihedral angle, $c_n$ are the Fourier constants used in the Potoff force field and listed in Table \ref{tab:torsions}, and $A_{\rm s} \sin^2\left(\frac{3\phi}{2} + \ang{180}\right)$ is an additional term proposed by \citenum{Nieto2006} to shift the torsional barrier heights. Note that $\phi$ is defined using a convention similar to IUPAC where $\phi = \ang{180}$ for the \textit{trans} conformation, whereas \citenum{Nieto2006} defines the \textit{trans} conformation as $\ang{0}$ or $\ang{360} \deg$, hence the $+\ang{180}$ term. As $\sin^2\left(\frac{3\phi}{2} + \ang{180}\right)$ has a maximum value of 1 at $\ang{0}$, $\ang{120}$, $\ang{240}$, and $\ang{360}$, $u^{\rm tors}$ is shifted by $A_{\rm s}$ at these dihedral angles. By contrast, this additional term does not shift $u^{\rm tors}$ for dihedral angles of $\ang{0}$, $\ang{180}$, and $\ang{300}$, which correspond to the equilibrium conformations of \textit{gauche}$^-$, \textit{trans}, and \textit{gauche}$^+$, respectively. Clearly, the non-shifted Potoff torsional potential is obtained only when $A_{\rm s} = 0$. 
 	
 	\begin{table}[h!]
-		\caption{Fourier constants $(c_n/k_{\rm B})$ in units of K \cite{Martin1999,Potoff_branched}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:torsions}
+		\caption{Fourier constants $(c_n/k_{\rm B})$ and shifting parameter $(A_{\rm s}/k_{\rm B})$ in units of K for Potoff force field  \cite{Martin1999,Potoff_branched}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:torsions}
 		\begin{center}
-			\begin{tabular}{|c|c|c|c|c|}
+			\begin{tabular}{|c|c|c|c|c|c|}
 				\hline
-				Torsion sites & $c_0/k_{\rm B}$ & $c_1/k_{\rm B}$ & $c_2/k_{\rm B}$ & $c_3/k_{\rm B}$ \\ \hline
-				CH$_i$-CH$_2$-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 \\
-				CH$_i$-CH$_2$-C-CH$_j$ & 0.0 & 0.0 & 0.0 & 461.29 \\
+				Torsion sites & $c_0/k_{\rm B}$ & $c_1/k_{\rm B}$ & $c_2/k_{\rm B}$ & $c_3/k_{\rm B}$ & $A_{\rm s}/k_{\rm B}$ \\ \hline
+				CH$_i$-CH$_2$-CH-CH$_j$ & -251.06 & 428.73 & -111.85 & 441.27 & 0.0 \\
+				CH$_i$-CH$_2$-C-CH$_j$ & 0.0 & 0.0 & 0.0 & 461.29 & 0.0 \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -528,14 +446,14 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 
     \citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
 
-    The reason we include the additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the non-shifted Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally.
+    The actual reason we include the additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$ $0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
     
     %Note that \citenum{Nieto2006} proposed a 15\% shift in the dihedral barriers for the CH$_i$-CH$_2$-CH$_2$-CH$_j$ potential.
     
 	\begin{figure}[htb!]
 		\centering
-%		\includegraphics[width=3.2in]{Einstein_slope_time_interval.png}
-		\caption{Uncertainty in dihedral potentials. Black line is the non-shifted Potoff torsional potential. Red lines are the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $A_{\rm s}/k_{\rm B}$ in units of K.}
+		\includegraphics[width=6.4in]{MCMC_torsions.pdf}
+		\caption{Uncertainty in dihedral potentials. Black line is the Potoff torsional potential. Red lines are the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $A_{\rm s}$. Both $u^{\rm tors}$ and $A_{\rm s}$ are expressed in units of K, i.e., divided by $k_{\rm B}$.}
 		\label{fig:dihedral_uncertainty}
 	\end{figure}
 	
@@ -543,7 +461,7 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 	\begin{equation} \label{eq:Mie}
 	u^{\rm vdw}(\epsilon,\sigma,\lambda;r) = \left(\frac{\lambda}{\lambda - 6}\right)\left(\frac{\lambda}{6}\right)^{\frac{6}{\lambda - 6}} \epsilon \left[\left(\frac{\sigma}{r}\right)^{\lambda} - \left(\frac{\sigma}{r}\right)^6\right]
 	\end{equation} 
-	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. 
+	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters. (Note that the generalized C parameters are taken from Figure BLANK in Ref. \citenum{Potoff_branched} and not from Table BLANK in Ref. \citenum{Potoff_branched}.)
 	
 	\begin{table}[h!]
 		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses.} \label{tab:nonbonded params}
@@ -555,32 +473,11 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 				CH$_3$ & 121.25 & 0.3783 & 16  \\ 
 				CH$_2$ & 61 & 0.399 & 16 \\ 
 				CH & 15 (15/14) & 0.46 (0.47/0.47) & 16\\
-				C & 1.2 (1.45/1.2) & 0.61 (0.61/0.62) & 16\\
+				C & 1.05 (1.45/1.2) & 0.605 (0.61/0.62) & 16\\
 				\hline
 			\end{tabular}
 		\end{center} 
 	\end{table}
-	
-	Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. Due to their superior accuracy, our reported Potoff results only implement the S/L parameter set.
-	
-	The uncertainty in the CH$_3$ and CH$_2$ non-bonded Mie 16-6 parameters were obtained previously. Reference BLANK assumed that the CH$_3$ parameters were transferable from ethane for longer \textit{n}-alkanes. The CH$_2$ parameters were obtained from propane, \textit{n}-butane, and \textit{n}-octane. The data included in the analysis were saturated liquid densities and saturated vapor pressures over a reduced temperature range of 0.45 to 0.85, as available in ThermoData Engine (TDE). 
-	
-	The uncertainty in the CH and C parameter sites were obtained from Reference BLANK. Rather than apply 
-	
-	With the assumption of sequential transferability from CH$_3$ 
-	
-	The uncertainty for the non-bonded Mie 16-6 parameter sets in $\epsilon_{CH_3}$ non-bonded Mie 16-6 parameters
-	
-	To simplify the uncertainty analysis, we assume the correlation between Mie parameters of different UA sites is zero. Therefore, we only account for the correlation between $\epsilon$ and $\sigma$ of a given UA site type.  
-	
-	The Potoff ``generalized'' CH and C parameter set is an attempt at a completely transferable set. However, since the ``generalized'' parameters performed poorly for some compounds, the S/L parameter set was proposed, where the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively.
-	
-	\begin{figure}[htb!]
-	\centering
-	%		\includegraphics[width=3.2in]{Einstein_slope_time_interval.png}
-	\caption{Uncertainty in non-bonded potentials. Black line is the Potoff non-bonded potential. Red lines correspond to the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $\epsilon$ and $\sigma$.}
-		\label{fig:nonbonded_uncertainty}
-	\end{figure}
 	
 	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen1987} for $\epsilon$ and $\sigma$ and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
 	\begin{equation} \label{eq:Lorentz-Berthelot_eps}
@@ -594,21 +491,108 @@ Uncertainty estimates increase substantially for high pressures at low reduced t
 	\end{equation}
 	where the $ij$ subscript refers to cross-interactions and the subscripts $ii$ and $jj$ refer to same-site interactions. 
 	
+	The MCMC Mie 16-6 parameters for CH$_3$ and CH$_2$ were reported previously. Reference BLANK assumed that the CH$_3$ parameters were transferable from ethane for longer \textit{n}-alkanes. The CH$_2$ parameters were obtained from propane, \textit{n}-butane, and \textit{n}-octane. The data included in the analysis were saturated liquid densities and saturated vapor pressures over a reduced temperature range of 0.45 to 0.85, as available in ThermoData Engine (TDE). 
+	
+	The MCMC non-bonded parameters for CH$_3$ and CH$_2$ ($\epsilon_{CH_3}, \sigma_{CH_3}, \epsilon_CH_2, $ and $\sigma_CH_2)$ were reported previously BLANK. These parameters were obtained using a likelihood function based on saturated liquid density and saturated vapor pressure data. By contrast, the MCMC parameters for CH and C ($\epsilon_{CH}, \sigma_{CH}, \epsilon_C, $ and $\sigma_C)$ were obtained from the scoring function reported in \citenum{Potoff_branched}. Specifically, we assumed a multivariate normal distribution for each $\epsilon$-$\sigma$ set, where the covariance matrix reproduced  the average and covariance matrix were fit to the  
+	
+	such that the short/long
+	
+	The uncertainty in the CH and C parameter sites were obtained from Reference BLANK. Rather than apply 
+	
+	The following assumptions are made in this uncertainty analysis: 
+	
+	\begin{enumerate}
+		\item CH$_3$ parameters for ethane are transferable to \textit{n}-alkanes and branched alkanes
+		\item CH$_2$ parameters for propane, \textit{n}-butane, and \textit{n}-octane are transferable to branched alkanes
+		\item CH and C parameters for branched alkanes are transferable to challenge compound
+		\item Correlation between different UA sites is zero
+		\item Uncertainty in repulsive exponent $(\lambda)$ is zero, i.e., we only quantify the uncertainty in $\epsilon$ and $\sigma$
+		\item Likelihood function and scoring function only depend on thermodynamic properties at vapor-liquid coexistence conditions
+	\end{enumerate}
+
+	
+	
+	With the assumption of sequential transferability from CH$_3$ 
+	
+	The uncertainty for the non-bonded Mie 16-6 parameter sets in $\epsilon_{CH_3}$ non-bonded Mie 16-6 parameters
+	
+	To simplify the uncertainty analysis, we assume the correlation between Mie parameters of different UA sites is zero. Therefore, we only account for the correlation between $\epsilon$ and $\sigma$ of a given UA site type.  
+	
+	The Potoff ``generalized'' CH and C parameter set is an attempt at a completely transferable set. However, since the ``generalized'' parameters performed poorly for some compounds, the S/L parameter set was proposed, where the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively.
+	
+	\begin{figure}[htb!]
+	\centering
+			\includegraphics[width=6.4in]{MCMC_nonbonded.pdf}
+	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference. \cite{Mie,Potoff_branched}}		
+%	\caption{Uncertainty in non-bonded potentials. Black line is the Potoff non-bonded potential. Red lines correspond to the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $\epsilon$ and $\sigma$.}
+		\label{fig:nonbonded_uncertainty}
+	\end{figure}
+
+    Note that the uncertainties in the CH and C non-bonded parameters are considerably larger than those for CH$_3$ and CH$_2$. The CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters are likely the cause for the negligible impact of non-bonded uncertainties.
+    
+%     Of the 81 non-bonded interactions, 25 are CH$_3$-CH$_3$, 
+    
+%     Since 45 ($5 \times 5 + 5 \times 4$) of the 81 $(9 \times 9)$ non-bonded interactions are affected by the CH$_3$ sites, the CH$_3$ uncertainties  
+
+	\begin{enumerate}
+		\item Potoff force field proved to be most reliable in previous study
+		\item United-atom, Mie 16-6
+		\item AUA4m considered modifying torsional barriers for CH$_2$-CH$_2$ by 15~\% and 40~\% for internal and terminal torsions, respectively.
+		\item Include uncertainty in $\epsilon$, $\sigma$, and $U^{\rm tors}$
+		\item Plots of MCMC samples and maybe the Mie potentials and torsional barriers explicitly
+	\end{enumerate}
+
+	
 	\section{Results} \label{Results}    
 	
+	Tabulated values for viscosity, density, and pressure at the prescribed state points are provided in Table BLANK. These values are also depicted in Figure BLANK along with the available experimental data point and model fits to simulation data.
+	
 %	, are less reliable near the triple point. By utilizing REFPROP densities, it is possible to compare force fields over the entire range of saturation temperatures.
+
+    \section{Discussion} \label{Discussion/Limitations}
+
+    Although the deviations from the hybrid McEwen-Paluch model fit to the Potoff-MCMC results are significantly lower than those of the Roelands and Barus models, this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two.
+
+    Although the hybrid McEwen-Paluch model clearly reproduces our simulation results with lower deviations than those of the Roelands and Barus models, this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. 
+
+    To quantitatively verify that the Potoff-MCMC force field predicts super-Arrhenius behavior at high pressures, we perform cross-validation between Equations BLANK and BLANK. 
+    
+    The hybrid McEwen-Paluch model is capable of representing an inflection point, i.e., a transition from Arrhenius to super-Arrhenius behavior. By contrast, the Barus and Roelands models are only capable of fitting Arrhenius-like data.
+    
+    \begin{equation}
+    \mu = \mu_0 \exp(\alpha P)
+    \end{equation}
+    where $\mu_0$ and $\alpha$ are fitting parameters.
+    
+    Roelands equation
+    
+    \begin{equation}
+    \mu = \mu_p \left(\frac{\mu_0}{\mu_p}\right)^{\left(\frac{P_p - P}{P_p}\right)^Z}
+    \end{equation}
+    where $\mu_0$ and $Z$ are fitting parameters and $\mu_p = 6.31 \times 10^-5$ Pa-s and $P_p = -0.196$ GPa.
+    
+    \begin{equation}
+    \mu = \mu_0 \left(1 + \frac{a_0}{q} P\right)^q \exp\left(\frac{C_{\rm F} P}{P_\infty - P}\right)
+    \end{equation}
+    where $\mu_0$, $a_0$, $q$, $C_{\rm F}$, and $P_\infty$ are fitting parameters.
+    
+    Note that the Barus model is obtained from the hybrid McEwen-Paluch model when $a_0 = 0$, $q=1$, and $P_\infty = P + 1$. 
+    
+    Although the Potoff force field demonstrates super-Arrhenius behavior, we should caution that this could be an anamoly of the force field. Since the Mie 16-6 potential is known to be overly repulsive at short distances, it is possible that this causes the sudden increase in viscosity. This has proven to be the case for the viscosity-density trend, while we have assumed that the viscosity-pressure trend is reliable due to the simultaneous over prediction of both viscosity and pressure at high densities.
+	
+	Other studies \cite{Liu2015} have corrected for systematic errors in viscosity by normalizing the viscosity-pressure trend with respect to viscosity at the lowest pressure. Although this may result in a more accurate prediction, we prefer to test the accuracy of the Potoff force field without any empirical corrections since this serves to truly test its transferability and predictive capabilities.
+	
+	Although time-temperature superposition is an attractive alternative, we are weary of the inordinately large uncertainties that this method can produce. If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable.
 	
 	\section{Conclusions} \label{Conclusions}
 	
-	This study demonstrates the improvement that has taken place over the past two decades for predicting viscosity with molecular simulation. First, following ``Best Practices'' for EMD lead to more reproducible results. Second, the state-of-the-art Mie $\lambda$-6 force fields are significantly more accurate than the traditional Lennard-Jones 12-6 force fields for viscosity, as well as for vapor-liquid coexistence properties. More specifically, the Potoff and TAMie force fields typically predict saturated liquid viscosities for \textit{n}-alkanes to within 10~\% of the REFPROP values. By contrast, the TraPPE and AUA4 models under predict saturated liquid viscosities by 20~\% to 50~\%, where the deviations are largest at lower temperatures. While Potoff and TAMie are also more reliable for branched alkanes, deviations are larger and demonstrate a similar temperature dependence. 
-	
-	The key limitation of the Potoff force field is that the choice of $\lambda = 16$ is too repulsive at close distances, which causes the viscosity to be over estimated at high densities. Due to a fortuitous cancellation of errors, the Potoff potential does provide a reliable $\eta$-$P$ trend. Since TAMie uses $\lambda =14$, the $\eta$-$\rho$ trend is slightly more reliable than that of Potoff. It is important to emphasize that transport properties were not included in the training set for parameterizing the Potoff and TAMie force fields. Therefore, the results from this study demonstrate that the improved prediction of static vapor-liquid coexistence properties obtained with Mie $\lambda$-6 potentials also results in improved prediction of a dynamic property, liquid viscosity.
-	
-	% liquid viscosity. a transport property, namely, liquid viscosity.
+    Previous work demonstrated that the Potoff force field provides reliable viscosities (typically within 10~\%) for well-studied \textit{n}-alkane and branched alkanes both at saturation and elevated pressures. For this reason, the Potoff force field was chosen to predict the viscosity-pressure relationship of 2,2,4-trimethylhexane as part of the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. In addition, we investigate the parameter uncertainty in the simulation results with Bayesian inference. Specifically, the non-bonded and torsional potentials are varied from run to run according to a Markov Chain in force field parameter space.
+    
+    Furthermore, we assess the existence of so-called super-Arrhenius behavior at high pressures. Cross validation model selection is employed to determine whether a super-Arrhenius empirical equation is required to reproduce our simulation results.
 	
 	\section*{Supporting Information}
 	
-    Section \ref{Gromacs input files} provides GROMACS input files.	Section \ref{Systems simulated} enumerates all systems simulated. Section \ref{Additional simulation details} details the MD integrator, thermostat, and barostat. Section \ref{SI:Simulation time} compares simulation results with varying production times. Section \ref{fixed flexible} determines the sensitivity of our results to the use of fixed bonds. Section \ref{SI:GK_analysis} outlines the Green-Kubo analysis process. Section \ref{Validation Runs} validates our methods by comparing with reference simulation values. Section \ref{SI:Tabulated} contains tabulated simulation values.       
+    Section \ref{Gromacs input files} provides GROMACS input files. Section \ref{SI:GK_analysis} outlines the Green-Kubo analysis process.       
 	
 	\section*{Acknowledgments}
 	
