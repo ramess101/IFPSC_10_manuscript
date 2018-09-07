@@ -1,57 +1,17 @@
 \begin{thebibliography}{10}
 
-\bibitem{LEMMON-RP10}
-E.~W. Lemmon, I.~H. Bell, M.~L. Huber, and M.~O. McLinden.
-\newblock {NIST Standard Reference Database 23: Reference Fluid Thermodynamic
-  and Transport Properties-REFPROP, Version 10.0, National Institute of
-  Standards and Technology}, 2018.
+\bibitem{McCabe2001}
+Clare McCabe, Shengting Cui, Peter~T. Cummings, Peter~A. Gordon, and Roland~B.
+  Saeger.
+\newblock Examining the rheology of 9{-}octylheptadecane to giga{-}pascal
+  pressures.
+\newblock {\em The Journal of Chemical Physics}, 114(4):1887--1891, 2001.
 
-\bibitem{PGL}
-B.E. Poling, J.M. Prausnitz, and J.P. O'Connell.
-\newblock {\em {The Properties of Gases and Liquids, 5th ed.}}
-\newblock McGraw-Hill Companies, Inc., 2001.
-\newblock Chapter 9.
-
-\bibitem{Mulero2017}
-{\'A}ngel Mulero, Isidro Cachadi{\~n}a, and Jos{\'e}~O. Valderrama.
-\newblock Artificial neural network for the correlation and prediction of
-  surface tension of refrigerants.
-\newblock {\em Fluid Phase Equilibria}, 451:60 -- 67, 2017.
-
-\bibitem{Lee2017}
-Seongmin Lee, Kiho Park, Yunkyung Kwon, Tae-Yun Park, and Dae~Ryook Yang.
-\newblock A modified scaled variable reduced coordinate ({SVRC})-quantitative
-  structure property relationship ({QSPR}) model for predicting liquid
-  viscosity of pure organic compounds.
-\newblock {\em Korean Journal of Chemical Engineering}, 34(10):2715--2724,
-  2017.
-
-\bibitem{Lotgering2015}
-Oliver L{\"o}tgering-Lin and Joachim Gross.
-\newblock Group contribution method for viscosities based on entropy scaling
-  using the perturbed-chain polar statistical associating fluid theory.
-\newblock {\em Industrial \& Engineering Chemistry Research},
-  54(32):7942--7952, 2015.
-
-\bibitem{Maginn2018}
-Edward~J. Maginn, Richard~A. Messerly, Daniel~J. Carlson, Daniel~R. Roe, and
-  J.~Richard Elliott.
-\newblock Best practices for computing transport properties 1.
-  {S}elf-diffusivity and viscosity from equilibrium molecular dynamics v1.
-\newblock {\em Living Journal of Computational Molecular Science}, Pending
-  publication, 2018.
-
-\bibitem{Nieto2006}
-Carlos Nieto-Draghi, Philippe Ungerer, and Bernard Rousseau.
-\newblock Optimization of the anisotropic united atoms intermolecular potential
-  for \textit{n}-alkanes: Improvement of transport properties.
-\newblock {\em The Journal of Chemical Physics}, 125(4):044517, 2006.
-
-\bibitem{Bernard2009}
-Damien~A. Bernard-Brunel and Jeffrey~J. Potoff.
-\newblock Effect of torsional potential on the predicted phase behavior of
-  \textit{n}-alkanes.
-\newblock {\em Fluid Phase Equilibria}, 279(2):100 -- 104, 2009.
+\bibitem{Liu2015}
+Pinzhi Liu, Hualong Yu, Ning Ren, Frances~E. Lockwood, and Q.~Jane Wang.
+\newblock Pressure{-}viscosity coefficient of hydrocarbon base oil through
+  molecular dynamics simulations.
+\newblock {\em Tribology Letters}, 60(3):34, 2015.
 
 \bibitem{TraPPE}
 M.~G. Martin and J.~I. Siepmann.
@@ -118,29 +78,11 @@ Carlos Nieto-Draghi, Anthony Bocahut, Beno{\^i}t Creton, Pascal Have, Aziz
   fuel gasoline.
 \newblock {\em Molecular Simulation}, 34(2):211--230, 2008.
 
-\bibitem{Allen1997}
-William Allen and Richard~L. Rowley.
-\newblock Predicting the viscosity of alkanes using nonequilibrium molecular
-  dynamics: Evaluation of intermolecular potential models.
-\newblock {\em The Journal of Chemical Physics}, 106(24):10273--10281, 1997.
-
-\bibitem{Payal2012}
-Rajdeep~Singh Payal, S.~Balasubramanian, Indranil Rudra, Kunj Tandon, Ingo
-  Mahlke, David Doyle, and Roger Cracknell.
-\newblock Shear viscosity of linear alkanes through molecular simulations:
-  quantitative tests for \textit{n}-decane and \textit{n}-hexadecane.
-\newblock {\em Molecular Simulation}, 38(14-15):1234--1241, 2012.
-
-\bibitem{Mondello1997}
-Maurizio Mondello and Gary~S. Grest.
-\newblock Viscosity calculations of \textit{n}-alkanes by equilibrium molecular
-  dynamics.
-\newblock {\em The Journal of Chemical Physics}, 106(22):9327--9336, 1997.
-
-\bibitem{Ungerer2007}
-Molecular simulation of the thermophysical properties of fluids: From
-  understanding toward quantitative predictions.
-\newblock {\em Journal of Molecular Liquids}, 134(1):71 -- 89, 2007.
+\bibitem{Postdoc_2}
+Richard~A. Messerly, Michael~R. Shirts, and Andrei~F. Kazakov.
+\newblock Uncertainty quantification confirms unreliable extrapolation toward
+  high pressures for united-atom {Mie} $\lambda$-6 force field.
+\newblock {\em Journal of Chemical Physics}, Pending publication, 2018.
 
 \bibitem{Gordon2006}
 Peter~A. Gordon.
@@ -148,12 +90,42 @@ Peter~A. Gordon.
   properties of hydrocarbons.
 \newblock {\em The Journal of Chemical Physics}, 125(1):014504, 2006.
 
-\bibitem{Hoang2017}
-Hai Hoang, St{\'e}phanie Delage-Santacreu, and Guillaume Galliero.
-\newblock Simultaneous description of equilibrium, interfacial, and transport
-  properties of fluids using a {Mie} chain coarse-grained force field.
-\newblock {\em Industrial \& Engineering Chemistry Research},
-  56(32):9213--9226, 2017.
+\bibitem{Postdoc_3}
+Richard~A. Messerly, Michelle~C. Anderson, Mostafa~S. Razavi, and J.~Richard
+  Elliott.
+\newblock Improvements and limitations of mie $\lambda${-}6 potential for
+  prediction of saturated and compressed liquid viscosity.
+\newblock {\em Fluid Phase Equilibria}, Pending publication, 2018.
+
+\bibitem{Nieto2006}
+Carlos Nieto-Draghi, Philippe Ungerer, and Bernard Rousseau.
+\newblock Optimization of the anisotropic united atoms intermolecular potential
+  for \textit{n}-alkanes: Improvement of transport properties.
+\newblock {\em The Journal of Chemical Physics}, 125(4):044517, 2006.
+
+\bibitem{Braga2012}
+Carlos Braga and Karl~P. Travis.
+\newblock Computer simulation of the role of torsional flexibility on mass and
+  momentum transport for a series of linear alkanes.
+\newblock {\em The Journal of Chemical Physics}, 137(6):064116, 2012.
+
+\bibitem{Herdes2015}
+Carmelo Herdes, Tim~S. Totton, and Erich~A. M{\"u}ller.
+\newblock Coarse grained force field for the molecular simulation of natural
+  gases and condensates.
+\newblock {\em Fluid Phase Equilibria}, 406:91 -- 100, 2015.
+
+\bibitem{Allen1987}
+M.~P. Allen and D.~J. Tildesley.
+\newblock {\em {Computer Simulation of Liquids}}.
+\newblock Clarendon Press ; Oxford University Press, Oxford England New York,
+  1987.
+
+\bibitem{Mess4}
+Richard~A. Messerly, Thomas A.~Knotts IV, and W.~Vincent Wilding.
+\newblock Uncertainty quantification and propagation of errors of the
+  {Lennard-Jones} 12-6 parameters for \textit{n}-alkanes.
+\newblock {\em The Journal of Chemical Physics}, 146(19):194110, 2017.
 
 \bibitem{GROMACS_2018}
 M.J. Abraham, D.~van~der Spoel, E.~Lindahl, B.Hess, and the GROMACS~development
@@ -169,22 +141,6 @@ GROMACS non-bonded tail corrections assume that the long-range contribution
   straightforward to include the $r^{-\lambda}$ contribution, we did not
   attempt to modify the GROMACS default tail correction values.
 
-\bibitem{NIST_SRSW}
-Vince~K. Shen, Daniel~W. Siderius, William~P. Krekelberg, and Harold~W. Hatch.
-\newblock {NIST} standard reference simulation website, {NIST} standard
-  reference database number 173.
-\newblock {\em National Institute of Standards and Technology}, Gaithersburg
-  MD, 20899.
-\newblock
-  https://www.nist.gov/programs-projects/nist-standard-reference-simulation-website.
-  Retrieved July 27, 2018.
-
-\bibitem{Kioupis2000}
-Loukas~I. Kioupis and Edward~J. Maginn.
-\newblock Impact of molecular architecture on the high-pressure rheology of
-  hydrocarbon fluids.
-\newblock {\em The Journal of Physical Chemistry B}, 104(32):7774--7783, 2000.
-
 \bibitem{Hess1998}
 Berk Hess, Henk Bekker, Herman J.~C. Berendsen, and Johannes G. E.~M. Fraaije.
 \newblock {LINCS: A} linear constraint solver for molecular simulations.
@@ -197,6 +153,14 @@ Berk Hess.
 \newblock {\em Journal of Chemical Theory and Computation}, 4(1):116--122,
   2008.
 
+\bibitem{Maginn2018}
+Edward~J. Maginn, Richard~A. Messerly, Daniel~J. Carlson, Daniel~R. Roe, and
+  J.~Richard Elliott.
+\newblock Best practices for computing transport properties 1.
+  {S}elf-diffusivity and viscosity from equilibrium molecular dynamics v1.
+\newblock {\em Living Journal of Computational Molecular Science}, Pending
+  publication, 2018.
+
 \bibitem{Zhang2015}
 Yong Zhang, Akihito Otani, and Edward~J. Maginn.
 \newblock Reliable viscosity calculation from equilibrium molecular dynamics
@@ -204,16 +168,22 @@ Yong Zhang, Akihito Otani, and Edward~J. Maginn.
 \newblock {\em Journal of Chemical Theory and Computation}, 11(8):3537--3546,
   2015.
 
-\bibitem{Herdes2015}
-Carmelo Herdes, Tim~S. Totton, and Erich~A. M{\"u}ller.
-\newblock Coarse grained force field for the molecular simulation of natural
-  gases and condensates.
-\newblock {\em Fluid Phase Equilibria}, 406:91 -- 100, 2015.
+\bibitem{Barus1893}
+C.~{Barus}.
+\newblock {Isothermals, isopiestics and isometrics relative to viscosity}.
+\newblock {\em American Journal of Science}, 45:87--96, 1893.
 
-\bibitem{Allen1987}
-M.~P. Allen and D.~J. Tildesley.
-\newblock {\em {Computer Simulation of Liquids}}.
-\newblock Clarendon Press ; Oxford University Press, Oxford England New York,
-  1987.
+\bibitem{Roelands1966}
+C.J.A. Roelands.
+\newblock {\em Correlational Aspects of the Viscosity{-}temperature{-}pressure
+  Relationships of Lubricating Oils}.
+\newblock PhD thesis, TU Delft, Delft University of Technology, 1966.
+
+\bibitem{Bair2016}
+Scott Bair, Laetitia Martinie, and Philippe Vergne.
+\newblock Classical ehl versus quantitative ehl{: A} perspective part
+  {II-}super{-}arrhenius piezoviscosity, an essential component of
+  elastohydrodynamic friction missing from classical ehl.
+\newblock {\em Tribology Letters}, 63(3):37, 2016.
 
 \end{thebibliography}

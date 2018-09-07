@@ -21,6 +21,5 @@ You're missing a field name---line 2489 of file IFPSC_10_references.bib
  : %URL = {https://doi.org/10.1080/08927022.2012.702423},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--empty author in Ungerer2007
-Warning--empty year in NIST_SRSW
+Warning--I didn't find a database entry for "Mundy1994"
 (There were 4 error messages)
