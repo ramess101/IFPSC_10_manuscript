@@ -372,7 +372,9 @@
 	
 	\citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
 	
-	The actual reason we include the additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$ $0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
+	%$0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$
+	
+	The actual reason we include the additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
 	
 	%Note that \citenum{Nieto2006} proposed a 15\% shift in the dihedral barriers for the CH$_i$-CH$_2$-CH$_2$-CH$_j$ potential.
 	
@@ -609,12 +611,12 @@
 	\begin{figure}[htb!]
 		\centering
 		\includegraphics[width=3.2in]{viscosity_pressure_results.pdf}
-		\caption{Viscosity-pressure results for Potoff, MCMC-Mie, and MCMC-Mie-tors. Different line colors and styles represent the best fit of Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}.}
+		\caption{Viscosity-pressure results for Potoff, MCMC-Mie, and MCMC-Mie-tors compared with experimental data. Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent the best fit of Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch} to simulation results. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit.
 		\label{fig:viscosity_pressure}
 	\end{figure}
 
     Figure \ref{fig:uncertainties} compares the different sources of uncertainty. The Potoff results only account for numerical uncertainties while MCMC-nb also accounts for non-bonded parameter uncertainty and MCMC-nb-tors also accounts for torsional uncertainties. Note that the reason why the MCMC-nb and MCMC-nb-tors uncertainties are larger than the Potoff uncertainties is because the latter uses fewer replicate simulations. When the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, this increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well.
-    
+        
 %     only 40 replicates are used for the latter while 200 replicates are used for the former. 
 
 	\begin{figure}[htb!]
@@ -629,7 +631,7 @@
 	\begin{figure}[htb!]
 		\centering
 		\includegraphics[width=3.2in]{Pressure_viscosity_coefficient.png}
-		\caption{Pressure-viscosity coefficient predicted with Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}.}
+		\caption{Pressure-viscosity coefficient predicted with Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}. Dashed lines represent 95~\% confidence intervals obtained from bootstrap re-sampling.}
 		\label{fig:viscosity_pressure_coefficent}
 	\end{figure}
 	
@@ -655,15 +657,15 @@
 	
 	The slow system dynamics at high pressures required extremely long simulations and large amounts of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation. Despite some obvious benefits, we are weary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. For this reason, we chose the more arduous brute-force approach.
 	
+    It is extremely surprising that both the non-bonded and torsional parameter uncertainties are negligible compared to the numerical uncertainties in $\eta$. A possible explanation for why the non-bonded parameter uncertainty have a negligible impact on $\eta$ is that the CH$_3$ uncertainties are considerably smaller than those for CH$_2$, CH, and C. As 224TMH consists primarily of CH$_3$ sites, the larger uncertainties in CH$_2$, CH, and C did not affect the results significantly. By contrast, no clear explanation exists for why the torsional parameter uncertainties did not affect the precision for $\eta$. Previous studies suggest that the 15~\% to 40~\% increase in the torsional barriers should increase the viscosities by a similar amount. However, we did not observe such a strong dependence (or any at all), suggesting that this particular molecule is much less sensitive to the torsional parameters than the long straight-chained alkanes studied in Reference \cite{Nieto2006}.
+	
 %	Although time-temperature superposition is an attractive alternative, we are weary of the inordinately large uncertainties that this method can produce. If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. 
 %	
 %	For this reason, we did not perform simulations at higher temperatures 
 	
 	\section{Conclusions} \label{Conclusions}
 	
-    Previous work demonstrated that the Potoff force field provides reliable viscosities (typically within 10~\%) for well-studied \textit{n}-alkane and branched alkanes both at saturation and elevated pressures. For this reason, the Potoff force field was chosen to predict the viscosity-pressure relationship of 2,2,4-trimethylhexane as part of the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. In addition, we investigate the parameter uncertainty in the simulation results with Bayesian inference. Specifically, the non-bonded and torsional potentials are varied from run to run according to a Markov Chain in force field parameter space.
-    
-    Furthermore, we assess the existence of so-called super-Arrhenius behavior at high pressures. Cross validation model selection is employed to determine whether a super-Arrhenius empirical equation is required to reproduce our simulation results.
+    Previous work demonstrated that the Potoff force field provides reliable viscosities (typically within 10~\%) for well-studied \textit{n}-alkane and branched alkanes both at saturation and elevated pressures. For this reason, the Potoff force field was chosen to predict the viscosity-pressure relationship of 2,2,4-trimethylhexane as part of the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. In addition, we investigate the parameter uncertainty in the simulation results with Bayesian inference. Specifically, the non-bonded and torsional potentials are varied from run to run according to a Markov Chain in force field parameter space. Furthermore, we assess the existence of so-called super-Arrhenius behavior at high pressures. Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results.
 	
 	\section*{Supporting Information}
 	
@@ -671,7 +673,7 @@
 	
 	\section*{Acknowledgments}
 	
-	We are grateful for the internal review provided by Andrei F. Kazakov and Alta Y. Fang of the National Institute of Standards and Technology (NIST). This research was performed while Richard A. Messerly held a National Research Council (NRC) Postdoctoral Research Associateship at NIST and while Michelle C. Anderson held a Summer Undergraduate Research Fellowship (SURF) position at NIST. 
+	We are grateful for the internal review provided by BLANK and BLANK of the National Institute of Standards and Technology (NIST). This research was performed while Richard A. Messerly held a National Research Council (NRC) Postdoctoral Research Associateship at NIST and while Michelle C. Anderson held a Summer Undergraduate Research Fellowship (SURF) position at NIST. 
 
 	Commercial equipment, instruments, or materials are identified only in order to adequately specify certain procedures. In no case does such identification imply recommendation or endorsement by NIST, nor does it imply that the products identified are necessarily the best available for the intended purpose.
 	
