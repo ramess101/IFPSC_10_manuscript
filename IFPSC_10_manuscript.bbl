@@ -1,5 +1,18 @@
 \begin{thebibliography}{10}
 
+\bibitem{Bair2016}
+Scott Bair, Laetitia Martinie, and Philippe Vergne.
+\newblock Classical ehl versus quantitative ehl{: A} perspective part
+  {II-}super{-}arrhenius piezoviscosity, an essential component of
+  elastohydrodynamic friction missing from classical ehl.
+\newblock {\em Tribology Letters}, 63(3):37, 2016.
+
+\bibitem{Mundy1996}
+Christopher~J. Mundy, Michael~L. Klein, and J.~Ilja Siepmann.
+\newblock Determination of the pressure−viscosity coefficient of decane by
+  molecular simulation.
+\newblock {\em The Journal of Physical Chemistry}, 100(42):16779--16781, 1996.
+
 \bibitem{McCabe2001}
 Clare McCabe, Shengting Cui, Peter~T. Cummings, Peter~A. Gordon, and Roland~B.
   Saeger.
@@ -178,12 +191,5 @@ C.J.A. Roelands.
 \newblock {\em Correlational Aspects of the Viscosity{-}temperature{-}pressure
   Relationships of Lubricating Oils}.
 \newblock PhD thesis, TU Delft, Delft University of Technology, 1966.
-
-\bibitem{Bair2016}
-Scott Bair, Laetitia Martinie, and Philippe Vergne.
-\newblock Classical ehl versus quantitative ehl{: A} perspective part
-  {II-}super{-}arrhenius piezoviscosity, an essential component of
-  elastohydrodynamic friction missing from classical ehl.
-\newblock {\em Tribology Letters}, 63(3):37, 2016.
 
 \end{thebibliography}

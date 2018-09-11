@@ -224,11 +224,17 @@
 				
 	\end{frontmatter}	
 		
-	\section{Input files} \label{Gromacs input files}
+	\section{Input files} \label{SI:Gromacs input files}
 	
 	We provide example input files for simulating 2,2,4-trimethylpentane at 245 K with the Potoff force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
 	
 	\newpage
+	
+	\section{MCMC from scoring function} \label{SI:MCMC from scoring function}
+	
+	Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
+	
+	We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
 	
 	\section{Green-Kubo analysis} \label{SI:GK_analysis}
 	

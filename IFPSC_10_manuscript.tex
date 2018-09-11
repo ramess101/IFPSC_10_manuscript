@@ -227,7 +227,9 @@
 		
 		\begin{abstract}
 			
-			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of the uncertainties arising from the force field non-bonded and torsional parameters. Although the uncertainties increase substantially with increasing pressure, we obtain quantitative evidence that supports so-called super-Arrhenius behavior with an inflection point in an $\ln(\eta)$-$P$ plot around 500 MPa. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical fitting models.  		
+			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical fitting models. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting so-called super-Arrhenius behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 500 MPa.  
+			
+			%Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results. 		
 			
 		\end{abstract}
 		
@@ -247,18 +249,18 @@
 		
 	\section{Introduction}
 	
-	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10). The 10$^{\rm th}$ challenge is to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, namely, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
+	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10). The 10$^{\rm th}$ challenge is to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, specifically, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
 	
 %	IFPSC is organized by several groups, namely, the Computational Molecular Science and Engineering Forum (CoMSEF) of the American Institute of Chemical Engineers (AIChE), the American Chemical Society (ACS), Army Research Lab, National Institute of Standards and Technology (NIST), The Dow Chemical Company, 3M, and United Technologies Research Center. 
-    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. Experimental measurements are performed by Scott Bair of Georgia Tech with a sample of greater than 98\% purity. The estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
+    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. New experimental measurements are performed by Scott Bair of Georgia Tech with a sample of greater than 98~\% purity. The estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
 	
-	Classical film thickness formulas rely heavily on the so-called pressure-viscosity coefficient $(\alpha)$, which is essentially an Arrhenius-like activation parameter that is obtained from the slope for an $\ln(\eta)$-$P$ plot. However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometry measurements for nearly a century. This super-Arrhenius trend is typically manifest by an inflection point in the $\ln(\eta)$-$P$ plot. While this behavior is common in experimental measurements, we are not aware of any rheological molecular simulation studies that have addressed this topic, as most simply assume an Arrhenius relationship when reporting $\alpha$ \cite{Mundy1994,McCabe2001,Liu2015}. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior. 
+	Classical film thickness formulas rely heavily on the so-called pressure-viscosity coefficient $(\alpha)$, which is essentially an Arrhenius-like activation parameter that is obtained from the slope for an log$_{10}(\eta)$-$P$ plot. However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometry measurements for nearly a century \cite{Bair2016}. This super-Arrhenius trend is typically manifest by an inflection point in the log$_{10}(\eta)$-$P$ plot. While this behavior is common in experimental measurements, we are not aware of any rheological molecular simulation studies that have addressed this topic, as most simply assume an Arrhenius relationship when reporting $\alpha$ \cite{Mundy1996,McCabe2001,Liu2015}. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior.
 	
-%	Most rheological molecular simulation studies assume an Arrhenius relationship and report the so-called pressure-viscosity coefficient which is the slope for an $\ln(\eta)-P$ plot \cite{Mundy1994,McCabe2001,Liu2015}. 
+%	Most rheological molecular simulation studies assume an Arrhenius relationship and report the so-called pressure-viscosity coefficient which is the slope for an log$_{10}(\eta)-P$ plot \cite{Mundy1994,McCabe2001,Liu2015}. 
 	
-	In a previous study, we investigated the adequacy of four different force fields for predicting the viscosity-pressure trend, namely, the Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. Each force field uses a united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) functional form. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa. The compounds in question were \textit{n}-alkanes ranging in carbon number from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane (224TMP). The 224TMP results at high pressures are especially useful as this compound is a close analogue to the challenge compound and, in contrast with 224TMH, 224TMP has been well studied experimentally.
+	In a previous study, we investigated the adequacy of four different united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) force fields for predicting the viscosity-pressure trend, namely, the Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ over a wide temperature range and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa. The compounds in question were \textit{n}-alkanes ranging in length from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane (224TMP). The 224TMP results at high pressures are especially useful as this compound is a close analogue to the challenge compound and, in contrast with 224TMH, 224TMP has been well studied experimentally.
 	
-	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by greater than 30~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 2,2,4-trimethylpentane to within 10~\% accuracy. For this reason, we chose to implement the Potoff Mie 16-6 force field for the challenge of predicting $\eta$ and $\alpha$ of the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for the compounds studied.
+	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by greater than 30~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 2,2,4-trimethylpentane to within 10~\% accuracy. For this reason, we implement the Potoff Mie 16-6 force field to predict $\eta$ and $\alpha$ for the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for the compounds studied and, specifically, for 224TMP.
 	 
 	One of the entry guidelines for IFPSC is ``an analysis of the uncertainty in the calculated results.'' Traditionally, simulation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to data post-processing. This class of uncertainty is referred to as ``numerical uncertainty'' (frequently referred to as ``statistical uncertainty''). Two other classes of uncertainty, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty'') are typically ignored in uncertainty quantification (UQ) due to the increased computational cost. The latter refers to the uncertainty associated with the choice of force field functional form, while the former refers to the uncertainty in the force field parameters for a given force field functional form.
 	
@@ -309,7 +311,7 @@
 	
 		\subsection{Force fields} \label{Force Field}
 	
-	We utilize the Potoff force field as it provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes that are similar to the challenge compound \cite{Postdoc_3}. In addition, we quantify the uncertainty in $\eta$ that arises from uncertainties in the non-bonded Mie 16-6 and torsional parameters. The parameter uncertainties are obtained using Bayesian inference Markov Chain Monte Carlo (MCMC). This analysis is performed sequentially. First, we include only the non-bonded uncertainties (referred to as MCMC-nb). Then, we include both the non-bonded and torsional uncertainties (MCMC-nb-tors). This sequential approach provides insight into which source of uncertainty has a greater impact on $\eta$.
+	We utilize the Potoff force field as it provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes that are similar to the challenge compound \cite{Postdoc_3}. In addition, we quantify the uncertainty in $\eta$ that arises from uncertainties in the non-bonded Mie 16-6 and torsional parameters. The parameter uncertainties are obtained using Bayesian inference Markov Chain Monte Carlo (MCMC). This UQ analysis is performed sequentially. First, we account for only the non-bonded uncertainties (referred to as MCMC-nb). Then, we include both the non-bonded and torsional uncertainties (MCMC-nb-tors). This sequential approach provides insight into which source of uncertainty has a greater impact on $\eta$.
 	
 %	 and are subsequently propagate these force field parameter uncertainties when predicting $\eta$.
 	
@@ -353,9 +355,9 @@
 	%	u^{\rm tors} = c_0 + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + c_3 [1+\cos{3\phi}] + A_{\rm s} \sin^2\left(\frac{3\phi}{2} + \ang{180}\right) = (c_0 - A_{\rm s}) + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + \left(c_3 + \frac{A_{\rm s}}{2}\right) [1+\cos{3\phi}]
 	%	\end{equation}
 	\begin{multline}
-	u^{\rm tors} = c_0 + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + c_3 [1+\cos{3\phi}] + A_{\rm s} \sin^2\left(\frac{3\phi}{2} + \ang{180}\right) \\ = (c_0 - A_{\rm s}) + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + \left(c_3 + \frac{A_{\rm s}}{2}\right) [1+\cos{3\phi}]
+	u^{\rm tors} = c_0 + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + c_3 [1+\cos{3\phi}] + A_{\rm s} \sin^2\left[\frac{3}{2}(\phi + \ang{180})\right] \\ = (c_0 - A_{\rm s}) + c_1 [1+\cos{\phi}] + c_2 [1-\cos{2\phi}] + \left(c_3 + \frac{A_{\rm s}}{2}\right) [1+\cos{3\phi}]
 	\end{multline}
-	where $u^{\rm tors}$ is the torsional energy, $\phi$ is the dihedral angle, $c_n$ are the Fourier constants used in the Potoff force field and listed in Table \ref{tab:torsions}, and $A_{\rm s} \sin^2\left(\frac{3\phi}{2} + \ang{180}\right)$ is an additional term proposed by \citenum{Nieto2006} to shift the torsional barrier heights. Note that $\phi$ is defined using a convention similar to IUPAC where $\phi = \ang{180}$ for the \textit{trans} conformation, whereas \citenum{Nieto2006} defines the \textit{trans} conformation as $\ang{0}$ or $\ang{360} \deg$, hence the $+\ang{180}$ term. As $\sin^2\left(\frac{3\phi}{2} + \ang{180}\right)$ has a maximum value of 1 at $\ang{0}$, $\ang{120}$, $\ang{240}$, and $\ang{360}$, $u^{\rm tors}$ is shifted by $A_{\rm s}$ at these dihedral angles. By contrast, this additional term does not shift $u^{\rm tors}$ for dihedral angles of $\ang{0}$, $\ang{180}$, and $\ang{300}$, which correspond to the equilibrium conformations of \textit{gauche}$^-$, \textit{trans}, and \textit{gauche}$^+$, respectively. Clearly, the non-shifted Potoff torsional potential is obtained only when $A_{\rm s} = 0$. 
+	where $u^{\rm tors}$ is the torsional energy, $\phi$ is the dihedral angle, $c_n$ are the Fourier constants used in the Potoff force field and listed in Table \ref{tab:torsions}, and $A_{\rm s} \sin^2\left[\frac{3}{2}(\phi + \ang{180})\right]$ is an additional term proposed by Nieto-Draghi et al. to shift the torsional barrier heights for normal and branched alkanes \cite{Nieto2006,Nieto2008}. Clearly, the non-shifted Potoff torsional potential is obtained only when $A_{\rm s} = 0$. We follow a convention similar to that of the International Union of Pure and Applied Chemistry (IUPAC) such that $\phi = \ang{180}$ for the \textit{trans} conformation, whereas Nieto-Draghi et al. define the \textit{trans} conformation as $\ang{0}$ or $\ang{360}$ \cite{Nieto2006,Nieto2008}, hence the $\phi+\ang{180}$ term. As $\sin^2\left[\frac{3}{2}(\phi + \ang{180})\right]$ has a maximum value of 1 at $\ang{0}$, $\ang{120}$, $\ang{240}$, and $\ang{360}$, $u^{\rm tors}$ is shifted by $A_{\rm s}$ at these dihedral angles. By contrast, this additional term does not shift $u^{\rm tors}$ for dihedral angles of $\ang{60}$, $\ang{180}$, and $\ang{300}$, which correspond to the equilibrium conformations of \textit{gauche}$^-$, \textit{trans}, and \textit{gauche}$^+$, respectively.  
 	
 	\begin{table}[h!]
 		\caption{Fourier constants $(c_n/k_{\rm B})$ and shifting parameter $(A_{\rm s}/k_{\rm B})$ in units of K for Potoff force field  \cite{Martin1999,Potoff_branched}. CH$_i$ and CH$_j$ represent CH$_3$, CH$_2$, CH, or C sites.} \label{tab:torsions}
@@ -369,12 +371,20 @@
 			\end{tabular}
 		\end{center} 
 	\end{table}
+
+	Nieto-Draghi et al. set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the terminal and internal torsions \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} \gg 0$, is because AUA4 utilizes a Lennard-Jones 12-6 potential and, therefore, under predicts $\eta$ by approximately 30~\%. However, despite the relatively large increase in the torsional barriers, the modified torsional model (AUA4) typically provides only marginal improvement of 5~\% to 15~\% \cite{Nieto2006,Nieto2008}. 
 	
-	\citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
+	% The primary reason why Nieto-Draghi et al. introduce this additional term is to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field, which systematically under predicts $\eta$ by around 30~\%. Despite the fairly large increase in torsional barrier,
+	
+%	Reference \citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
 	
 	%$0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$
 	
-	The actual reason we include the additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
+	As the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $. 	The actual reason we include this additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a skewed distribution with a mean value near zero and the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum barrier height for the non-shifted Potoff torsional potential. Note that, unlike Nieto-Draghi et al., we do not assume that the dihedral barriers must be increased unilaterally. The rationale for using this skewed distribution is presented in Section \ref{Results}. 
+	
+	Figure \ref{fig:dihedral_uncertainty} compares the non-shifted Potoff torsional potential, $\pm 40$~\% shift in barrier heights, and the MCMC torsional potentials which are used for MCMC-nb-tors. The insets also depict the skewed distributions and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions. Also, unlike Nieto-Draghi et al., we make no distinction between internal and terminal torsions.
+		
+%	The actual reason we include this additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
 	
 	%Note that \citenum{Nieto2006} proposed a 15\% shift in the dihedral barriers for the CH$_i$-CH$_2$-CH$_2$-CH$_j$ potential.
 	
@@ -385,16 +395,16 @@
 		\label{fig:dihedral_uncertainty}
 	\end{figure}
 	
-	Non-bonded interactions between sites located in two different molecules or separated by more than three bonds within the same molecule are calculated using a Mie $\lambda$-6 potential (of which the Lennard-Jones, LJ, 12-6 is a subclass) \cite{Herdes2015}:
+	Non-bonded interactions between sites located in two different molecules or separated by more than three bonds within the same molecule are calculated using a Mie $\lambda$-6 potential (of which the traditional Lennard-Jones, LJ, 12-6 is a subclass) \cite{Herdes2015}:
 	\begin{equation} \label{eq:Mie}
 	u^{\rm vdw}(\epsilon,\sigma,\lambda;r) = \left(\frac{\lambda}{\lambda - 6}\right)\left(\frac{\lambda}{6}\right)^{\frac{6}{\lambda - 6}} \epsilon \left[\left(\frac{\sigma}{r}\right)^{\lambda} - \left(\frac{\sigma}{r}\right)^6\right]
 	\end{equation} 
 	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. 
 	
-	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable set, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters. (Note the discrepancy between the generalized C parameters reported in Table 1 of Reference \citenum{Potoff_branched} and the optimal region depicted in Figure 1 of Reference \citenum{Potoff_branched}.)
+	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable force field, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters.
 	
 	\begin{table}[h!]
-		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses.} \label{tab:nonbonded params}
+		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses. $^*$ Generalized C parameters obtained by private communication. Note the discrepancy between the generalized C parameters reported in Table 1 of Reference \citenum{Potoff_branched} and the optimal region depicted in Figure 1 of Reference \citenum{Potoff_branched}.)} \label{tab:nonbonded params}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|}
 				\hline
@@ -403,7 +413,7 @@
 				CH$_3$ & 121.25 & 0.3783 & 16  \\ 
 				CH$_2$ & 61 & 0.399 & 16 \\ 
 				CH & 15 (15/14) & 0.46 (0.47/0.47) & 16\\
-				C & 1.05 (1.45/1.2) & 0.605 (0.61/0.62) & 16\\
+				C & 1.05$^*$ (1.45/1.2) & 0.605$^*$ (0.61/0.62) & 16\\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -423,35 +433,38 @@
 	
 %	The MCMC Mie 16-6 parameters for CH$_3$ and CH$_2$ were reported previously \cite{Postdoc_2}. Reference BLANK assumed that the CH$_3$ parameters were transferable from ethane for longer \textit{n}-alkanes. The CH$_2$ parameters were obtained from propane, \textit{n}-butane, and \textit{n}-octane. The data included in the analysis were saturated liquid densities and saturated vapor pressures over a reduced temperature range of 0.45 to 0.85, as available in ThermoData Engine (TDE). 
 %	
-	The MCMC non-bonded parameters for CH$_3$ and CH$_2$ ($\epsilon_{CH_3}, \sigma_{CH_3}, \epsilon_CH_2, $ and $\sigma_CH_2)$ were reported previously \cite{Postdoc_2}. These parameters were obtained using a likelihood function based on saturated liquid density and saturated vapor pressure data for ethane, propane, \textit{n}-butane, and \textit{n}-octane. By contrast, the MCMC parameters for CH and C ($\epsilon_{CH}, \sigma_{CH}, \epsilon_C, $ and $\sigma_C)$ were obtained from the scoring function reported in Reference \citenum{Potoff_branched} that depends on several vapor-liquid coexistence properties for a wide range of branched alkanes. Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
+	Figure \ref{fig:nonbonded_uncertainty} depicts the MCMC non-bonded parameters for CH$_3$, CH$_2$, CH, and C united-atom sites ($\epsilon_{\rm CH_3}$, $\sigma_{\rm CH_3}$, $\epsilon_{\rm CH_2}$, $\sigma_{\rm CH_2}$, $\epsilon_{\rm CH}$, $\sigma_{\rm CH})$, $\epsilon_{\rm C}$, and $\sigma_{\rm C})$). Note that $\lambda_{\rm CH_3} = \lambda_{\rm CH_2} = \lambda_{\rm CH} = \lambda_{\rm C} = 16$ and parameters are assumed to be transferable, e.g., the CH$_2$ MCMC parameters do not depend on the CH$_3$ MCMC parameters. The MCMC non-bonded parameters for CH$_3$ and CH$_2$ sites were reported previously \cite{Postdoc_2}. These parameters were obtained using a likelihood function based on saturated liquid density and saturated vapor pressure data for ethane, propane, \textit{n}-butane, and \textit{n}-octane. By contrast, the MCMC parameters for CH and C sites were obtained from the scoring function reported by Mick et al. \cite{Potoff_branched} that depends on several vapor-liquid coexistence properties for a diverse set of branched alkanes. Details regarding the generation of MCMC parameter sets from the scoring function are found in Supporting Information. An important observation from Figure \ref{fig:nonbonded_uncertainty} is that the uncertainties in the CH and C non-bonded parameters are considerably larger (on a percent basis) than those for CH$_3$ and CH$_2$.
 	
-    Note that this approach applies the common assumption of transferability between UA sites. In addition, the parameter correlation between different UA sites, e.g., between $\sigma_{CH_3}$ and $\sigma{_CH}$, are assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon$-$\sigma$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
+	
+%	Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
+	
+%    We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
     
-    	\begin{figure}[htb!]
+    \begin{figure}[htb!]
     	\centering
     	\includegraphics[width=6.4in]{MCMC_nonbonded.pdf}
-    	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference. \cite{Mie,Potoff_branched}}		
+    	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference \cite{Mie,Potoff_branched}. Top left, top right, bottom left, and bottom right panels correspond to CH$_3$, CH$_2$, CH, and C parameters, respectively.}		
     	%	\caption{Uncertainty in non-bonded potentials. Black line is the Potoff non-bonded potential. Red lines correspond to the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $\epsilon$ and $\sigma$.}
     	\label{fig:nonbonded_uncertainty}
     \end{figure}
     
-    Note that the uncertainties in the CH and C non-bonded parameters are considerably larger than those for CH$_3$ and CH$_2$. The CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters are likely the cause for the negligible impact of non-bonded uncertainties.
+%    Note that the uncertainties in the CH and C non-bonded parameters are considerably larger than those for CH$_3$ and CH$_2$. Note that the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
 	
-    Two important assumptions are made in this UQ analysis. First, we not only apply the common assumption of transferability between UA sites, but we also assume that there is zero correlation between different UA sites \cite{Mess4}. Second, we assume that the uncertainties obtained from as the likelihood and scoring functions depend only on thermodynamic properties at vapor-liquid coexistence conditions, we assume that the  In other words, a variation be 	The CH$_3$ parameters for ethane are assumed to be transferable to longer \textit{n}-alkanes
-	
-%	  such that  m  reproduced  the average and covariance matrix were fit to the  
+%    Two important assumptions are made in this UQ analysis. First, we not only apply the common assumption of transferability between UA sites, but we also assume that there is zero correlation between different UA sites \cite{Mess4}. Second, we assume that the uncertainties obtained from as the likelihood and scoring functions depend only on thermodynamic properties at vapor-liquid coexistence conditions, we assume that the  In other words, a variation be 	The CH$_3$ parameters for ethane are assumed to be transferable to longer \textit{n}-alkanes
 %	
-%	such that the short/long
+%%	  such that  m  reproduced  the average and covariance matrix were fit to the  
+%%	
+%%	such that the short/long
+%%	
+%%	The uncertainty in the CH and C parameter sites were obtained from Reference BLANK. Rather than apply 
 %	
-%	The uncertainty in the CH and C parameter sites were obtained from Reference BLANK. Rather than apply 
-	
-    In summary, the following assumptions are made in this uncertainty analysis: 
-	
-	\begin{enumerate}
-		\item Correlation between different UA sites is zero, i.e., all UA sites are transferable
-		\item $\lambda = 16$, i.e.,  only $\epsilon$ and $\sigma$ have non-zero uncertainty
-		\item Likelihood function and scoring function depend only on thermodynamic properties at vapor-liquid coexistence conditions
-	\end{enumerate}
+%    In summary, the following assumptions are made in this uncertainty analysis: 
+%	
+%	\begin{enumerate}
+%		\item Correlation between different UA sites is zero, i.e., all UA sites are transferable
+%		\item $\lambda = 16$, i.e.,  only $\epsilon$ and $\sigma$ have non-zero uncertainty
+%		\item Likelihood function and scoring function depend only on thermodynamic properties at vapor-liquid coexistence conditions
+%	\end{enumerate}
 
 %		\item CH$_3$ parameters for ethane are transferable to \textit{n}-alkanes and branched alkanes
 %\item CH$_2$ parameters for propane, \textit{n}-butane, and \textit{n}-octane are transferable to branched alkanes
@@ -473,13 +486,13 @@
 	
 	%     Since 45 ($5 \times 5 + 5 \times 4$) of the 81 $(9 \times 9)$ non-bonded interactions are affected by the CH$_3$ sites, the CH$_3$ uncertainties  
 	
-	\begin{enumerate}
-		\item Potoff force field proved to be most reliable in previous study
-		\item United-atom, Mie 16-6
-		\item AUA4m considered modifying torsional barriers for CH$_2$-CH$_2$ by 15~\% and 40~\% for internal and terminal torsions, respectively.
-		\item Include uncertainty in $\epsilon$, $\sigma$, and $U^{\rm tors}$
-		\item Plots of MCMC samples and maybe the Mie potentials and torsional barriers explicitly
-	\end{enumerate}
+%	\begin{enumerate}
+%		\item Potoff force field proved to be most reliable in previous study
+%		\item United-atom, Mie 16-6
+%		\item AUA4m considered modifying torsional barriers for CH$_2$-CH$_2$ by 15~\% and 40~\% for internal and terminal torsions, respectively.
+%		\item Include uncertainty in $\epsilon$, $\sigma$, and $U^{\rm tors}$
+%		\item Plots of MCMC samples and maybe the Mie potentials and torsional barriers explicitly
+%	\end{enumerate}
 	
 	\subsection{Simulation set-up}
 		
@@ -489,7 +502,7 @@
 	
 	%In addition, the shell and python scripts used for preparing and analyzing simulations are available on GitHub \cite{BLANK}. 
 	
-    We utilize the same simulation specifications as our previous study BLANK. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections \cite{GROMACS_note}. Our previous study also shows that finite size effects are negligible for a 400 molecule system. 
+    We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections \cite{GROMACS_note}. Our previous study also shows that finite size effects are negligible for a 400 molecule system. 
 	 
 	\begin{table}[htb!]
 		\caption{General simulation specifications.} \label{tab:sim_specs}
@@ -555,26 +568,30 @@
 	
 	\subsection{Data analysis}
 	
-	The analysis for the Potoff Mie $\lambda$-6 force field simulation results is identical to that prescribed in our previous study (see Reference BLANK). In brief, we implement the Green-Kubo ``time-decomposition'' analysis \cite{Maginn2018,Zhang2015}
+	The post-simulation data analysis is identical to that prescribed in our previous study \cite{Postdoc_3}. In brief, we implement the Green-Kubo ``time-decomposition'' analysis \cite{Maginn2018,Zhang2015}
 	\begin{equation} \label{eq:Green_Kubo}
 	\eta(t) = \frac{V}{k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \int_{0}^{t}dt'\left\langle \tau_{\alpha\beta,n}(t') \tau_{\alpha\beta,n}(0)\right\rangle_{t_0,\alpha\beta}
 	\end{equation} 
-	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over time origins $(t_0)$ and $\tau_{\alpha\beta}$. 
+	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over twelve different time origins $(t_0)$ and all three unique off-diagonal $\tau_{\alpha\beta}$ components. For a precise integration of Equation \ref{eq:Green_Kubo}, $\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps). Equation \ref{eq:Green_Kubo} also averages $N_{\rm reps}$ independent replicate simulations, where the Potoff replicate simulations utilize the same force field parameters. By contrast, the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets (see Figures \ref{fig:nonbonded_uncertainty} and \ref{fig:dihedral_uncertainty}).
 	
-	$\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps), Equation \ref{eq:Green_Kubo} averages the independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components.
+%	, Equation \ref{eq:Green_Kubo} averages the independent replicate simulations, twelve different time-origins, and all three unique off-diagonal stress tensor components.
 	
-	The ``true'' viscosity, i.e., the infinite-time-limit viscosity, is obtained by evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$. As the long-time tail does not converge, we fit the ``running integral'' to a double-exponential function
+	The force field viscosity is obtained by evaluating Equation \ref{eq:Green_Kubo} as $t \rightarrow \infty$, i.e., the infinite-time-limit viscosity $(\eta^\infty)$. As the long-time tail does not converge, we fit the ``running integral'' to a double-exponential function
 	\begin{equation} \label{eq: Double exponential}
 	\eta(t) = A \alpha \tau_1 \left(1-\exp{(-t/\tau_1)}\right) + A (1-\alpha) \tau_2 \left(1-\exp{(-t/\tau_2)}\right)
 	\end{equation}
-	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$ is the infinite-time-limit viscosity. We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
-	 
-	The uncertainty in $\eta^{\infty}$ is obtained by bootstrap re-sampling. Specifically, the fitting process described previously is repeated hundreds of times using randomly selected subsets of replicate simulations. For the Potoff results, each replicate simulation utilizes the same force field parameters. By contrast, the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets. The 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
+	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$. See our previous work for details regarding the fitting procedure \cite{Postdoc_3}. 
 	
+%	 We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
+	 
+	The uncertainty in $\eta$ is obtained by bootstrap re-sampling and reported at the 95~\% confidence level. Specifically, the fitting of Equation \ref{eq: Double exponential} is repeated hundreds of times using randomly selected subsets of replicate simulations from which we obtain the distribution of $\eta^{\infty}$ estimates. Section \ref{SI:GK_analysis} of Supporting Information validates this process for the MCMC non-bonded CH$_3$ parameter sets with ethane. 
+		
+%	For the Potoff results, each replicate simulation utilizes the same force field parameters. By contrast, the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets. The 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
+%	
 	
 	% For the Potoff force field, the number of replicates in the subset is equal to the total number of replicates. The methodology is different for the MCMC simulations. In this case, two different rounds of re-sampling are performed. First, only 40 replicates are subsampled from the total of 200 replicates. This is done to randomize the MCMC parameter sets. Second, standard bootstrapping with replacement is performed from these 40 replicates. Both layers of this process are repeated hundreds of times. For both Potoff and MCMC force fields, a 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
 	
-    The simulation results are fit to four different empirical models from which the pressure-viscosity coefficient $(\alpha)$ is calculated. As viscosity ranges over several orders of magnitude, the objective function for fitting is the sum-squared-error of log$_{10}(\eta)$. Only the MCMC-nb-tors values are included in the fit, as these simulation results account for more sources of uncertainty than the Potoff and MCMC-nb results. The pressure-viscosity coefficient for each empirical fit is obtained by differentiating $ln(\eta)$ with respect to $P$.   
+    The simulated $\eta$ with respect to $P$ values are fit to four different empirical models from which the pressure-viscosity coefficient $(\alpha)$ is calculated. As viscosity ranges over several orders of magnitude, the objective function for fitting is the sum-squared-error of log$_{10}(\eta)$. Only the MCMC-nb-tors values are included in the fit, as these simulation results account for more sources of uncertainty than the Potoff and MCMC-nb results. The pressure-viscosity coefficient for each empirical fit is obtained by either analytical or numerical differentiation of log$_{10}(\eta)$ with respect to $P$.   
     
     The first empirical model we implement is the traditional Barus expression \cite{Barus1893}
 	\begin{equation} \label{eq:Barus}
@@ -584,7 +601,7 @@
 	\begin{equation} \label{eq:Roelands}
 	\eta = \eta_p \left(\frac{\eta_0}{\eta_p}\right)^{\left(\frac{P_p - P}{P_p}\right)^Z}
 	\end{equation}
-	where $\eta_0$ and $Z$ are fitting parameters and $\eta_p = 6.31 \times 10^-5$ Pa-s and $P_p = -0.196$ GPa. The third model is an alternative form of Equation \ref{eq:Roelands} where $eta_p$ and $P_p$ are additional fitting parameters (rather than fixed constants). This four parameter Roelands equation, which we refer to as ``Roelands-Modified,'' is more flexible than the standard Roelands model and can predict super-Arrhenius behavior. The fourth model is a hybrid McEwen-Paluch expression \cite{Bair2016}	
+	where $\eta_0$ and $Z$ are fitting parameters and $\eta_p = 6.31 \times 10^-5$ Pa-s and $P_p = -0.196$ GPa. The third model is an alternative form of Equation \ref{eq:Roelands} where $\eta_p$ and $P_p$ are additional fitting parameters (rather than fixed constants). This four parameter Roelands equation, which we refer to as ``Roelands-Modified,'' is more flexible than the standard Roelands model and can predict super-Arrhenius behavior. The fourth model is a hybrid McEwen-Paluch expression \cite{Bair2016}	
 	\begin{equation} \label{eq:McEwen-Paluch}
 	\eta = \eta_0 \left(1 + \frac{a_0}{q} P\right)^q \exp\left(\frac{C_{\rm F} P}{P_\infty - P}\right)
 	\end{equation}
@@ -594,14 +611,16 @@
 		
 	\section{Results} \label{Results}    
 	
-	Tabulated values for viscosity, density, and pressure at the prescribed state points are provided in Table \ref{tab:tabulated_values}. These values are also depicted in Figure \ref{fig:viscosity_pressure} along with the available experimental data point and model fits to simulation data.
+	Table \ref{tab:tabulated_values} provides tabulated values for viscosity, density, and pressure at the prescribed state points for Potoff, MCMC-nb, and MCMC-nb-tors. These values are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the MCMC-nb-tors values and the available experimental viscosity at atmospheric pressure. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 500 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between simulation results and the McEwen-Paluch empirical model fit. This panel is useful for visually comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties.
+	
+	Recall that the Potoff results only account for numerical uncertainties, MCMC-nb accounts for numerical and non-bonded parameter uncertainties, and MCMC-nb-tors accounts for numerical, non-bonded and torsional parameter uncertainties. Although somewhat counter intuitive, the reason why the MCMC-nb and MCMC-nb-tors uncertainties are smaller than the Potoff uncertainties is because the latter uses fewer replicate simulations. When the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, this increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well.	For 224TMH, the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
 	
 	\begin{table}[h!]
-		\caption{Simulation results for Potoff, MCMC-Mie, and MCMC-Mie-tors.} \label{tab:tabulated_values}
+		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors.} \label{tab:tabulated_values}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|c|c|c|c|}
 				\hline
-				\multicolumn{1}{|c}{} & \multicolumn{1}{|c}{} & \multicolumn{2}{|c|}{Potoff} & \multicolumn{2}{|c|}{MCMC-Mie} & \multicolumn{2}{|c|}{MCMC-Mie-tors}  \\ \hline
+				\multicolumn{1}{|c}{} & \multicolumn{1}{|c}{} & \multicolumn{2}{|c|}{Potoff} & \multicolumn{2}{|c|}{MCMC-nb} & \multicolumn{2}{|c|}{MCMC-nb-tors}  \\ \hline
 				$T$ (K) & $P$ (MPa) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) \\ \hline  
 				\hline
 			\end{tabular}
@@ -615,34 +634,36 @@
 		\label{fig:viscosity_pressure}
 	\end{figure}
 
-    Figure \ref{fig:uncertainties} compares the different sources of uncertainty. The Potoff results only account for numerical uncertainties while MCMC-nb also accounts for non-bonded parameter uncertainty and MCMC-nb-tors also accounts for torsional uncertainties. Note that the reason why the MCMC-nb and MCMC-nb-tors uncertainties are larger than the Potoff uncertainties is because the latter uses fewer replicate simulations. When the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, this increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well.
-        
-%     only 40 replicates are used for the latter while 200 replicates are used for the former. 
+%    Figure \ref{fig:uncertainties} compares the different sources of uncertainty. The Potoff results only account for numerical uncertainties while MCMC-nb also accounts for non-bonded parameter uncertainty and MCMC-nb-tors also accounts for torsional uncertainties. Note that the reason why the MCMC-nb and MCMC-nb-tors uncertainties are larger than the Potoff uncertainties is because the latter uses fewer replicate simulations. When the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, this increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well.
+%        
+%%     only 40 replicates are used for the latter while 200 replicates are used for the former. 
+%
+%	\begin{figure}[htb!]
+%		\centering
+%	%	\includegraphics[width=6.4in]{viscosity_pressure.pdf}
+%		\caption{Uncertainty distributions for Potoff, MCMC-Mie, and MCMC-Mie-tors.}
+%		\label{fig:uncertainties}
+%	\end{figure}
 
-	\begin{figure}[htb!]
-		\centering
-	%	\includegraphics[width=6.4in]{viscosity_pressure.pdf}
-		\caption{Uncertainty distributions for Potoff, MCMC-Mie, and MCMC-Mie-tors.}
-		\label{fig:uncertainties}
-	\end{figure}
-
-    The predicted pressure-viscosity coefficient $(\alpha)$, as determined by fitting the MCMC-nb-tors results to Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}, are presented in Figure \ref{fig:viscosity_pressure_coefficent}. The uncertainties in $\alpha$ are obtained with bootstrap re-sampling, where a single $\eta$ value is randomly selected from the MCMC-nb-tors distribution. The traditional Barus $\alpha$ value is constant with respect to pressure. The Roelands $\alpha$ value actually decreases with increasing pressure, while the Roelands, Modified $\alpha$ value does increase but without a change in slope. Only the McEwen-Paluch $\alpha$ value shows the marked change in slope which corresponds to an inflection point in the $\ln(\eta)$-$P$ plot. The $\alpha$ magnitude are all reasonable (i.e., similar in magnitude to other lubricants) over the entire range of pressures.
+    Figure \ref{fig:viscosity_pressure_coefficent} presents the predicted pressure-viscosity coefficient $(\alpha)$, as determined by fitting the MCMC-nb-tors results to Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}. The uncertainties in $\alpha$ are obtained with bootstrap re-sampling for the empirical model fits. Note that the $\alpha$ magnitudes for all empirical models are reasonable (i.e., similar in magnitude to other lubricants \cite{Mundy1996,McCabe2001,Liu2015}) over the entire range of pressures. However, as expected, the traditional Barus $\alpha$ value is constant with respect to pressure. By contrast, the Roelands $\alpha$ value decreases with increasing pressure, while the Roelands-Modified $\alpha$ value increases with respect to pressure but without a change from negative to positive slope. Only the McEwen-Paluch $\alpha$ value shows the marked change in slope which corresponds to an inflection point in the log$_{10}(\eta)$-$P$ plot. 
 
 	\begin{figure}[htb!]
 		\centering
 		\includegraphics[width=3.2in]{Pressure_viscosity_coefficient.png}
-		\caption{Pressure-viscosity coefficient predicted with Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}. Dashed lines represent 95~\% confidence intervals obtained from bootstrap re-sampling.}
+		\caption{Pressure-viscosity coefficient predicted with empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}). Dashed lines represent 95~\% confidence intervals obtained from bootstrap re-sampling.}
 		\label{fig:viscosity_pressure_coefficent}
 	\end{figure}
+
+% Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}.
 	
 %	Although the deviations from the hybrid McEwen-Paluch model fit to the simulation results are significantly lower than those of the Roelands and Barus models, this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models.
 	
-	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models, this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model is actually over-fit to our simulation results. To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the data are included in the training set while 30~\% are excluded as the testing set. Since the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set, we conclude that the McEwen-Paluch model is not over-fit to the data. Therefore, there is statistical evidence that the Mie 16-6 united-atom force field predicts an inflection point followed by super-Arrhenius behavior. 
+	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models (see Figures \ref{fig:viscosity_pressure} and \ref{fig:cross_validation}), this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model is actually over-fit to our simulation results. To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the data are included in the training set while 30~\% are excluded as the testing set. Since the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set, we conclude that the McEwen-Paluch model is not over-fit to the data. Therefore, there is statistical evidence that the Mie 16-6 united-atom force field predicts an inflection point followed by super-Arrhenius behavior. 
 
 	\begin{figure}[htb!]
 		\centering
 		\includegraphics[width=3.2in]{cross_validation.png}
-		\caption{Monte Carlo cross-validation for Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}.}
+		\caption{Monte Carlo cross-validation for empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}). MSE$_{\rm train}$ and MSE$_{\rm test}$ are the mean-squared-error for the ``training'' and ``testing'' sets, respectively.}
 		\label{fig:cross_validation}
 	\end{figure}
 	
@@ -651,13 +672,16 @@
 	
     \section{Discussion} \label{Discussion/Limitations}   
     
-    Although the Potoff force field demonstrates super-Arrhenius behavior, we should caution that this could be an anomaly of the force field. Since the Mie 16-6 potential is known to be overly repulsive at short distances, it is possible that this causes the sudden increase in viscosity. This has proven to be the case for the viscosity-density trend, although we have assumed that the viscosity-pressure trend is reliable due to the simultaneous over prediction of both viscosity and pressure at high densities.
-	
-	Other studies \cite{Liu2015} have corrected for systematic errors in viscosity by normalizing the viscosity-pressure trend with respect to viscosity at the lowest pressure. This approach would be possible for the challenge compound since a single experimental data point is available at saturation pressure. Although this may result in a more accurate prediction, we prefer to test the reliability of the Potoff force field without any empirical corrections since this serves to truly test its transferability and predictive capabilities.
-	
-	The slow system dynamics at high pressures required extremely long simulations and large amounts of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation. Despite some obvious benefits, we are weary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. For this reason, we chose the more arduous brute-force approach.
-	
     It is extremely surprising that both the non-bonded and torsional parameter uncertainties are negligible compared to the numerical uncertainties in $\eta$. A possible explanation for why the non-bonded parameter uncertainty have a negligible impact on $\eta$ is that the CH$_3$ uncertainties are considerably smaller than those for CH$_2$, CH, and C. As 224TMH consists primarily of CH$_3$ sites, the larger uncertainties in CH$_2$, CH, and C did not affect the results significantly. By contrast, no clear explanation exists for why the torsional parameter uncertainties did not affect the precision for $\eta$. Previous studies suggest that the 15~\% to 40~\% increase in the torsional barriers should increase the viscosities by a similar amount. However, we did not observe such a strong dependence (or any at all), suggesting that this particular molecule is much less sensitive to the torsional parameters than the long straight-chained alkanes studied in Reference \cite{Nieto2006}.
+        
+    Although the Potoff force field demonstrates super-Arrhenius behavior, we should caution that this could be an anomaly of the force field. Since the Mie 16-6 potential is known to be overly repulsive at short distances \cite{Postdoc_2,Postdoc_3}, it is possible that this causes the rapid increase in $\eta$ at high pressures. 
+    
+    %This has proven to be the case for the viscosity-density trend, although we have assumed that the viscosity-pressure trend is reliable due to the simultaneous over prediction of both viscosity and pressure at high densities.
+	
+	Other studies \cite{Liu2015} correct for systematic errors in viscosity by normalizing $\eta$ with respect to an experimental viscosity value at low pressure. This approach would be possible for the challenge compound since a single experimental data point is available at saturation pressure. Although this may result in a more accurate prediction, we prefer not to use an empirical correction, rather we truly test the force field's transferability and predictive capabilities.
+	
+	The slow system dynamics at high pressures requires extremely long simulations and large amounts of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation. Despite some obvious benefits, we are weary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. For this reason, we choose the more arduous brute-force approach.	
+
 	
 %	Although time-temperature superposition is an attractive alternative, we are weary of the inordinately large uncertainties that this method can produce. If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. 
 %	
@@ -665,11 +689,11 @@
 	
 	\section{Conclusions} \label{Conclusions}
 	
-    Previous work demonstrated that the Potoff force field provides reliable viscosities (typically within 10~\%) for well-studied \textit{n}-alkane and branched alkanes both at saturation and elevated pressures. For this reason, the Potoff force field was chosen to predict the viscosity-pressure relationship of 2,2,4-trimethylhexane as part of the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. In addition, we investigate the parameter uncertainty in the simulation results with Bayesian inference. Specifically, the non-bonded and torsional potentials are varied from run to run according to a Markov Chain in force field parameter space. Furthermore, we assess the existence of so-called super-Arrhenius behavior at high pressures. Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results.
+    Previous work demonstrated that the Potoff force field provides reliable viscosities (typically within 10~\%) for well-studied \textit{n}-alkane and branched alkanes both at saturation and elevated pressures. For this reason, the Potoff force field was chosen to predict the viscosity-pressure relationship of 2,2,4-trimethylhexane as part of the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. In addition, we investigate the parameter uncertainty in the simulation results with Bayesian inference. Specifically, the non-bonded and torsional potentials are varied from run to run according to a Markov Chain in force field parameter space. Surprisingly, the non-bonded and torsional parameter uncertainties are typically negligible compared to the numerical fluctuations in simulation output. Furthermore, we use cross validation model selection to verify the existence of so-called super-Arrhenius behavior at high pressures.
 	
 	\section*{Supporting Information}
 	
-    Section \ref{Gromacs input files} provides GROMACS input files. Section \ref{SI:GK_analysis} outlines the Green-Kubo analysis process.       
+    Section \ref{SI:Gromacs input files} provides GROMACS input files. Section \ref{SI:MCMC from scoring function} describes how the CH and C non-bonded MCMC parameter sets are obtained. Section \ref{SI:GK_analysis} validates the MCMC-nb uncertainty quantification approach. Section \ref{SI:Running integrals} presents the average Green-Kubo integrals for each state point.      
 	
 	\section*{Acknowledgments}
 	
