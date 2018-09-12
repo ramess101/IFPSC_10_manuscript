@@ -406,7 +406,7 @@
 	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable force field, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters.
 	
 	\begin{table}[h!]
-		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses. $^*$Private communication of tabulated scoring function values for generalized C parameters. Note the discrepancy between the generalized C parameters reported in Table 1 of Reference \citenum{Potoff_branched} and the optimal region depicted in Figure 1 of Reference \citenum{Potoff_branched}.} \label{tab:nonbonded params}
+		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses. $^*$Private communication of tabulated scoring function values for generalized C parameters. Note the small discrepancy between the generalized C parameters reported in Table 1 of Reference \citenum{Potoff_branched} and the optimal region depicted in Figure 1 of Reference \citenum{Potoff_branched}.} \label{tab:nonbonded params}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|}
 				\hline
@@ -524,19 +524,37 @@
 
 	We perform a sequence of six simulation stages: energy minimization, $NPT$ equilibration, $NPT$ production, energy minimization, $NVT$ equilibration, and $NVT$ production. The average box size from the $NPT$ production stage is utilized in the second energy minimization and subsequent $NVT$ stages. Table \ref{tab:thermostats_barostats} lists the integrators, thermostats, barostats, and simulation time used for each $NPT$ and $NVT$ equilibration and production stage. These specifications are also the same as our previous study, with the exception of the $NVT$ production simulation times, which are state point dependent. The specific production times for the $NVT$ production stage are provided in Table \ref{tab:production times}.
 
+%	\begin{table}[htbp!]
+%		\caption{Simulation specifications for equilibration (Equil.) and production (Prod.) stages.} \label{tab:thermostats_barostats}
+%		%    	\begin{center}
+%		\begin{tabular}{|p{2.6cm}|c|c|c|c|}
+%			\hline
+%			& $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
+%			Simulation time (ns) & 1 & 1 & 1 & 1 to 48 \\ \hline
+%			Integrator & Velocity Verlet \cite{Swope1982}  & Leap frog \cite{Hockney1974} & Velocity Verlet & Velocity Verlet \\ \hline 
+%			Thermostat & Velocity rescale \cite{Bussi2007} & Nos{\'e}-Hoover \cite{Hoover1985,Nose1984} & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ \hline 
+%			Thermostat time-constant (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
+%			Barostat & Berendsen \cite{Berendsen1984} & Parrinello-Rahman \cite{Nose1983,Parrinello1981} & N/A & N/A \\ \hline
+%			Barostat time-constant (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
+%			Barostat compressibility (1/bar) & 4.5E-5 & 4.5E-5 & N/A & N/A \\
+%			\hline
+%		\end{tabular}
+%		%    	\end{center} 
+%	\end{table}
+
 	\begin{table}[htbp!]
-		\caption{Simulation specifications for equilibration (Equil.) and production (Prod.) stages.} \label{tab:thermostats_barostats}
+		\caption{Simulation specifications for equilibration (Equil.) and production (Prod.) stages. $t_{\rm sim}$ is the simulation time, $\tau_{T}$ is the thermostat time-constant, $\tau_{P}$ is the barostat time-constant, and $\zeta_{P}$ is the barostat compressibility.} \label{tab:thermostats_barostats}
 		%    	\begin{center}
-		\begin{tabular}{|p{2.6cm}|c|c|c|c|}
+		\begin{tabular}{|l|c|c|c|c|}
 			\hline
 			& $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
-			Simulation time (ns) & 1 & 1 & 1 & 1 to 48 \\ \hline
+			$t_{\rm sim}$ (ns) & 1 & 1 & 1 & 1 to 48 \\ \hline
 			Integrator & Velocity Verlet \cite{Swope1982}  & Leap frog \cite{Hockney1974} & Velocity Verlet & Velocity Verlet \\ \hline 
 			Thermostat & Velocity rescale \cite{Bussi2007} & Nos{\'e}-Hoover \cite{Hoover1985,Nose1984} & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ \hline 
-			Thermostat time-constant (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
+			$\tau_{T}$ (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
 			Barostat & Berendsen \cite{Berendsen1984} & Parrinello-Rahman \cite{Nose1983,Parrinello1981} & N/A & N/A \\ \hline
-			Barostat time-constant (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
-			Barostat compressibility (1/bar) & 4.5E-5 & 4.5E-5 & N/A & N/A \\
+			$\tau_{P}$ (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
+			$\zeta_{P}$ (1/bar) & 4.5E-5 & 4.5E-5 & N/A & N/A \\
 			\hline
 		\end{tabular}
 		%    	\end{center} 
@@ -592,7 +610,7 @@
 	
 %	 We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
 	 
-	The uncertainty in $\eta$ is obtained by bootstrap re-sampling and reported at the 95~\% confidence level. Specifically, the fitting of Equation \ref{eq: Double exponential} is repeated hundreds of times using randomly selected subsets of replicate simulations from which we obtain the distribution of $\eta^{\infty}$ estimates. Section \ref{SI:GK_analysis} of Supporting Information validates this process for the MCMC non-bonded CH$_3$ parameter sets with ethane. 
+	The uncertainty in $\eta$ is obtained by bootstrap re-sampling and reported at the 95~\% confidence level. Specifically, the fitting of Equation \ref{eq: Double exponential} is repeated hundreds of times using randomly selected subsets of replicate simulations from which we obtain the distribution of $\eta^{\infty}$ estimates. Section \ref{SI:MCMC_analysis} of Supporting Information validates this process for the MCMC non-bonded CH$_3$ parameter sets with ethane. 
 		
 %	For the Potoff results, each replicate simulation utilizes the same force field parameters. By contrast, the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets. The 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
 %	
@@ -638,7 +656,7 @@
 	\begin{figure}[htb!]
 		\centering
 		\includegraphics[width=3.2in]{viscosity_pressure_results.pdf}
-		\caption{Viscosity-pressure results for Potoff, MCMC-nb, and MCMC-nb-tors compared with experimental data. Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent the best fit of Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch} to MCMC-nb-tors results. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit.}
+		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference.}
 		\label{fig:viscosity_pressure}
 	\end{figure}
 	
