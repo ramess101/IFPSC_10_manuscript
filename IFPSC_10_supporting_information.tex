@@ -226,7 +226,7 @@
 		
 	\section{Input files} \label{SI:Gromacs input files}
 	
-	We provide example input files for simulating 2,2,4-trimethylpentane at 245 K with the Potoff force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
+	We provide example input files for simulating 2,2,4-trimethylhexane at 293 K with the Potoff force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
 	
 	\newpage
 	
@@ -236,7 +236,7 @@
 	
 	We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
 	
-	\section{Green-Kubo analysis} \label{SI:GK_analysis}
+	\section{MCMC validation} \label{SI:MCMC_analysis}
 	
 	This section provides a detailed example of how we obtain estimates for $\eta$ and the corresponding uncertainty. The results depicted in Figures \ref{fig:autocorrelation} through \ref{fig:bootstraps} are for propane with the Potoff model and $T^{\rm sat} = 166$ K. Figure \ref{fig:autocorrelation} depicts a typical autocorrelation function (``enecorr.xvg'' file) obtained by executing the GROMACS ``energy --vis'' command. By default, GROMACS partitions the complete simulation into twelve evenly sized time blocks. Therefore, the autocorrelation function in Figure \ref{fig:autocorrelation} is the average of twelve different time origins. 
 	
@@ -248,6 +248,10 @@
 	
     \clearpage
 	\newpage
+	
+    \section{$A_{\rm s}$ distribution} \label{SI:MCMC torsions}
+	
+	\section{Green-Kubo integrals} \label{SI:Running integrals}
 		
 	\section*{References}
 	

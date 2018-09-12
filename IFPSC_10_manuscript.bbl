@@ -2,14 +2,14 @@
 
 \bibitem{Bair2016}
 Scott Bair, Laetitia Martinie, and Philippe Vergne.
-\newblock Classical ehl versus quantitative ehl{: A} perspective part
-  {II-}super{-}arrhenius piezoviscosity, an essential component of
-  elastohydrodynamic friction missing from classical ehl.
+\newblock Classical {EHL} versus quantitative {EHL}{: A} perspective part
+  {II-}super{-}{A}rrhenius piezoviscosity, an essential component of
+  elastohydrodynamic friction missing from classical {EHL}.
 \newblock {\em Tribology Letters}, 63(3):37, 2016.
 
 \bibitem{Mundy1996}
 Christopher~J. Mundy, Michael~L. Klein, and J.~Ilja Siepmann.
-\newblock Determination of the pressure−viscosity coefficient of decane by
+\newblock Determination of the pressure{-}viscosity coefficient of decane by
   molecular simulation.
 \newblock {\em The Journal of Physical Chemistry}, 100(42):16779--16781, 1996.
 
@@ -97,6 +97,36 @@ Richard~A. Messerly, Michael~R. Shirts, and Andrei~F. Kazakov.
   high pressures for united-atom {Mie} $\lambda$-6 force field.
 \newblock {\em Journal of Chemical Physics}, Pending publication, 2018.
 
+\bibitem{Bay_Deriv}
+F.~Rizzi, H.~N. Najm, B.~J. Debusschere, K.~Sargsyan, M.~Salloum,
+  H.~Adalsteinsson, and O.~M. Knio.
+\newblock Uncertainty quantification in {MD} simulations. {Part II: Bayesian}
+  inference of force-field parameters.
+\newblock {\em Multiscale Modeling \& Simulation}, 10(4):1460--1492, 2012.
+
+\bibitem{Bay_MD}
+Panagiotis Angelikopoulos, Costas Papadimitriou, and Petros Koumoutsakos.
+\newblock Bayesian uncertainty quantification and propagation in molecular
+  dynamics simulations: A high performance computing framework.
+\newblock {\em The Journal of Chemical Physics}, 137(14):144103, 2012.
+
+\bibitem{Bay_UQ}
+Fabien Cailliez and Pascal Pernot.
+\newblock Statistical approaches to forcefield calibration and prediction
+  uncertainty in molecular simulation.
+\newblock {\em The Journal of Chemical Physics}, 134(5):054124, 2011.
+
+\bibitem{Mess4}
+Richard~A. Messerly, Thomas A.~Knotts IV, and W.~Vincent Wilding.
+\newblock Uncertainty quantification and propagation of errors of the
+  {Lennard-Jones} 12-6 parameters for \textit{n}-alkanes.
+\newblock {\em The Journal of Chemical Physics}, 146(19):194110, 2017.
+
+\bibitem{Efron1979}
+B.~Efron.
+\newblock Bootstrap methods: Another look at the jackknife.
+\newblock {\em The Annals of Statistics}, 7(1):1--26, 1979.
+
 \bibitem{Gordon2006}
 Peter~A. Gordon.
 \newblock Development of intermolecular potentials for predicting transport
@@ -106,7 +136,7 @@ Peter~A. Gordon.
 \bibitem{Postdoc_3}
 Richard~A. Messerly, Michelle~C. Anderson, Mostafa~S. Razavi, and J.~Richard
   Elliott.
-\newblock Improvements and limitations of mie $\lambda${-}6 potential for
+\newblock Improvements and limitations of {M}ie $\lambda${-}6 potential for
   prediction of saturated and compressed liquid viscosity.
 \newblock {\em Fluid Phase Equilibria}, Pending publication, 2018.
 
@@ -128,31 +158,15 @@ Carmelo Herdes, Tim~S. Totton, and Erich~A. M{\"u}ller.
   gases and condensates.
 \newblock {\em Fluid Phase Equilibria}, 406:91 -- 100, 2015.
 
-\bibitem{Allen1987}
+\bibitem{Allen2017}
 M.~P. Allen and D.~J. Tildesley.
-\newblock {\em {Computer Simulation of Liquids}}.
-\newblock Clarendon Press ; Oxford University Press, Oxford England New York,
-  1987.
-
-\bibitem{Mess4}
-Richard~A. Messerly, Thomas A.~Knotts IV, and W.~Vincent Wilding.
-\newblock Uncertainty quantification and propagation of errors of the
-  {Lennard-Jones} 12-6 parameters for \textit{n}-alkanes.
-\newblock {\em The Journal of Chemical Physics}, 146(19):194110, 2017.
+\newblock {\em Computer simulation of liquids}.
+\newblock Oxford University Press, Oxford England, second edition, 2017.
 
 \bibitem{GROMACS_2018}
 M.J. Abraham, D.~van~der Spoel, E.~Lindahl, B.Hess, and the GROMACS~development
   team.
 \newblock {\em GROMACS User Manual version 2018, www.gromacs.org (2018)}.
-
-\bibitem{GROMACS_note}
-GROMACS non-bonded tail corrections assume that the long-range contribution
-  from the $r^{-\lambda}$ term is negligible compared to the $r^{-6}$ term. By
-  comparing the GROMACS output with other (slower) simulation packages, we
-  verified that the small error introduced with this approximation does not
-  significantly affect our results. For this reason, although it is
-  straightforward to include the $r^{-\lambda}$ contribution, we did not
-  attempt to modify the GROMACS default tail correction values.
 
 \bibitem{Hess1998}
 Berk Hess, Henk Bekker, Herman J.~C. Berendsen, and Johannes G. E.~M. Fraaije.
@@ -165,6 +179,51 @@ Berk Hess.
   simulation.
 \newblock {\em Journal of Chemical Theory and Computation}, 4(1):116--122,
   2008.
+
+\bibitem{Swope1982}
+William~C. Swope, Hans~C. Andersen, Peter~H. Berens, and Kent~R. Wilson.
+\newblock A computer simulation method for the calculation of equilibrium
+  constants for the formation of physical clusters of molecules{: A}pplication
+  to small water clusters.
+\newblock {\em The Journal of Chemical Physics}, 76(1):637--649, 1982.
+
+\bibitem{Hockney1974}
+R.W Hockney, S.P Goel, and J.W Eastwood.
+\newblock Quiet high-resolution computer models of a plasma.
+\newblock {\em Journal of Computational Physics}, 14(2):148 -- 158, 1974.
+
+\bibitem{Bussi2007}
+Giovanni Bussi, Davide Donadio, and Michele Parrinello.
+\newblock Canonical sampling through velocity rescaling.
+\newblock {\em The Journal of Chemical Physics}, 126(1):014101, 2007.
+
+\bibitem{Hoover1985}
+William~G. Hoover.
+\newblock Canonical dynamics: {E}quilibrium phase-space distributions.
+\newblock {\em Physical Review A}, 31:1695--1697, 1985.
+
+\bibitem{Nose1984}
+Shuichi Nos{\'e}.
+\newblock A unified formulation of the constant temperature molecular dynamics
+  methods.
+\newblock {\em The Journal of Chemical Physics}, 81(1):511--519, 1984.
+
+\bibitem{Berendsen1984}
+H.~J.~C. Berendsen, J.~P.~M. Postma, W.~F. van Gunsteren, A.~DiNola, and J.~R.
+  Haak.
+\newblock Molecular dynamics with coupling to an external bath.
+\newblock {\em The Journal of Chemical Physics}, 81(8):3684--3690, 1984.
+
+\bibitem{Nose1983}
+Shuichi Nos{\'e} and M.L. Klein.
+\newblock Constant pressure molecular dynamics for molecular systems.
+\newblock {\em Molecular Physics}, 50(5):1055--1076, 1983.
+
+\bibitem{Parrinello1981}
+M.~Parrinello and A.~Rahman.
+\newblock Polymorphic transitions in single crystals{: A} new molecular
+  dynamics method.
+\newblock {\em Journal of Applied Physics}, 52(12):7182--7190, 1981.
 
 \bibitem{Maginn2018}
 Edward~J. Maginn, Richard~A. Messerly, Daniel~J. Carlson, Daniel~R. Roe, and
@@ -188,7 +247,7 @@ C.~{Barus}.
 
 \bibitem{Roelands1966}
 C.J.A. Roelands.
-\newblock {\em Correlational Aspects of the Viscosity{-}temperature{-}pressure
+\newblock {\em Correlational Aspects of the Viscosity{-}Temperature{-}Pressure
   Relationships of Lubricating Oils}.
 \newblock PhD thesis, TU Delft, Delft University of Technology, 1966.
 
