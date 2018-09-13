@@ -681,7 +681,7 @@
 
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=3.2in]{Pressure_viscosity_coefficient.png}
+		\includegraphics[width=3.2in]{Pressure_viscosity_coefficient.pdf}
 		\caption{Pressure-viscosity coefficient predicted with empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}). Dashed lines represent 95~\% confidence intervals obtained from bootstrap re-sampling.}
 		\label{fig:viscosity_pressure_coefficent}
 	\end{figure}
@@ -694,8 +694,8 @@
 
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=3.2in]{cross_validation.png}
-		\caption{Monte Carlo cross-validation for empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}). MSE$_{\rm train}$ and MSE$_{\rm test}$ are the mean-squared-error for the ``training'' and ``testing'' sets, respectively.}
+		\includegraphics[width=6.4in]{cross_validation.pdf}
+		\caption{Monte Carlo cross-validation for empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}). MSE$_{\rm train}$ and MSE$_{\rm test}$ are the mean-squared-error for the ``training'' and ``testing'' sets, respectively. Left panel compares MSE$_{\rm train}$ and MSE$_{\rm test}$ for each model, while the right panel compares the McEwen-Paluch MSE$_{\rm test}$ with the MSE$_{\rm test}$ for the other three models.}
 		\label{fig:cross_validation}
 	\end{figure}
 	
@@ -708,7 +708,7 @@
     
 %    For 224TMH, the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
     
-    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Previous studies suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we did not observe such a strong dependence. Specifically, the required increase in the torsional barriers was between 60~\% and 80~\% to achieve an increase of approximately 10~\% in viscosity (see Supporting Information). We propose that the discrepancy between our findings and those of Nieto-Draghi et al. arises either from using united-atom sites or the Mie 16-6 potential, whereas AUA4 utilizes anisotropic-united-atom sites with the Lennard-Jones 12-6 potential.
+    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Previous studies suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we did not observe such a strong dependence. Specifically, the required increase in the torsional barriers was between 80~\% and 100~\% to achieve an increase of approximately 10~\% in viscosity (see Supporting Information). We propose that the discrepancy between our findings and those of Nieto-Draghi et al. arises either from using united-atom sites or the Mie 16-6 potential, whereas AUA4 utilizes anisotropic-united-atom sites with the Lennard-Jones 12-6 potential.
     
     % or the Mie 16-6 po the  This suggests that either this particular molecule or the Mie 16-6 potential is much less sensitive to the torsional parameters than the long straight-chained alkanes studied in Reference \cite{Nieto2006}.
         
