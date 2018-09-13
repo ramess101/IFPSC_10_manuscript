@@ -228,30 +228,130 @@
 	
 	We provide example input files for simulating 2,2,4-trimethylhexane at 293 K with the Potoff force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
 	
+    \clearpage
 	\newpage
 	
 	\section{MCMC from scoring function} \label{SI:MCMC from scoring function}
 	
-	Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
+	The Potoff CH and C parameters are optimized using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. MCMC requires an expression for the likelihood function $(L)$, in particular, the log of the likelihood function (log$_{10}(L)$). Standard least squares minimization is mathematically equivalent to maximizing the likelihood function of a normal distribution
+	\begin{equation} \label{eq:likelihood}
+	L(D|\theta) = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}}\exp\left[\frac{-1}{2\sigma^2}\left(\sum_i(y(\theta)-D_i)^2\right)\right]
+	\end{equation}
+	where $D$ are the data, $\theta$ are the model parameters, $n$ is the number of data points, $\sigma$ is the standard deviation, and $\sum(y(\theta)-D_i)^2$ is the sum-squared-error $(SSE)$.
 	
-	We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
+	\begin{multline}
+	L(D|\theta) = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left[\frac{-1}{2\sigma^2}\left(\sum_i(y(\theta)-D_i)^2\right)\right] \\ = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left(\frac{-SSE(\theta)}{2\sigma^2}\right)
+	\end{multline}
+
+    In MCMC, assuming a uniform prior, the probability of accepting a new parameter set is
+    \begin{equation}
+    \alpha = \frac{L(D|\theta_{\rm new})}{L(D|\theta_{\rm old})}
+    \end{equation}
+    
+
+    In MCMC, the probability of accepting a new parameter set only depends on the log-likelihood (assuming a uniform prior), which for Equation \ref{eq:likelihood} 
+    \begin{equation}
+    log_{10}(L(D|\theta)) \propto -\sum(y(\theta)-D_i)^2 \propto -SSE(\theta)
+    \end{equation}
 	
+    In MCMC, the probability of accepting a new parameter set is equal to the difference between log$_{10}(L(D|\theta_{\rm new}))$ and log$_{10}(L(D|\theta_{\rm old}))$ (assuming a uniform prior). All terms in Equation \ref{eq:likelihood} that do not depend on $\theta$ cancel. Therefore, the acceptance probability $(\alpha)$ is equal to
+    \begin{equation}
+    \alpha = \sum(y(\theta_{\rm old})-D_i)^2 - \sum(y(\theta_{\rm new})-D_i)^2 = SSE_{\rm old} - SSE_{\rm new}
+    \end{equation}
+    \begin{multline}
+    \alpha = log_{10}(L(D|\theta_{\rm new})) - log_{10}(L(D|\theta_{\rm old})) = \sum(y(\theta_{\rm old})-D_i)^2 - \sum(y(\theta_{\rm new})-D_i)^2 = SSE_{\rm old} - SSE_{\rm new}
+    \end{multline}
+    note that the order of ``new'' and ``old'' changes due to the negative sign in Equation \ref{eq:likelihood}.
+    
+    Because Potoff's scoring function $(S)$ is not simply the sum-squared-error, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution. However, we can still apply the maximum likelihood criterion by substituting $S$ for $SSE$ in Equation \ref{eq:likelihood}. Again, because the terms that do not depend on $\theta$ cancel when taking the difference of logarithms, the acceptance probability is just
+    \begin{equation}
+    \alpha = S_{\rm old} - S_{\rm new}
+    \end{equation}  
+    \begin{equation}
+    log_{10}(L(D|\theta)) \propto -S(\theta)
+    \end{equation}
+
+    \begin{equation}
+	log_{10}(L(D|\theta)) \propto -SSE(\theta)
+	\end{equation}
+    
+    The MCMC sampling was performed by interpolating the raw scoring function values over the two-dimensional grids of $\epsilon_{\rm CH}$-$\sigma_{\rm CH}$ and $\epsilon_{\rm C}$-$\sigma_{\rm C}$. The values of $S$ were obtained through private communication with Potoff's group. We utilize the scoring function from the ``long'' CH and C parameters. Using the ``generalized'' or ``short'' scoring function values would result in a different MCMC sampling.
+    
+    The optimal ``long'' CH parameter is on the boundary of the grid tested by Mick et al. Therefore, we did not have any scoring function values for $\epsilon_{\rm CH} < 14$ K. A similar problem is faced for $\epsilon_{\rm C} < 0.8$ K and $\sigma_{\rm C} > 0.63$ nm, but these regions are rarely sampled by the MCMC algorithm. To overcome the challenge of extrapolating outside of the domain where $S(\theta)$ is available, we fit log$_{10}(S(\theta))$ to a multi-variate normal distribution. This approach works well for the CH parameters because the CH scoring function has a fairly normal shape. While the assumption of normality is worse for $S$ of C, this does not significantly affect our results because of the infrequent sampling of this extrapolation region.    
+    
+%      After taking the logarithm of Equation \ref{eq:likelihood}, and subtracting log$_{10}(L(D|\theta_{\rm new}))$ and log$_{10}(L(D|\theta_{\rm old}))$ log$_{10}((L)$ and omi By removing all terms that 
+%	
+%	 Similarly, minimization of Potoff's scoring function $(S)$ is mathematically equivalent to maximizing log$_{10}(L(S))$.  the log  Translating the scoring function into a Bayesian context is actually quite simple. 
+%	
+%	Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
+%	
+%	We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
+%	
+    \clearpage
+    \newpage
+
 	\section{MCMC validation} \label{SI:MCMC_analysis}
 	
-	This section provides a detailed example of how we obtain estimates for $\eta$ and the corresponding uncertainty. The results depicted in Figures \ref{fig:autocorrelation} through \ref{fig:bootstraps} are for propane with the Potoff model and $T^{\rm sat} = 166$ K. Figure \ref{fig:autocorrelation} depicts a typical autocorrelation function (``enecorr.xvg'' file) obtained by executing the GROMACS ``energy --vis'' command. By default, GROMACS partitions the complete simulation into twelve evenly sized time blocks. Therefore, the autocorrelation function in Figure \ref{fig:autocorrelation} is the average of twelve different time origins. 
+	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the MCMC-nb 95~\% confidence intervals obtained in two different manners. First, where a single replicate simulation is performed for each MCMC-nb parameter set, which are pooled together for bootstrap re-sampling. Second, where 40 replicate simulations are performed for each set of MCMC-nb parameters, and bootstrap re-sampling is performed independently for each set of 40 replicates. Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at saturation conditions. Figure \ref{fig:MCMC_validation} demonstrates that the 95~\% confidence intervals are nearly indistinguishable for the two methods. This provides empirical evidence that performing a single simulation with each parameter set is the same as performing numerous simulations with each parameter set.
 	
-	GROMACS then performs a simple two-point trapezoidal integration of neighboring points to obtain the Green-Kubo integral. The Green-Kubo integral with respect to time is output in the ``visco.xvg'' file. Figure \ref{fig:replicates} presents the Green-Kubo integral from forty replicate simulations. Although a single replicate is often quite noisy at long times, the average of these replicates converges smoothly (see Figure \ref{fig:replicates}). 
-	
-	Figure \ref{fig:standard_deviation} shows that the fluctuations, or standard deviation, increases with time but is adequately modeled with $A t^{b}$. The line labeled ``cut-off'' in Figures \ref{fig:replicates} and \ref{fig:standard_deviation} is the time at which $\sigma_{\eta} \approx 0.4 \times \eta^\infty$. Data beyond this time are excluded from the fit of the double-exponential function. 
-	
-	Bootstrap re-sampling provides an estimate of the uncertainty. Figure \ref{fig:bootstraps} shows that, typically, the bootstrapped distribution is quite normal. The lines labeled ``bootstraps'' in Figure \ref{fig:replicates} are the lower and upper 95 \% confidence interval.
+	\begin{figure}[htb!]
+		\centering
+%		\includegraphics[width=3.2in]{MCMC_validation}
+		\caption{}
+		\label{fig:MCMC_validation}
+	\end{figure}
 	
     \clearpage
 	\newpage
 	
     \section{$A_{\rm s}$ distribution} \label{SI:MCMC torsions}
 	
+%	Sensitivity 
+%	Nieto did 15 and 40
+%	-40 has very strange torsional barriers
+%	+80 did not seem justified for a single data point
+%	
+%	 
+%	
+%	As only a single viscosity data point is available for  In order to determine how much th
+%	
+%	
+%	While Nieto-Draghi et al. propose that the internal and terminal torsions be increased by 15~\% and 40~\%, respectively,  
+	
+	
+	In this section, we demonstrate how we develop the skewed distribution for $A_{\rm s}$, where the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, we consider $A_{\rm s} < 0$.
+	
+	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. The viscosities in Figure \ref{fig:sensitivity_torsions} are computed at 293 K and atmospheric pressure. Also depicted is the only available experimental viscosity value. 	 
+	
+	\begin{figure}[htb!]
+		\centering
+		%		\includegraphics[width=3.2in]{sensitivity_torsions}
+		\caption{}
+		\label{fig:sensitivity_torsions}
+	\end{figure}
+	
+%	As the Mie 16-6 potential predicts $\eta$ more accurately than the Lennard-Jones 12-6 potentials, 
+	
+	Figure \ref{fig:sensitivity_torsions} demonstrates that quantitative agreement with the experimental viscosity point necessitates an $A_{\rm s}$ value that is 80~\% the maximum torsional barrier. Fearing some unforeseen consequences, we do not feel that obtaining quantitative agreement with this single experimental value merits such a dramatic increase in the torsional barriers. For this reason, we adopt the same percent increase as that proposed by Nieto-Draghi et al., i.e., 40~\%. 
+	
+
+	
+	\clearpage
+	\newpage
+	
 	\section{Green-Kubo integrals} \label{SI:Running integrals}
+		
+	Figure \ref{fig:running_integrals} presents the average Green-Kubo integral for all thirteen state points. Note that much longer simulations are required for high pressures/viscosities. 	
+	
+	\begin{figure}[htb!]
+		\centering
+		%		\includegraphics[width=3.2in]{sensitivity_torsions}
+		\caption{}
+		\label{fig:running_integrals}
+	\end{figure}
+		
+	\clearpage
+	\newpage
 		
 	\section*{References}
 	
