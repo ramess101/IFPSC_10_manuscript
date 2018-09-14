@@ -166,7 +166,7 @@
 	\addFileDependency{#1.aux}%
 }
 
-\myexternaldocument{Special_issue_manuscript}
+\myexternaldocument{IFPSC_10_manuscript}
 
 % The figures are in a figures/ subdirectory.
 \graphicspath{{figures/}}
@@ -231,33 +231,33 @@
 	
 	\section{MCMC from scoring function} \label{SI:MCMC from scoring function}
 	
-	\subsection{Derivation}
-	
-	Mick et al. optimized the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. MCMC requires an expression for the likelihood function $(L)$ and, in particular, the log (or natural log) of the likelihood function ($\ln(L)$). This section describes how we translate the scoring function into a log-likelihood function.
-	
-	Standard least squares minimization is mathematically equivalent to maximizing the likelihood function of a normal distribution. This can be readily verified from the following expression
-	\begin{multline} \label{eq:likelihood}
-	L(D|\theta) = \prod_i \frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp\left[\frac{-1}{2\sigma^2}(y(\theta)-D_i)^2\right] = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left[\frac{-1}{2\sigma^2}\left(\sum_i(y(\theta)-D_i)^2\right)\right] \\ = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left(\frac{-SSE(\theta)}{2\sigma^2}\right)
-	\end{multline}
-	where $D$ are the data, $\theta$ are the model parameters, $n$ is the number of data points, $\sigma$ is the standard deviation (which is assumed to be equal for all data points), $y(\theta)$ is the model estimate, and $\sum_i(y(\theta)-D_i)^2$ is the sum-squared-error $(SSE)$. The log-likelihood can then be expressed as    
-	\begin{equation} \label{eq:log-likelihood}
-	\ln(L(D|\theta)) = \ln\left(\frac{1}{\sqrt{2 \pi^n \sigma^{2n}}}\right) - \frac{SSE(\theta)}{2\sigma^2}
-	\end{equation}  
-	Clearly, minimizing the sum-squared-error is mathematically equivalent to maximizing the likelihood or log-likelihood when assuming the errors follow a normal distribution. 
-		
-	In MCMC, assuming a uniform prior, the probability of accepting a proposed or ``new'' parameter set ($\theta_{\rm new}$) given a previous or ``old'' parameter set ($\theta_{\rm old}$) is
+	Markov Chain Monte Carlo (MCMC) requires an expression for the likelihood function $(L)$ and, in particular, the log (or natural log) of the likelihood function ($\ln(L)$). For example, by assuming a uniform prior in the model parameters and a symmetric proposal distribution, the Metropolis-Hastings acceptance criterion for an MCMC move only depends on $L$ such that
 	\begin{equation}
 	\alpha = \frac{L(D|\theta_{\rm new})}{L(D|\theta_{\rm old})}
 	\end{equation}
-	where $\alpha$ is the acceptance probability. For computational reasons, it is common to perform MCMC using the log-likelihood such that 
+	where $D$ are the data, $\theta$ are the model parameters, and $\alpha$ is the probability of accepting a proposed or ``new'' parameter set ($\theta_{\rm new}$) given a previous or ``old'' parameter set ($\theta_{\rm old}$). For computational reasons, it is common to perform MCMC using the log-likelihood such that 
 	\begin{equation} \label{eq:log-alpha}
 	\ln(\alpha) = \ln(L(D|\theta_{\rm new})) - \ln(L(D|\theta_{\rm old}))
 	\end{equation}
-	Note that the term in Equation \ref{eq:log-likelihood} that does not depend on $\theta$ cancels when computing $\ln(\alpha)$. Substitution of Equation \ref{eq:log-likelihood} into Equation \ref{eq:log-alpha} yields
+	By contrast, Mick et al. optimize the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. This section describes how we translate the scoring function into a log-likelihood function to enable direct application of MCMC.
+	
+	\subsection{Derivation}
+		
+	Standard least squares minimization is mathematically equivalent to maximizing the likelihood function when assuming the errors follow a normal distribution. This can be readily verified from the following expression
+	\begin{multline} \label{eq:likelihood}
+	L(D|\theta) = \prod_i \frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp\left[\frac{-1}{2\sigma^2}(y(\theta)-D_i)^2\right] = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left[\frac{-1}{2\sigma^2}\left(\sum_i(y(\theta)-D_i)^2\right)\right] \\ = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left(\frac{-SSE(\theta)}{2\sigma^2}\right)
+	\end{multline}
+	where $n$ is the number of data points, $\sigma$ is the standard deviation (which is assumed to be equal for all data points), $y(\theta)$ is the model estimate, and $\sum_i(y(\theta)-D_i)^2$ is the sum-squared-error $(SSE)$. The log-likelihood can then be expressed as    
+	\begin{equation} \label{eq:log-likelihood}
+	\ln(L(D|\theta)) = \ln\left(\frac{1}{\sqrt{2 \pi^n \sigma^{2n}}}\right) - \frac{SSE(\theta)}{2\sigma^2}
+	\end{equation}  
+	Substitution of Equation \ref{eq:log-likelihood} into Equation \ref{eq:log-alpha} yields the MCMC acceptance probability
 	\begin{equation}
 	\ln(\alpha) = \frac{SSE(\theta_{\rm old}) - SSE(\theta_{\rm new})}{2\sigma^2}
 	\end{equation}
-	note that the order of ``new'' and ``old'' changes due to the negative sign in Equation \ref{eq:log-likelihood}. 
+	note that the order of ``new'' and ``old'' changes due to the negative sign in Equation \ref{eq:log-likelihood}. Also, note the cancellation of the term in Equation \ref{eq:log-likelihood} that does not depend on $\theta$.
+	
+	%Clearly, minimizing the sum-squared-error is mathematically equivalent to maximizing the likelihood or log-likelihood when assuming the errors follow a normal distribution.
 	
 	To this point, we have assumed that the standard deviation is constant with respect to the data. Relaxing this assumption, the likelihood is expressed as
 	\begin{multline} \label{eq:weighted-likelihood}
@@ -287,6 +287,65 @@
 	\begin{equation} \label{eq:log-score}
 	\ln(\alpha) = S(\theta_{\rm old}) - S(\theta_{\rm new})
 	\end{equation}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rough draft
+%	
+%	Mick et al. optimized the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. MCMC requires an expression for the likelihood function $(L)$ and, in particular, the log (or natural log) of the likelihood function ($\ln(L)$). This section describes how we translate the scoring function into a log-likelihood function.
+%	
+%	Standard least squares minimization is mathematically equivalent to maximizing the likelihood function of a normal distribution. This can be readily verified from the following expression
+%	\begin{multline} \label{eq:likelihood}
+%	L(D|\theta) = \prod_i \frac{1}{\sqrt{2 \pi \sigma^{2}}} \exp\left[\frac{-1}{2\sigma^2}(y(\theta)-D_i)^2\right] = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left[\frac{-1}{2\sigma^2}\left(\sum_i(y(\theta)-D_i)^2\right)\right] \\ = \frac{1}{\sqrt{2 \pi^n \sigma^{2n}}} \exp\left(\frac{-SSE(\theta)}{2\sigma^2}\right)
+%	\end{multline}
+%	where $D$ are the data, $\theta$ are the model parameters, $n$ is the number of data points, $\sigma$ is the standard deviation (which is assumed to be equal for all data points), $y(\theta)$ is the model estimate, and $\sum_i(y(\theta)-D_i)^2$ is the sum-squared-error $(SSE)$. The log-likelihood can then be expressed as    
+%	\begin{equation} \label{eq:log-likelihood}
+%	\ln(L(D|\theta)) = \ln\left(\frac{1}{\sqrt{2 \pi^n \sigma^{2n}}}\right) - \frac{SSE(\theta)}{2\sigma^2}
+%	\end{equation}  
+%	Clearly, minimizing the sum-squared-error is mathematically equivalent to maximizing the likelihood or log-likelihood when assuming the errors follow a normal distribution. 
+%	
+%	In MCMC, assuming a uniform prior, the probability of accepting a proposed or ``new'' parameter set ($\theta_{\rm new}$) given a previous or ``old'' parameter set ($\theta_{\rm old}$) is
+%	\begin{equation}
+%	\alpha = \frac{L(D|\theta_{\rm new})}{L(D|\theta_{\rm old})}
+%	\end{equation}
+%	where $\alpha$ is the acceptance probability. For computational reasons, it is common to perform MCMC using the log-likelihood such that 
+%	\begin{equation} \label{eq:log-alpha}
+%	\ln(\alpha) = \ln(L(D|\theta_{\rm new})) - \ln(L(D|\theta_{\rm old}))
+%	\end{equation}
+%	Note that the term in Equation \ref{eq:log-likelihood} that does not depend on $\theta$ cancels when computing $\ln(\alpha)$. Substitution of Equation \ref{eq:log-likelihood} into Equation \ref{eq:log-alpha} yields
+%	\begin{equation}
+%	\ln(\alpha) = \frac{SSE(\theta_{\rm old}) - SSE(\theta_{\rm new})}{2\sigma^2}
+%	\end{equation}
+%	note that the order of ``new'' and ``old'' changes due to the negative sign in Equation \ref{eq:log-likelihood}. 
+%	
+%	To this point, we have assumed that the standard deviation is constant with respect to the data. Relaxing this assumption, the likelihood is expressed as
+%	\begin{multline} \label{eq:weighted-likelihood}
+%	L(D|\theta) = \prod_i \frac{1}{\sqrt{2 \pi \sigma_i^{2}}} \exp\left[\frac{-1}{2\sigma_i^2}(y(\theta)-D_i)^2\right] = C \exp\left[\sum_i\frac{-1}{2\sigma_i^2}(y(\theta)-D_i)^2\right] \\ = C \exp\left[\sum_i-w_i(y(\theta)-D_i)^2\right] = C \exp\left(-WSSE(\theta)\right)
+%	\end{multline}
+%	where $\sigma_i$ varies for $D_i$, $C$ is a normalization constant equal to $\prod_i (2 \pi \sigma_i^2)^{-1}$, and $WSSE$ is the weighted-sum-squared-error with weights $(w_i)$ equal to $\sigma_i^{-2}$. The log-likelihood can then be expressed as    
+%	\begin{equation} \label{eq:weighted-log-likelihood}
+%	\ln(L(D|\theta)) = \ln(C) - WSSE(\theta)
+%	\end{equation}
+%	and substitution into Equation \ref{eq:log-alpha} yields the MCMC acceptance probability for the weighted-sum-squared-error
+%	\begin{equation}
+%	\ln(\alpha) = WSSE(\theta_{\rm old}) - WSSE(\theta_{\rm new})
+%	\end{equation}
+%	
+%	Potoff's scoring function $(S)$ is not simply the sum-squared-error or even the weighted-sum-squared-error. $S$ is expressed in terms of the absolute percent deviation and different properties are assigned different weights that are not necessarily the inverse variance ($\sigma_i^{-2}$). Therefore, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution for neither constant nor varying $\sigma$. However, we can still apply the maximum likelihood criterion for Potoff's scoring function such that
+%	%	\begin{multline} \label{eq:scoring-likelihood}
+%	%	L(D|\theta) = \prod_i C_i \exp\left[w_i|y(\theta)-D_i|\right] = C \exp\left[\sum_i w_i|y(\theta)-D_i|\right] \\ = C \exp\left(-S(\theta)\right)
+%	%	\end{multline}
+%	\begin{equation} \label{eq:scoring-likelihood}
+%	L(D|\theta) = \prod_i C_i \exp\left(w_i\left|\frac{y(\theta)-D_i}{D_i}\right|\right) = C \exp\left(\sum_i w_i\left|\frac{y(\theta)-D_i}{D_i}\right|\right) = C \exp\left(-S(\theta)\right)
+%	\end{equation}
+%	where $C_i$ and $C$ are normalization constants, and $w_i$ are the weights assigned by Potoff (e.g., 0.6135 for saturated liquid density, $\rho_{\rm liq}$). Note that although Equation \ref{eq:scoring-likelihood} utilizes an absolute percent deviation, rather than a weighted-sum-squared-error, the final expression is still analogous to Equation \ref{eq:weighted-likelihood}. Therefore, the log-likelihood for Potoff's scoring function is
+%	\begin{equation}
+%	\ln(L(D|\theta)) = \ln(C) -S(\theta)
+%	\end{equation}
+%	and substitution into Equation \ref{eq:log-alpha} yields the MCMC acceptance probability for Potoff's scoring function
+%	\begin{equation} \label{eq:log-score}
+%	\ln(\alpha) = S(\theta_{\rm old}) - S(\theta_{\rm new})
+%	\end{equation}
+%	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	
 	% for the i$^{\rm th}$ data point. Note that $w_i$ incorporates both the coefficients Potoff assigns (e.g., 0.6135 for $\rho_{\rm liq}$) as well as the inverse data value $(1/D_i)$. 
 %	
@@ -399,7 +458,7 @@
 
     With Equation \ref{eq:log-score}, all that remains to perform MCMC is a way to compute $S$ for any $\theta$. This is achieved by smoothing/interpolating the raw scoring function values (utilizing SciPy's RectBivariateSpline function in the interpolation sub-package) over the two-dimensional grids of $\epsilon_{\rm CH}$-$\sigma_{\rm CH}$ and $\epsilon_{\rm C}$-$\sigma_{\rm C}$. The values of $S$ were obtained through private communication with Potoff's group. Only the scoring function values from the ``long'' CH and C parameters are utilized in this study. Using the ``generalized'' or ``short'' scoring function values would result in a different MCMC sampling of $\epsilon$ and $\sigma$.
 	
-	The optimal ``long'' CH parameter is on the boundary of the grid tested by Mick et al. Therefore, we did not have any scoring function values for $\epsilon_{\rm CH} < 14$ K. A similar problem is faced for $\epsilon_{\rm C} < 0.8$ K and $\sigma_{\rm C} > 0.63$ nm, but these regions are rarely sampled by the MCMC algorithm. To overcome the challenge of extrapolating outside of the domain where $S(\theta)$ is available, we fit $\ln(S(\theta))$ to a multi-variate normal distribution. This approach works well for the CH parameters because the CH scoring function has a fairly normal shape. While the assumption of normality is worse for $S$ of C, this does not significantly affect our results because of the infrequent sampling of this extrapolation region.   
+	The optimal ``long'' CH parameter is on the boundary of the grid tested by Mick et al. Therefore, we do not have any scoring function values from simulation for $\epsilon_{\rm CH} < 14$ K. A similar problem is faced for $\epsilon_{\rm C} < 0.8$ K and $\sigma_{\rm C} > 0.63$ nm but, fortunately, these regions are rarely sampled by the MCMC algorithm. To overcome the challenge of extrapolating outside of the domain where $S(\theta)$ is available, we fit $\ln(S(\theta))$ to a multi-variate normal distribution. This approach works well for the CH parameters because the CH scoring function has a fairly normal shape. While the assumption of normality is worse for $S$ over the $\epsilon_{\rm C}$-$\sigma_{\rm C}$ parameter space, this does not significantly affect our results because of the infrequent sampling of this extrapolation region.   
 
 
 
@@ -432,9 +491,9 @@
 
 	\section{MCMC validation} \label{SI:MCMC_analysis}
 	
-	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, where a single replicate simulation is performed for each MCMC-nb parameter set, which are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, where 40 replicate simulations are performed for each set of MCMC-nb parameters, and bootstrap re-sampling is performed independently for each set of 40 replicates ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at saturation conditions. 
+	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, where a single replicate simulation is performed for each MCMC-nb parameter set, which are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, where 40 replicate simulations are performed for each set of MCMC-nb parameters, and bootstrap re-sampling is performed independently for each set of 40 replicates ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at 137 K and saturated liquid density using the Potoff force field. 
 	
-	Figure \ref{fig:MCMC_validation} demonstrates that the uncertainties are nearly indistinguishable for the two methods. This provides empirical evidence that performing a single simulation with each parameter set is the same as performing numerous simulations with each parameter set. Also of interest is that the numerical uncertainties ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 1$) are much smaller than the overall uncertainties, suggesting that parameter uncertainties play a larger role for ethane.
+	Figure \ref{fig:MCMC_validation} demonstrates that the uncertainties are nearly indistinguishable for the two methods. This provides empirical evidence that performing a single simulation with each MCMC parameter set is the same as performing numerous simulations with each MCMC parameter set. Also of interest is that the numerical uncertainties ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 1$) are much smaller than the overall uncertainties, suggesting that parameter uncertainties play a large role for ethane.
 	
 	\begin{figure}[htb!]
 		\centering
@@ -461,9 +520,9 @@
 %	While Nieto-Draghi et al. propose that the internal and terminal torsions be increased by 15~\% and 40~\%, respectively,  
 	
 	
-	In this section, we develop the skewed distribution for $A_{\rm s}$, where the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, we consider $A_{\rm s} < 0$.
+	In this section, we develop the skewed distribution for $A_{\rm s}$, where the respective lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, unlike Nieto-Draghi et al., we consider $A_{\rm s} < 0$.
 	
-	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. The viscosities in Figure \ref{fig:sensitivity_torsions} are computed at 293 K and atmospheric pressure. Also depicted is the only available experimental viscosity value. 	 
+	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. $A_{\rm s}$ is expressed as a percentage of the maximum for the non-shifted torsional potential. The viscosities in Figure \ref{fig:sensitivity_torsions} for 2,2,4-trimethylhexane are computed at 293 K and atmospheric pressure with 200 molecules and the Potoff force field. Also depicted is the only available experimental viscosity value at this temperature and pressure. 	 
 	
 	\begin{figure}[htb!]
 		\centering
@@ -476,7 +535,7 @@
 	
 	Figure \ref{fig:sensitivity_torsions} demonstrates that quantitative agreement with the experimental viscosity point necessitates an $A_{\rm s}$ value that is 80~\% the maximum torsional barrier. Fearing some unforeseen consequences, we do not feel that obtaining quantitative agreement with this single experimental value merits such a dramatic increase in the torsional barriers. For this reason, we adopt the largest percent increase proposed by Nieto-Draghi et al., i.e., 40~\%. 
 	
-	By contrast, decreasing the torsional barriers by 40~\% does have a significant impact on the predicted viscosity. We attribute this to the \textit{gauche} barrier heights being approximately 40~\% the \textit{cis} barrier heights. Therefore, reducing all barriers by 40~\% of the maximum torsional barrier nearly eliminates the equilibrium \textit{gauche} conformations. Even a 15~\% reduction has an appreciable affect on $\eta$. For this reason, we do not recommend reducing the barrier heights by more than 15~\%.	
+	By contrast, decreasing the torsional barriers by 40~\% does have a significant impact on the predicted viscosity. We attribute this to the \textit{gauche} barrier heights being approximately 40~\% the \textit{cis} barrier heights for the CH$_i$-CH$_2$-CH-CH$_j$ torsional potential. Therefore, reducing all barriers by 40~\% of the maximum torsional barrier nearly eliminates the equilibrium \textit{gauche} conformations (see Figure \ref{fig:dihedral_uncertainty} in the main text). Even a 15~\% reduction has an appreciable effect on $\eta$. For this reason, we do not recommend reducing the barrier heights by more than 15~\%.	
 	
 	\clearpage
 	\newpage
@@ -488,9 +547,11 @@
 	\begin{figure}[htb!]
 		\centering
 		%		\includegraphics[width=3.2in]{sensitivity_torsions}
-		\caption{Green-Kubo integrals with respect to time. Top panel depicts lower pressure/viscosity simulations where 1 to 4 ns simulations are sufficiently long. Bottom panel depicts higher pressure/viscosity simulations where 8 to 48 ns simulations are required to observe a Green-Kubo plateau.}
+		\caption{Green-Kubo integrals with respect to time. Top, middle, and bottom panels depict, respectively, low, intermediate, and high pressure/viscosity simulations where respective simulation times of 1 to 4 ns, 8 to 16 ns, and 24 to 48 ns are required to observe a Green-Kubo plateau.}
 		\label{fig:running_integrals}
 	\end{figure}
+
+% depicts lower pressure/viscosity simulations where 1 to 4 ns simulations are sufficiently long. Middle panel depic Bottom panel depicts higher pressure/viscosity simulations where 8 to 48 ns simulations are required to observe a Green-Kubo plateau.
 		
 %	\clearpage
 %	\newpage
