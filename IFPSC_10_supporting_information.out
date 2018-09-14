@@ -1,5 +1,7 @@
 \BOOKMARK [1][-]{section.1}{Input files}{}% 1
 \BOOKMARK [1][-]{section.2}{MCMC from scoring function}{}% 2
-\BOOKMARK [1][-]{section.3}{MCMC validation}{}% 3
-\BOOKMARK [1][-]{section.4}{As distribution}{}% 4
-\BOOKMARK [1][-]{section.5}{Green-Kubo integrals}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Theory}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Implementation}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{MCMC validation}{}% 5
+\BOOKMARK [1][-]{section.4}{As distribution}{}% 6
+\BOOKMARK [1][-]{section.5}{Green-Kubo integrals}{}% 7
