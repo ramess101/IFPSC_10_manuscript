@@ -619,13 +619,19 @@
 	
 	\subsection{Pressure-viscosity coefficient} \label{Pressure-viscosity coefficient}
 	
-    The simulated $\eta$ values with respect to $P$ are fit to four different empirical models from which the pressure-viscosity coefficient $(\alpha)$ is calculated. As viscosity ranges over several orders of magnitude, the objective function for fitting is the sum-squared-error of log$_{10}(\eta)$. Only the MCMC-nb-tors values are included in the fit, as these simulation results account for more sources of uncertainty than the Potoff and MCMC-nb results. The pressure-viscosity coefficient for each empirical fit is obtained by differentiation of log$_{10}(\eta)$ with respect to $P$.   
+    The simulated $\eta$ values with respect to $P$ are fit to four different empirical models from which the pressure-viscosity coefficient $(\alpha)$ is calculated
+    \begin{equation}
+    \alpha \equiv \frac{d\ln(\eta)}{dP}
+    \end{equation}
+    As viscosity ranges over several orders of magnitude, the objective function for fitting is the sum-squared-error of log$_{10}(\eta)$. Only the MCMC-nb-tors values are included in the fit, as these simulation results account for more sources of uncertainty than the Potoff and MCMC-nb results. 
     
+    %The pressure-viscosity coefficient for each empirical fit is obtained by differentiation of $\ln(\eta)$ with respect to $P$.
+           
     The first empirical model we implement is the traditional Barus expression \cite{Barus1893}
 	\begin{equation} \label{eq:Barus}
 	\eta = \eta_0 \exp(\alpha P)
 	\end{equation}
-	where $\eta_0$ and $\alpha$ are fitting parameters. The second model is the popular Roelands equation \cite{Roelands1966}	
+	where the fitting parameters $\eta_0$ and $\alpha$ correspond to the zero pressure viscosity and the pressure-viscosity coefficient, respectively. The second model is the popular Roelands equation \cite{Roelands1966}	
 	\begin{equation} \label{eq:Roelands}
 	\eta = \eta_p \left(\frac{\eta_0}{\eta_p}\right)^{\left(\frac{P_p - P}{P_p}\right)^Z}
 	\end{equation}
