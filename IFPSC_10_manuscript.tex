@@ -371,31 +371,6 @@
 			\end{tabular}
 		\end{center} 
 	\end{table}
-
-	Nieto-Draghi et al. sets $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (the \textit{cis} conformation) for the terminal and internal torsions \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). As the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $. Thus, unlike Nieto-Draghi et al., we do not propose that the torsional barriers must be increased unilaterally.
-	
-	% The primary reason why Nieto-Draghi et al. introduce this additional term is to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field, which systematically under predicts $\eta$ by around 30~\%. Despite the fairly large increase in torsional barrier,
-	
-%	Reference \citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
-	
-	%$0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$
-	
-	The actual reason we include this additional term is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a skewed distribution with a mean value near zero and the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum barrier height for the non-shifted Potoff torsional potential. The MCMC-nb-tors parameters are sampled from this distribution. The rationale for the $A_{\rm s}$ distribution is presented in Supporting Information. 
-	
-	% Section \ref{Results}. 
-	
-	Figure \ref{fig:dihedral_uncertainty} compares the non-shifted Potoff torsional potential, $\pm 40$~\% shift in barrier heights, and the MCMC-nb-tors potentials. The insets also depict the skewed distributions and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions. Note that, unlike Nieto-Draghi et al., we make no distinction between internal and terminal torsions.
-		
-%	The actual reason we include this additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
-	
-	%Note that \citenum{Nieto2006} proposed a 15\% shift in the dihedral barriers for the CH$_i$-CH$_2$-CH$_2$-CH$_j$ potential.
-	
-	\begin{figure}[htb!]
-		\centering
-		\includegraphics[width=6.4in]{MCMC_torsions.pdf}
-		\caption{Comparison of Potoff (black solid lines), $\pm 40$~\% (green dotted lines), and MCMC-nb-tors (red dashed lines) torsional potentials. Insets show the distribution for $A_{\rm s}$ as blue dash-dotted lines. Left and right panels correspond to CH$_i-$CH$_2-$CH$-$CH$_j$ and CH$_i-$CH$_2-$C$-$CH$_j$ torsions, respectively. Both $u^{\rm tors}/k_{\rm B}$ and $A_{\rm s}/k_{\rm B}$ are expressed in units of K.}
-		\label{fig:dihedral_uncertainty}
-	\end{figure}
 	
 	Non-bonded interactions between sites located in two different molecules or separated by more than three bonds within the same molecule are calculated using a Mie $\lambda$-6 potential (of which the traditional Lennard-Jones, LJ, 12-6 is a subclass) \cite{Herdes2015}:
 	\begin{equation} \label{eq:Mie}
@@ -435,6 +410,34 @@
 	
 %	The MCMC Mie 16-6 parameters for CH$_3$ and CH$_2$ were reported previously \cite{Postdoc_2}. Reference BLANK assumed that the CH$_3$ parameters were transferable from ethane for longer \textit{n}-alkanes. The CH$_2$ parameters were obtained from propane, \textit{n}-butane, and \textit{n}-octane. The data included in the analysis were saturated liquid densities and saturated vapor pressures over a reduced temperature range of 0.45 to 0.85, as available in ThermoData Engine (TDE). 
 %	
+
+    \subsubsection{Parameter uncertainty}
+
+	Nieto-Draghi et al. sets $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (the \textit{cis} conformation) for the terminal and internal torsions, respectively \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). As the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $. Thus, unlike Nieto-Draghi et al., we do not propose that the torsional barriers must be increased unilaterally.
+
+	% The primary reason why Nieto-Draghi et al. introduce this additional term is to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field, which systematically under predicts $\eta$ by around 30~\%. Despite the fairly large increase in torsional barrier,
+	
+	%	Reference \citenum{Nieto2006} set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. This corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why \citenum{Nieto2006} introduced this additional term was to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field. This methodology works fairly well for Lennard-Jones 12-6 force fields, which systematically under predict viscosity by greater than 30~\%. However, since the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $ K.
+	
+	%$0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$
+	
+	The actual reason we include this additional torsion term is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a skewed distribution with a mean value near zero and the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum barrier height for the non-shifted Potoff torsional potential. The MCMC-nb-tors parameters are sampled from this distribution. The rationale for the $A_{\rm s}$ distribution is presented in Supporting Information. 
+	
+	% Section \ref{Results}. 
+	
+	Figure \ref{fig:dihedral_uncertainty} compares the non-shifted Potoff torsional potential, $\pm 40$~\% shift in barrier heights, and the MCMC-nb-tors potentials. The insets also depict the skewed distributions and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions. Note that, unlike Nieto-Draghi et al., we make no distinction between internal and terminal torsions.
+	
+	%	The actual reason we include this additional term, however, is to provide a simple method for quantifying the uncertainty in the torsional potential. Specifically, we assume that $A_{\rm s}$ follows a normal distribution with a mean value of zero and a standard deviation equal to $0.075 \times \max(u^{\rm tors}_{\rm Potoff})$. The standard deviation is assigned such that the 95\% confidence interval is equal to 15\% the maximum barrier height for the Potoff torsional potential. We use a normal distribution such that the uncertainty in the dihedral barriers is symmetric, i.e., unlike \citenum{Nieto2006} we do not assume that the dihedral barriers must be increased unilaterally. Figure \ref{fig:dihedral_uncertainty} compares the Potoff and MCMC torsional potentials. The insets also depict the normal distribution and the randomly sampled MCMC $A_{\rm s}$ sets. Note that the challenge compound consists of four CH$_i-$CH$_2-$CH$-$CH$_j$ torsions and three CH$_i-$CH$_2-$C$-$CH$_j$ torsions.
+	
+	%Note that \citenum{Nieto2006} proposed a 15\% shift in the dihedral barriers for the CH$_i$-CH$_2$-CH$_2$-CH$_j$ potential.
+	
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=6.4in]{MCMC_torsions.pdf}
+		\caption{Comparison of Potoff (black solid lines), $\pm 40$~\% (green dotted lines), and MCMC-nb-tors (red dashed lines) torsional potentials. Insets show the distribution for $A_{\rm s}$ as blue dash-dotted lines. Left and right panels correspond to CH$_i-$CH$_2-$CH$-$CH$_j$ and CH$_i-$CH$_2-$C$-$CH$_j$ torsions, respectively. Both $u^{\rm tors}/k_{\rm B}$ and $A_{\rm s}/k_{\rm B}$ are expressed in units of K.}
+		\label{fig:dihedral_uncertainty}
+	\end{figure}
+
 	Figure \ref{fig:nonbonded_uncertainty} depicts the MCMC non-bonded parameters for CH$_3$, CH$_2$, CH, and C united-atom sites ($\epsilon_{\rm CH_3}$, $\sigma_{\rm CH_3}$, $\epsilon_{\rm CH_2}$, $\sigma_{\rm CH_2}$, $\epsilon_{\rm CH}$, $\sigma_{\rm CH}$, $\epsilon_{\rm C}$, and $\sigma_{\rm C}$) which are used for MCMC-nb and MCMC-nb-tors. Note that $\lambda_{\rm CH_3} = \lambda_{\rm CH_2} = \lambda_{\rm CH} = \lambda_{\rm C} = 16$. Parameters are assumed to be transferable, e.g., the CH$_2$ MCMC parameters do not depend on the CH$_3$ MCMC parameters. The MCMC non-bonded parameters for CH$_3$ and CH$_2$ sites were reported previously \cite{Postdoc_2}. These parameters were obtained using a likelihood function based on saturated liquid density and saturated vapor pressure data for ethane, propane, \textit{n}-butane, and \textit{n}-octane. By contrast, the MCMC parameters for CH and C sites were obtained from the scoring function reported by Mick et al. \cite{Potoff_branched} that depends on several vapor-liquid coexistence properties for a diverse set of branched alkanes. Details regarding the generation of MCMC parameter sets from the scoring function are found in Supporting Information. An important observation from Figure \ref{fig:nonbonded_uncertainty} is that the ranges of MCMC sampled CH and C non-bonded parameters are considerably larger (on a percent basis) than those for CH$_3$ and CH$_2$.
 	
 	
