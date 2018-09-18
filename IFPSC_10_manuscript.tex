@@ -642,12 +642,29 @@
 	Table \ref{tab:tabulated_values} provides tabulated values for viscosity, density, and pressure at the prescribed state points for Potoff, MCMC-nb, and MCMC-nb-tors. These values are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the MCMC-nb-tors values and the available experimental viscosity at atmospheric pressure. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between simulation results and the McEwen-Paluch empirical model fit. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties.
 	
 	\begin{table}[htb!]
-		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors.} \label{tab:tabulated_values}
+		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors. Subscripts and superscripts (when present) correspond to the lower and upper 95~\% confidence intervals, respectively. If only a subscript is present the lower and upper uncertainties are nearly equal (i.e., the distribution of bootstrap samples is essentially symmetric) and only the average uncertainty is reported.} \label{tab:tabulated_values}
 		\begin{center}
-			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+%			\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\begin{tabular}{|c|c|c|c|c|c|}
 				\hline
-				\multicolumn{1}{|c}{} & \multicolumn{1}{|c}{} & \multicolumn{2}{|c|}{Potoff} & \multicolumn{2}{|c|}{MCMC-nb} & \multicolumn{2}{|c|}{MCMC-nb-tors}  \\ \hline
-				$T$ (K) & $P$ (MPa) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) \\ \hline  
+%				\multicolumn{1}{|c}{} & \multicolumn{1}{|c}{} & \multicolumn{2}{|c|}{Potoff} & \multicolumn{2}{|c|}{MCMC-nb} & \multicolumn{2}{|c|}{MCMC-nb-tors}  \\ \hline
+%				$T$ (K) & $P$ (MPa) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) & $\rho$ (kg/m$^3$) & $\eta$ (Pa-s) \\ \hline 
+%				$T$ (K) & 	$\rho$ (kg/m$^3$) & 	$P$ (MPa) & 	$\eta_{\rm Potoff}$ (mPa-s) & 	$\eta_{\rm MCMC-nb}$ (mPa-s) & 	$\eta_{\rm MCMC-nb-tors}$ (mPa-s) \\ \hline
+				\multicolumn{1}{|c}{$T$ (K)} & \multicolumn{1}{|c}{$\rho$ (kg/m$^3$)} & \multicolumn{1}{|c}{$P$ (MPa)} & \multicolumn{3}{|c|}{$\eta$ (10$^{-3}$ Pa-s)} \\ \hline
+				 &  &  & Potoff & MCMC-nb & MCMC-nb-tors \\ \hline 
+				292.854$_{0.095}$ & 	716.46$_{0.46}$ & 	-2.08$_{0.83}$ & 	0.605$_{0.045}$ & 	0.555$_{0.016}$ & 	0.572$_{0.025}$ \\
+				292.851$_{0.085}$ & 	734.67$_{0.44}$ & 	22.9$_{1.1}$ & 	0.753$^{0.078}_{0.098}$ & 	0.743$_{0.029}$ & 	0.751$_{0.028}$ \\
+				292.847$_{0.089}$ & 	749.22$_{0.45}$ & 	47.9$_{1.2}$ & 	0.957$^{0.076}_{0.061}$ & 	0.970$_{0.037}$ & 	0.932$_{0.033}$ \\
+				292.85$_{0.10}$ & 	772.24$_{0.37}$ & 	98.3$_{1.3}$ & 	1.60$_{0.14}$ & 	1.43$^{0.066}_{0.21}$ & 	1.426$_{0.065}$ \\
+				292.838$_{0.088}$ & 	790.25$_{0.35}$ & 	148.3$_{1.6}$ & 	2.18$^{0.24}_{0.19}$ & 	2.134$_{0.098}$ & 	0.0$_{1.0}$ \\
+				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.28$^{0.34}_{0.52}$ & 	0.0$_{1.0}$ \\
+				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.61$_{0.79}$ & 	0.0$_{1.0}$ \\
+				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	28.0$_{2.9}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	70$_{10}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	164$_{21}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	795$_{11}$ & 	450$^{42}_{25}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.738$_{0.022}$ & 	912.7$_{1.0}$ & 	882$_{11}$ & 	1096$^{165}_{125}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3200$_{669}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -655,7 +672,7 @@
 	
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=3.2in]{viscosity_pressure_results.pdf}
+		\includegraphics[width=3.1in]{viscosity_pressure_results.pdf}
 		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference.}
 		\label{fig:viscosity_pressure}
 	\end{figure}
