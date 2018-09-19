@@ -509,7 +509,7 @@
 	
 	%In addition, the shell and python scripts used for preparing and analyzing simulations are available on GitHub \cite{BLANK}. 
 	
-    We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term). Our previous study also shows that finite size effects are negligible for a 400 molecule system. 
+    We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term). Our previous study also shows that finite size effects are negligible for a 200 or 400 molecule system. We utilize the larger system size only for $P \le 500$ MPa, while the smaller system size is favored for the longer (higher pressure) simulations.
 	 
 	\begin{table}[htb!]
 		\caption{General simulation specifications.} \label{tab:sim_specs}
@@ -521,7 +521,7 @@
 				Tail-corrections & $U$ and $P$ \\
 				Constrained bonds & LINCS \cite{Hess1998,Hess2008} \\
 				LINCS-order & 8 \\			     
-				Number of molecules & 400 \\
+				Number of molecules & 200 or 400 \\
 				\hline        
 			\end{tabular}
 		\end{center}
@@ -589,7 +589,7 @@
 		\end{center}
 	\end{table}
 	
-	A large number of replicate simulations are required at each state point to improve the precision and to provide more rigorous estimates of uncertainty \cite{Maginn2018,Zhang2015}. We utilize between 40 and 80 independent replicates when simulating the Potoff force field, while we use 200 replicates for the MCMC parameter sets. The Potoff replicate simulations utilize the same force field parameters, whereas the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets (see Figures \ref{fig:nonbonded_uncertainty} and \ref{fig:dihedral_uncertainty}). To ensure independence between replicates, the entire series of simulation stages are repeated for each replicate. The energy minimization stages start with a different pseudo-random configuration and the initial velocities are randomized for the $NPT$ and $NVT$ equilibration stages. The replicates, therefore, sample from a distribution of densities (i.e., box sizes) for a given pressure. 
+	A large number of replicate simulations are required at each state point to improve the precision and to provide more rigorous estimates of uncertainty \cite{Maginn2018,Zhang2015}. We utilize between 40 and 80 independent replicates, where a greater number of replicates are needed for more viscous systems, i.e. at higher pressures. Each Potoff replicate simulation utilizes the same force field parameters, whereas MCMC-nb and MCMC-nb-tors utilize different parameter sets for each replicate (see Figures \ref{fig:nonbonded_uncertainty} and \ref{fig:dihedral_uncertainty}). To ensure independence between replicates, the entire series of simulation stages is repeated. The energy minimization stages start with a different pseudo-random configuration and the initial velocities are randomized for the $NPT$ and $NVT$ equilibration stages. The replicates, therefore, sample from a distribution of densities (i.e., box sizes) for a given pressure. 
 	
 	%each replicate having a different box size (i.e., density) for the $NVT$ stages.
 	
@@ -650,10 +650,10 @@
 		
 	\section{Results} \label{Results}    
 	
-	Table \ref{tab:tabulated_values} provides tabulated values for viscosity, density, and pressure at the prescribed state points for Potoff, MCMC-nb, and MCMC-nb-tors. These values are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the MCMC-nb-tors values and the available experimental viscosity at atmospheric pressure. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between simulation results and the McEwen-Paluch empirical model fit. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties.
+	Table \ref{tab:tabulated_values} provides tabulated values for viscosity $(\eta)$ and density $(\rho)$ for Potoff, MCMC-nb, and MCMC-nb-tors at the prescribed temperature $(T)$ and pressure $(P)$. The uncertainties (expressed at the 95~\% confidence level) for $T$, $\rho$, and $P$ are computed with the standard deviation of the replicate simulation averages, while those for $\eta$ are obtained from bootstrap re-sampling. Note that the average temperature slightly decreases with increasing pressure, but $T$ is always within the 0.3 K uncertainty stipulated by the IFPSC10 experimental measurements. Also, the average pressures tend to be lower than the prescribed pressure. For most state points, however, the combined uncertainty in pressure from experiment (the greater of 1 MPa and 0.4~\%) and simulation is sufficient to account for this discrepancy. 
 	
 	\begin{table}[htb!]
-		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors. Subscripts and superscripts (when present) correspond to the lower and upper 95~\% confidence intervals, respectively. If only a subscript is present the lower and upper uncertainties are nearly equal (i.e., the distribution of bootstrap samples is essentially symmetric) and only the average uncertainty is reported.} \label{tab:tabulated_values}
+		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors. Subscripts and superscripts (when present) correspond to the lower and upper 95~\% confidence intervals, respectively. If only a subscript is present the lower and upper uncertainties are approximately equal (i.e., the bootstrap distribution is essentially symmetric) and only the average uncertainty is reported.} \label{tab:tabulated_values}
 		\begin{center}
 %			\begin{tabular}{|c|c|c|c|c|c|c|c|}
 			\begin{tabular}{|c|c|c|c|c|c|}
@@ -681,14 +681,18 @@
 		\end{center} 
 	\end{table}
 	
+	The values from Table \ref{tab:tabulated_values} are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the MCMC-nb-tors values and the available experimental viscosity at atmospheric pressure \cite{TDE}. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between the McEwen-Paluch empirical model fit and the simulation results, experimental data point, and the other three empirical model fits. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties and for quantifying the discrepancy between the various empirical models.
+	
 	\begin{figure}[htb!]
 		\centering
-		\includegraphics[width=3.1in]{viscosity_pressure_results.pdf}
-		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference.}
+		\includegraphics[width=3.2in]{viscosity_pressure_results.pdf}
+		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference \cite{TDE}.}
 		\label{fig:viscosity_pressure}
 	\end{figure}
 	
-	Recall that the Potoff results only account for numerical uncertainties, MCMC-nb accounts for numerical and non-bonded parameter uncertainties, and MCMC-nb-tors accounts for numerical, non-bonded and torsional parameter uncertainties. Although somewhat counter intuitive, the reason why the MCMC-nb and MCMC-nb-tors uncertainties are smaller than the Potoff uncertainties is because the latter uses fewer replicate simulations. If the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, the increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well. Therefore, Figure \ref{fig:viscosity_pressure} suggests the surprising conclusion that the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties in the Green-Kubo viscosity.
+	Recall that the Potoff results only account for numerical uncertainties, MCMC-nb accounts for numerical and non-bonded parameter uncertainties, and MCMC-nb-tors accounts for numerical, non-bonded and torsional parameter uncertainties. Notice in Table \ref{tab:tabulated_values} and Figure \ref{fig:viscosity_pressure} that the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties are approximately the same. This somewhat surprising result supports the conclusion that the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties in the Green-Kubo viscosity. 
+	
+%	Although somewhat counter intuitive, the reason why the MCMC-nb and MCMC-nb-tors uncertainties are smaller than the Potoff uncertainties is because the latter uses fewer replicate simulations. If the non-bonded and torsional uncertainties are negligible compared to the numerical uncertainties, the increase in $N_{\rm reps}$ reduces the numerical uncertainty and, consequently, the overall uncertainty decreases as well. Therefore, 
 	
 %	For 224TMH, the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
 %	
@@ -729,6 +733,32 @@
 	
 	%	To quantitatively verify that the Potoff-MCMC force field predicts super-Arrhenius behavior at high pressures, we perform cross-validation between Equations BLANK and BLANK. 
 	%	
+	
+	Table \ref{tab:smoothed_values} is included to facilitate scoring our entry for the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Table \ref{tab:smoothed_values} provides ``smoothed'' $\eta$ and $\alpha$ values calculated with the McEwen-Paluch fit to our simulation results. The uncertainties reflect both the simulation and experimental pressure uncertainties. 
+	
+	\begin{table}[htb!]
+		\caption{Smoothed simulation results for the purpose of scoring our entry to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Uncertainties are expressed at the 95~\% confidence level. Pressure uncertainties are those reported for the experimental measurements.} \label{tab:smoothed_values}
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
+				0.1$_{1.0}$ & 	0.589$_{0.011}$ & 	13.66$_{0.32}$ \\
+				25.0$_{1.0}$ & 	0.790$_{0.011}$ & 	10.380$_{0.055}$ \\
+				50.0$_{1.0}$ & 	1.004$_{0.012}$ & 	8.964$_{0.088}$ \\
+				100.0$_{1.0}$ & 	1.517$_{0.020}$ & 	7.769$_{0.072}$ \\
+				150.0$_{1.0}$ & 	2.209$_{0.033}$ & 	7.326$_{0.036}$ \\
+				250.0$_{1.0}$ & 	4.539$_{0.069}$ & 	7.174$_{0.047}$ \\
+				400.0$_{1.6}$ & 	13.68$_{0.28}$ & 	7.623$_{0.073}$ \\
+				500.0$_{2.0}$ & 	30.08$_{0.86}$ & 	8.160$_{0.074}$ \\
+				600.0$_{2.4}$ & 	70.3$_{2.6}$ & 	8.851$_{0.070}$ \\
+				700.0$_{2.8}$ & 	177.6$_{8.0}$ & 	9.70$_{0.10}$ \\
+				800.0$_{3.2}$ & 	493$_{27}$ & 	10.74$_{0.18}$ \\
+				900.0$_{3.6}$ & 	1531$_{114}$ & 	11.99$_{0.31}$ \\
+				1000.0$_{4.0}$ & 	5466$_{587}$ & 	13.51$_{0.49}$ \\
+				\hline
+			\end{tabular}
+		\end{center} 
+	\end{table} 
 	
     \section{Discussion} \label{Discussion/Limitations}   
     

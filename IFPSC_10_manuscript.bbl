@@ -251,4 +251,12 @@ C.J.A. Roelands.
   Relationships of Lubricating Oils}.
 \newblock PhD thesis, TU Delft, Delft University of Technology, 1966.
 
+\bibitem{TDE}
+Michael Frenkel, Robert~D. Chirico, Vladimir Diky, Xinjian Yan, Qian Dong, and
+  Chris Muzny.
+\newblock Thermodata engine {(TDE):} software implementation of the dynamic
+  data evaluation concept.
+\newblock {\em Journal of Chemical Information and Modeling}, 45(4):816--838,
+  2005.
+
 \end{thebibliography}
