@@ -26,6 +26,13 @@ Pinzhi Liu, Hualong Yu, Ning Ren, Frances~E. Lockwood, and Q.~Jane Wang.
   molecular dynamics simulations.
 \newblock {\em Tribology Letters}, 60(3):34, 2015.
 
+\bibitem{Postdoc_3}
+Richard~A. Messerly, Michelle~C. Anderson, S.~Mostafa Razavi, and J.~Richard
+  Elliott.
+\newblock Improvements and limitations of {M}ie $\lambda${-}6 potential for
+  prediction of saturated and compressed liquid viscosity.
+\newblock {\em Fluid Phase Equilibria}, Pending publication, 2018.
+
 \bibitem{TraPPE}
 M.~G. Martin and J.~I. Siepmann.
 \newblock Transferable potentials for phase equilibria. 1. {United-atom}
@@ -132,13 +139,6 @@ Peter~A. Gordon.
 \newblock Development of intermolecular potentials for predicting transport
   properties of hydrocarbons.
 \newblock {\em The Journal of Chemical Physics}, 125(1):014504, 2006.
-
-\bibitem{Postdoc_3}
-Richard~A. Messerly, Michelle~C. Anderson, Mostafa~S. Razavi, and J.~Richard
-  Elliott.
-\newblock Improvements and limitations of {M}ie $\lambda${-}6 potential for
-  prediction of saturated and compressed liquid viscosity.
-\newblock {\em Fluid Phase Equilibria}, Pending publication, 2018.
 
 \bibitem{Nieto2006}
 Carlos Nieto-Draghi, Philippe Ungerer, and Bernard Rousseau.
