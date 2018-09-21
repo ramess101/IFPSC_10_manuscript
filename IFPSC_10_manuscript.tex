@@ -178,8 +178,12 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		\title{The role of force field parameter uncertainty in the prediction of the pressure-viscosity coefficient}
-		
+%		\title{The role of force field parameter uncertainty in the prediction of the pressure-viscosity coefficient}
+%		\title{Mie 16-6 force field predicts super-Arrhenius viscosity behavior at high pressures for 2,2,4-trimethylhexane}
+%		\title{Successful prediction of super-Arrhenius viscosity behavior at high pressures for 2,2,4-trimethylhexane}
+%		\title{Probing the existence of super-Arrhenius pressure-viscosity coefficients with molecular simulation}
+        \title{Mie 16-6 force field predicts viscosity with faster than exponential pressure dependence at high pressures for 2,2,4-trimethylhexane}
+				
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
 		%% \address[label1]{}
@@ -227,7 +231,7 @@
 		
 		\begin{abstract}
 			
-			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical fitting models. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting so-called super-Arrhenius behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
+			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting so-called super-Arrhenius behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
 			
 			%Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results. 		
 			
@@ -241,7 +245,7 @@
 			%% MSC codes here, in the form: \MSC code \sep code
 			%% or \MSC[2008] code \sep code (2000 is the default)
 			
-			Uncertainty Quantification \sep Bayesian Inference \sep Thermophysical Properties \sep Shear Viscosity \sep Molecular Dynamics Simulation
+			Pressure-viscosity coefficient \sep Industrial Fluid Properties Simulation Challenge \sep Uncertainty Quantification \sep Molecular Dynamics Simulation
 			
 		\end{keyword}
 		
@@ -249,18 +253,18 @@
 		
 	\section{Introduction}
 	
-	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10). The 10$^{\rm th}$ challenge is to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, specifically, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
+	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10), which challenges modelers to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, specifically, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
 	
 %	IFPSC is organized by several groups, namely, the Computational Molecular Science and Engineering Forum (CoMSEF) of the American Institute of Chemical Engineers (AIChE), the American Chemical Society (ACS), Army Research Lab, National Institute of Standards and Technology (NIST), The Dow Chemical Company, 3M, and United Technologies Research Center. 
-    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. New experimental measurements are performed by Scott Bair of Georgia Tech with a sample of greater than 98~\% purity. The estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
+    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. New experimental measurements have been performed by Scott Bair of Georgia Tech but have not been made available at this time. The sample purity is greater than 98~\% and the estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
 	
 	Classical film thickness formulas rely heavily on the so-called pressure-viscosity coefficient $(\alpha)$, which is essentially an Arrhenius-like activation parameter that is obtained from the slope of an log$_{10}(\eta)$-$P$ plot. However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometry measurements for nearly a century \cite{Bair2016}. This super-Arrhenius trend is typically manifest by an inflection point in the log$_{10}(\eta)$-$P$ plot at high pressures. While this behavior is common in experimental measurements, we are not aware of any rheological molecular simulation studies that have addressed this topic, as most simply assume an Arrhenius relationship when reporting $\alpha$ \cite{Mundy1996,McCabe2001,Liu2015}. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior.
 	
 %	Most rheological molecular simulation studies assume an Arrhenius relationship and report the so-called pressure-viscosity coefficient which is the slope for an log$_{10}(\eta)-P$ plot \cite{Mundy1994,McCabe2001,Liu2015}. 
 	
-	In a previous study \cite{Postdoc_3}, we investigated the adequacy of four different united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) force fields for predicting the viscosity-pressure trend, namely, the Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ over a wide temperature range and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa. The compounds in question were \textit{n}-alkanes ranging in length from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane (224TMP). The 224TMP results at high pressures are especially useful as this compound is a close analogue to the challenge compound and, in contrast with 224TMH, 224TMP has been well studied experimentally.
+	In a previous study \cite{Postdoc_3}, we investigated the accuracy of predicting viscosity with four different united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) force fields, namely, the Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ over a wide temperature range and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa, i.e., the same temperature and pressure range as the challenge. The compounds in question were \textit{n}-alkanes ranging in length from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane (224TMP). The 224TMP results at high pressures are especially useful as this compound is a close analogue to the challenge compound and, in contrast with 224TMH, 224TMP has been well studied experimentally.
 	
-	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by 20~\% to 50~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 224TMP to within 10~\% accuracy. For this reason, we implement the Potoff Mie 16-6 force field to predict $\eta$ and $\alpha$ for the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for the compounds studied and, specifically, for 224TMP.
+	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by 20~\% to 50~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 224TMP to within 10~\% accuracy. For this reason, we implement the Potoff Mie 16-6 force field to predict $\eta$ and $\alpha$ for the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for any compound studied, including for 224TMP.
 	 
 	One of the entry guidelines for IFPSC is ``an analysis of the uncertainty in the calculated results.'' Traditionally, simulation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to data post-processing. This class of uncertainty is referred to as ``numerical uncertainty'' (frequently referred to as ``statistical uncertainty'') \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. Two other classes of uncertainty, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty'') are typically ignored in uncertainty quantification (UQ) due to the increased computational cost \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. The latter refers to the uncertainty associated with the choice of force field functional form, while the former refers to the uncertainty in the force field parameters for a given force field functional form.
 	
@@ -274,7 +278,7 @@
 	
 	%limit our parameter uncertainty investigation to the non-bonded and torsional parameters.
 	
-	The outline for the present work is the following. Section \ref{Methods} explains the force field, simulation methodology, and data analysis. Section \ref{Results} presents the simulation results, with an emphasis on uncertainty quantification. Section \ref{Discussion/Limitations} discusses some important observations and limitations. Section \ref{Conclusions} recaps the primary conclusions from this work.
+	The outline for the present work is the following. Section \ref{Methods} explains the force field, parameter uncertainties, simulation methodology, data analysis, and empirical models. Section \ref{Results} presents the simulation results, with an emphasis on uncertainty quantification. Section \ref{Discussion/Limitations} discusses some important observations and limitations. Section \ref{Conclusions} recaps the primary conclusions from this work.
 	
 %	The 10th Industrial Fluid Properties Simulation Challenge will test the capability of molecular dynamics simulation to provide the property of liquids most important to elastohydrodynamic lubrication (EHL), the pressure-viscosity relation.  The temperature dependence at elevated pressure could be the subject of a future challenge.
 %	
@@ -383,7 +387,7 @@
 	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable force field, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters.
 	
 	\begin{table}[h!]
-		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses. $^*$Private communication of tabulated scoring function values for generalized C parameters. Note the small discrepancy between the generalized C parameters reported in Table 1 of Reference \citenum{Potoff_branched} and the optimal region depicted in Figure 1 of Reference \citenum{Potoff_branched}.} \label{tab:nonbonded params}
+		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses.} \label{tab:nonbonded params}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|}
 				\hline
@@ -396,7 +400,12 @@
 				\hline
 			\end{tabular}
 		\end{center} 
+%	\fontsize{9}{6}
+	\footnotesize
+	    $^*$Note in Reference \citenum{Potoff_branched} that a small discrepancy exists between the generalized C parameters in Table 1 and the optimal region depicted in Figure 1. The generalized C parameters reported here were obtained from private communication of tabulated scoring function values and are, thus, slightly different than those reported in Reference \citenum{Potoff_branched}.
 	\end{table}
+
+\normalsize
 	
 	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen2017} for $\epsilon$ and $\sigma$ and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
 	\begin{equation} \label{eq:Lorentz-Berthelot_eps}
@@ -415,7 +424,7 @@
 
     \subsubsection{MCMC parameter uncertainty} \label{sec:parameter_uncertainty}
 
-	Nieto-Draghi et al. sets $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (the \textit{cis} conformation) for the terminal and internal torsions, respectively \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). 
+	Nieto-Draghi et al. set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (the \textit{cis} conformation) for the terminal and internal torsions, respectively \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). 
 	
 	% The primary reason why Nieto-Draghi et al. introduce this additional term is to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field, which systematically under predicts $\eta$ by around 30~\%. Despite the fairly large increase in torsional barrier,
 	
@@ -554,7 +563,7 @@
 			\hline
 			& $NPT$ Equil. & $NPT$ Prod. & $NVT$ Equil. & $NVT$ Prod. \\ \hline
 			$t_{\rm sim}$ (ns) & 1 & 1 & 1 & 1 to 48 \\ \hline
-			Integrator & Velocity Verlet \cite{Swope1982}  & Leap frog \cite{Hockney1974} & Velocity Verlet & Velocity Verlet \\ \hline 
+			Integrator & Leap frog \cite{Hockney1974} & Leap frog & Velocity Verlet \cite{Swope1982} & Velocity Verlet \\ \hline 
 			Thermostat & Velocity rescale \cite{Bussi2007} & Nos{\'e}-Hoover \cite{Hoover1985,Nose1984} & Nos{\'e}-Hoover & Nos{\'e}-Hoover \\ \hline 
 			$\tau_{T}$ (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
 			Barostat & Berendsen \cite{Berendsen1984} & Parrinello-Rahman \cite{Nose1983,Parrinello1981} & N/A & N/A \\ \hline
@@ -615,7 +624,7 @@
 	
 %	 We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
 	 
-	The uncertainty in $\eta$ is obtained by bootstrap re-sampling and reported at the 95~\% confidence level. Specifically, the fitting of Equation \ref{eq: Double exponential} is repeated hundreds of times using randomly selected subsets of replicate simulations from which we obtain the distribution of $\eta^{\infty}$ estimates. Section \ref{SI:MCMC_analysis} of Supporting Information validates this process for the MCMC non-bonded CH$_3$ parameter sets with ethane. 
+	The uncertainty in $\eta$ is obtained by bootstrap re-sampling and reported at the 95~\% confidence level. Specifically, the fitting of Equation \ref{eq: Double exponential} is repeated hundreds of times using randomly selected subsets of replicate simulations from which we obtain a distribution of $\eta^{\infty}$ estimates. Section \ref{SI:MCMC_analysis} of Supporting Information validates this process for the MCMC non-bonded CH$_3$ parameter sets with ethane. 
 		
 %	For the Potoff results, each replicate simulation utilizes the same force field parameters. By contrast, the MCMC-nb and MCMC-nb-tors replicates utilize different parameter sets. The 95~\% confidence interval is obtained from the distribution of bootstrap estimates for $\eta^\infty$. An example of the MCMC process is provided in Section \ref{SI:GK_analysis} of Supporting Information.
 %	
@@ -667,15 +676,15 @@
 				292.851$_{0.085}$ & 	734.67$_{0.44}$ & 	22.9$_{1.1}$ & 	0.753$^{0.078}_{0.098}$ & 	0.743$_{0.029}$ & 	0.751$_{0.028}$ \\
 				292.847$_{0.089}$ & 	749.22$_{0.45}$ & 	47.9$_{1.2}$ & 	0.957$^{0.076}_{0.061}$ & 	0.970$_{0.037}$ & 	0.932$_{0.033}$ \\
 				292.85$_{0.10}$ & 	772.24$_{0.37}$ & 	98.3$_{1.3}$ & 	1.60$_{0.14}$ & 	1.43$^{0.066}_{0.21}$ & 	1.426$_{0.065}$ \\
-				292.838$_{0.088}$ & 	790.25$_{0.35}$ & 	148.3$_{1.6}$ & 	2.18$^{0.24}_{0.19}$ & 	2.134$_{0.098}$ & 	0.0$_{1.0}$ \\
-				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.28$^{0.34}_{0.52}$ & 	0.0$_{1.0}$ \\
-				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.61$_{0.79}$ & 	0.0$_{1.0}$ \\
-				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	28.0$_{2.9}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
-				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	70$_{10}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
-				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	164$_{21}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
-				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	795$_{11}$ & 	450$^{42}_{25}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
-				292.738$_{0.022}$ & 	912.7$_{1.0}$ & 	882$_{11}$ & 	1096$^{165}_{125}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
-				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3200$_{669}$ & 	0.0$_{1.0}$ & 	0.0$_{1.0}$ \\
+				292.838$_{0.088}$ & 	790.25$_{0.35}$ & 	148.3$_{1.6}$ & 	2.18$^{0.24}_{0.19}$ & 	2.134$_{0.098}$ & 	-- \\
+				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.28$^{0.34}_{0.52}$ & 	-- \\
+				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.61$_{0.79}$ & 	-- \\
+				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	28.0$_{2.9}$ & 	-- & 	-- \\
+				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	70$_{10}$ & 	-- & 	-- \\
+				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	164$_{21}$ & 	-- & 	-- \\
+				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	795$_{11}$ & 	450$^{42}_{25}$ & 	-- & 	-- \\
+				292.738$_{0.022}$ & 	912.7$_{1.0}$ & 	882$_{11}$ & 	1096$^{165}_{125}$ & 	-- & 	-- \\
+				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3200$_{669}$ & 	-- & 	-- \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -748,7 +757,7 @@
 			\begin{tabular}{|c|c|c|}
 				\hline
 				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
-				0.1$_{1.0}$ & 	0.589$_{0.011}$ & 	13.66$_{0.32}$ \\
+				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	13.66$_{0.32}$ \\
 				25.0$_{1.0}$ & 	0.790$_{0.011}$ & 	10.380$_{0.055}$ \\
 				50.0$_{1.0}$ & 	1.004$_{0.012}$ & 	8.964$_{0.088}$ \\
 				100.0$_{1.0}$ & 	1.517$_{0.020}$ & 	7.769$_{0.072}$ \\
@@ -772,7 +781,11 @@
     
 %    For 224TMH, the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
     
-    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Previous studies suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we did not observe such a strong dependence. Specifically, the required increase in the torsional barriers was between 80~\% and 100~\% to achieve an increase of approximately 10~\% in viscosity (see Supporting Information). We propose that the discrepancy between our findings and those of Nieto-Draghi et al. arises either from using united-atom sites or the Mie 16-6 potential, whereas AUA4 utilizes anisotropic-united-atom sites with the Lennard-Jones 12-6 potential.
+    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Previous studies suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we did not observe such a strong dependence. Specifically, the required increase in the torsional barriers was between 80~\% and 100~\% to achieve an increase of approximately 10~\% in viscosity (see Supporting Information). We propose that the discrepancy between our findings and those of Nieto-Draghi et al. arises as a consequence of differences between the united-atom sites and Mie 16-6 potential employed in this work and the anisotropic-united-atom sites and Lennard-Jones 12-6 potential employed by Nieto-Draghi et al.
+    
+    %arises either from using united-atom sites or the Mie 16-6 potential, whereas AUA4 utilizes anisotropic-united-atom sites with the Lennard-Jones 12-6 potential.
+    
+    
     
     % or the Mie 16-6 po the  This suggests that either this particular molecule or the Mie 16-6 potential is much less sensitive to the torsional parameters than the long straight-chained alkanes studied in Reference \cite{Nieto2006}.
         
@@ -782,7 +795,7 @@
 	
 	Other studies \cite{Liu2015} correct for systematic errors in viscosity by normalizing $\eta$ with respect to an experimental viscosity value at low pressure. This approach would be possible for the challenge compound since a single experimental data point is available at saturation pressure. Although this may provide a more accurate prediction, we prefer not to use an empirical correction, especially from a single data point. Our goal, rather, is to truly test the force field's predictive capabilities.
 	
-	The slow system dynamics (i.e. long rotational relaxation times) at high pressures require extremely long simulations and large amounts of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation. Despite some obvious benefits, we are weary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. For this reason, we choose the more arduous brute-force approach.	
+	The slow system dynamics (i.e. long rotational relaxation times) at high pressures require extremely long simulations and a large number of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation. Despite some obvious benefits, we are wary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. For this reason, we choose the more arduous brute-force approach.	
 
 	
 %	Although time-temperature superposition is an attractive alternative, we are weary of the inordinately large uncertainties that this method can produce. If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. 
