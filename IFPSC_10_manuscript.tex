@@ -384,25 +384,25 @@
 	\end{equation} 
 	where $u^{\rm vdw}$ is the van der Waals interaction, $\sigma$ is the distance $(r)$ where $u^{\rm vdw} = 0$, $-\epsilon$ is the energy of the potential at the minimum $\left(\text{i.e., }u^{\rm vdw} = -\epsilon \text{ and } \frac{\partial u^{\rm vdw}}{\partial r} = 0 \text{ for } r=r_{\rm min} \right)$, and $\lambda$ is the repulsive exponent. 
 	
-	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable force field, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. The Potoff results presented in this study are obtained with the ``long'' parameters.
+	The non-bonded Potoff Mie $\lambda$-6 force field parameters are provided in Table \ref{tab:nonbonded params}. Note that Potoff reports a ``generalized'' and ``short/long'' (S/L) CH and C parameter set. The ``generalized'' CH and C parameter set is an attempt at a completely transferable force field, while the ``short'' and ``long'' parameters are implemented when the number of carbons in the backbone is $\le 4$ and $> 4$, respectively. As the longest continuous carbon backbone for 2,2,4-trimethylhexane consists of six carbons, the Potoff results presented in this study are obtained with the ``long'' parameters.
 	
 	\begin{table}[h!]
-		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters. The ``short/long'' Potoff CH and C parameters are included in parentheses.} \label{tab:nonbonded params}
+		\caption{Non-bonded Potoff Mie $\lambda$-6 parameters \cite{Mie,Potoff_branched}. The CH and C values are the ``long'' Potoff parameters.} \label{tab:nonbonded params}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|}
 				\hline
-				\multicolumn{1}{|c}{} & \multicolumn{3}{|c|}{Potoff (S/L)}  \\ \hline
+				\multicolumn{1}{|c}{} & \multicolumn{3}{|c|}{Potoff}  \\ \hline
 				United-atom & $\epsilon/k_{\rm B}$ (K) & $\sigma$ (nm) & $\lambda$ \\ \hline
 				CH$_3$ & 121.25 & 0.3783 & 16  \\ 
 				CH$_2$ & 61 & 0.399 & 16 \\ 
-				CH & 15 (15/14) & 0.46 (0.47/0.47) & 16\\
-				C & 1.05$^*$ (1.45/1.2) & 0.605$^*$ (0.61/0.62) & 16\\
+				CH & 14 & 0.47 & 16\\
+				C & 1.2 & 0.62 & 16\\
 				\hline
 			\end{tabular}
 		\end{center} 
-%	\fontsize{9}{6}
-	\footnotesize
-	    $^*$Note in Reference \citenum{Potoff_branched} that a small discrepancy exists between the generalized C parameters in Table 1 and the optimal region depicted in Figure 1. The generalized C parameters reported here were obtained from private communication of tabulated scoring function values and are, thus, slightly different than those reported in Reference \citenum{Potoff_branched}.
+
+%	\footnotesize
+%	    $^*$Note in Reference \citenum{Potoff_branched} that a small discrepancy exists between the generalized C parameters in Table 1 and the optimal region depicted in Figure 1. The generalized C parameters reported here were obtained from private communication of tabulated scoring function values and are, thus, slightly different than those reported in Reference \citenum{Potoff_branched}.
 	\end{table}
 
 \normalsize
@@ -459,7 +459,7 @@
     \begin{figure}[htb!]
     	\centering
     	\includegraphics[width=6.4in]{MCMC_nonbonded.pdf}
-    	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference \cite{Mie,Potoff_branched}. Top left, top right, bottom left, and bottom right panels correspond to CH$_3$, CH$_2$, CH, and C parameters, respectively.}		
+    	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference \cite{Mie,Potoff_branched}. Top left, top right, bottom left, and bottom right panels correspond to CH$_3$, CH$_2$, CH, and C parameters, respectively. Note in Reference \citenum{Potoff_branched} that a small discrepancy exists between the generalized C parameters in Table 1 and the optimal region depicted in Figure 1. The generalized C parameters shown here were obtained from private communication of tabulated scoring function values and are, thus, slightly different than those reported in Reference \citenum{Potoff_branched}.}		
     	%	\caption{Uncertainty in non-bonded potentials. Black line is the Potoff non-bonded potential. Red lines correspond to the 200 MCMC sampled parameter sets used in this study. Insets show the distribution for $\epsilon$ and $\sigma$.}
     	\label{fig:nonbonded_uncertainty}
     \end{figure}
@@ -518,7 +518,9 @@
 	
 	%In addition, the shell and python scripts used for preparing and analyzing simulations are available on GitHub \cite{BLANK}. 
 	
-    We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Our previous study demonstrates that, for compounds smaller than \textit{n}-dodecane, the correct system dynamics are obtained using a 2 fs time-step and 1.4 nm non-bonded cut-off distance with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term). Although a 1.0 nm cut-off is reliable for most compounds, it can lead to spurious viscosity estimates for larger molecules. For this reason, we incur the additional computational cost with the longer cut-off so as to avoid any unforeseen simulation anomalies. Our previous study also shows that finite size effects are negligible for a 200 or 400 molecule system. We utilize the larger system size only for $P \le 500$ MPa, while the smaller system size is favored for the longer (higher pressure) simulations.
+    We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Note that we employ a 1.4 nm non-bonded cut-off with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term) instead of the 1.0 nm cut-off utilized by Potoff's group \cite{Mie,Potoff_branched}. Although a 1.0 nm cut-off is reliable for most compounds, it can lead to spurious viscosity estimates and even unstable simulations for large molecules, e.g., \textit{n}-dodecane \cite{Postdoc_3}. For this reason, we incur the additional computational cost with the longer cut-off so as to avoid any unforeseen simulation anomalies. Our previous study also shows that finite size effects are negligible for a 200 or 400 molecule system. We utilize the larger system size only for $P \le 500$ MPa, while the smaller system size is favored for the longer (higher pressure) simulations.
+	 
+%	 For example, our previous study demonstrates that, with a 2 fs time-step, a cut-off distance of 1.4 nm or greater is required for \textit{n}-alkanes longer than \textit{n}-dodecane.
 	 
 	\begin{table}[htb!]
 		\caption{General simulation specifications.} \label{tab:sim_specs}
@@ -742,7 +744,7 @@
 		\label{fig:cross_validation}
 	\end{figure}
 	
-	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models are over fit to the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set was ``easier'' than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, there is strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope $\alpha$ with respect to $P$ change signs, we cannot conclude whether an inflection point precedes the super-Arrhenius region.
+	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models are over fit to the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set was ``easier'' than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, there is strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope of $\alpha$ with respect to $P$ changes signs, we cannot conclude whether an inflection point precedes the super-Arrhenius region.
 	
 	%	an inflection point followed by super-Arrhenius behavior 
 	
@@ -812,7 +814,7 @@
 	
 	\section*{Acknowledgments}
 	
-	We would like to acknowledge Jeffrey J. Potoff and Mohammad Soroush Barhaghi for their invaluable contributions to this study. We are also grateful for the internal review provided by Alta Y. Fang and BLANK of the National Institute of Standards and Technology (NIST). 
+	We would like to acknowledge Jeffrey J. Potoff and Mohammad S. Barhaghi for their invaluable contributions to this study. We are also grateful for the internal review provided by Alta Y. Fang and Ian H. Bell of the National Institute of Standards and Technology (NIST). 
 	
 	This research was performed while Richard A. Messerly held a National Research Council (NRC) Postdoctoral Research Associateship at NIST and while Michelle C. Anderson held a Summer Undergraduate Research Fellowship (SURF) position at NIST. 
 
