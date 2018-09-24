@@ -231,7 +231,7 @@
 		
 		\begin{abstract}
 			
-			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting so-called super-Arrhenius behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
+			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates of 2,2,4-trimethylhexane at 293 K for a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting faster-than-exponential (a.k.a. super-Arrhenius) behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
 			
 			%Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results. 		
 			
@@ -253,20 +253,20 @@
 		
 	\section{Introduction}
 	
-	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10), which challenges modelers to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, specifically, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
+	The Industrial Fluid Properties Simulation Challenge (IFPSC) is an open international competition aimed at aligning the molecular simulation community, which is primarily academic, with the goals of industrial research. The present work is a submission to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge (IFPSC10)\footnote{http://fluidproperties.org/10th}, which challenges modelers to predict the viscosity $(\eta)$ of 2,2,4-trimethylhexane (224TMH) over a wide range of pressures $(P)$, specifically, from 0.1 MPa (atmospheric) to 1000 MPa, at a constant temperature $(T)$ of 293 K.
 	
 %	IFPSC is organized by several groups, namely, the Computational Molecular Science and Engineering Forum (CoMSEF) of the American Institute of Chemical Engineers (AIChE), the American Chemical Society (ACS), Army Research Lab, National Institute of Standards and Technology (NIST), The Dow Chemical Company, 3M, and United Technologies Research Center. 
-    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. New experimental measurements have been performed by Scott Bair of Georgia Tech but have not been made available at this time. The sample purity is greater than 98~\% and the estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
+    The practical application of IFPSC10 is elastohydrodynamic lubrication (EHL), where knowledge of the pressure-viscosity relationship is paramount. The challenge compound was chosen as an ideal lubricating oil candidate for which no published experimental viscosity data are available above ambient pressure. New experimental measurements have been performed by Scott Bair of Georgia Tech but have not been made available at this time to avoid the experimental data biasing the simulations and to fairly test the molecular modeling approaches in a predictive manner. The sample purity is greater than 98~\% and the estimated experimental uncertainties for $\eta$, $T$, and $P$ are, respectively, 3~\%, 0.3 K, and the greater of 1 MPa and 0.4~\%.
 	
-	Classical film thickness formulas rely heavily on the so-called pressure-viscosity coefficient $(\alpha)$, which is essentially an Arrhenius-like activation parameter that is obtained from the slope of an log$_{10}(\eta)$-$P$ plot. However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometry measurements for nearly a century \cite{Bair2016}. This super-Arrhenius trend is typically manifest by an inflection point in the log$_{10}(\eta)$-$P$ plot at high pressures. While this behavior is common in experimental measurements, we are not aware of any rheological molecular simulation studies that have addressed this topic, as most simply assume an Arrhenius relationship when reporting $\alpha$ \cite{Mundy1996,McCabe2001,Liu2015}. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior.
+	Classical film thickness formulas rely heavily on the so-called pressure-viscosity coefficient $(\alpha)$, which is essentially an Arrhenius-like activation parameter that is obtained from the slope of a log$_{10}(\eta)$-$P$ plot (see Section \ref{Pressure-viscosity coefficient}). However, faster-than-exponential, a.k.a. super-Arrhenius, dependence on pressure has been observed through experimental viscometry measurements for nearly a century \cite{Bair2016}. This super-Arrhenius trend is typically manifest by an inflection point in the log$_{10}(\eta)$-$P$ plot at high pressures. While this behavior is common in experimental measurements, we are not aware of any rheological molecular simulation studies that have addressed this topic, as most simply assume an Arrhenius relationship when reporting $\alpha$ \cite{Mundy1996,McCabe2001,Liu2015}. IFPSC10 is an ideal opportunity to demonstrate whether or not molecular simulation can provide evidence supporting or opposing the existence of super-Arrhenius behavior.
 	
 %	Most rheological molecular simulation studies assume an Arrhenius relationship and report the so-called pressure-viscosity coefficient which is the slope for an log$_{10}(\eta)-P$ plot \cite{Mundy1994,McCabe2001,Liu2015}. 
 	
 	In a previous study \cite{Postdoc_3}, we investigated the accuracy of predicting viscosity with four different united-atom (UA) Mie $\lambda$-6 (generalized Lennard-Jones, LJ) force fields, namely, the Transferable Potentials for Phase Equilibria (TraPPE-UA \cite{TraPPE,Martin1999,TraPPEUA2}), Transferable Anisotropic Mie (TAMie) \cite{TAMie,Weidler2016}, Potoff \cite{Mie,Potoff_branched}, and fourth generation anisotropic-united-atom (AUA4) \cite{AUA4,Nieto2008}. The comparisons with experimental data were made for saturated liquid viscosity $(\eta_{\rm liq}^{\rm sat})$ over a wide temperature range and compressed liquid viscosity $(\eta_{\rm liq}^{\rm comp})$ at 293 K from atmospheric pressure to 1000 MPa, i.e., the same temperature and pressure range as the challenge. The compounds in question were \textit{n}-alkanes ranging in length from ethane to \textit{n}-docosane and branched alkanes ranging in size from 2-methylpropane to 2,2,4-trimethylpentane (224TMP). The 224TMP results at high pressures are especially useful as this compound is a close analogue to the challenge compound and, in contrast with 224TMH, 224TMP has been well studied experimentally.
 	
-	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by 20~\% to 50~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 224TMP to within 10~\% accuracy. For this reason, we implement the Potoff Mie 16-6 force field to predict $\eta$ and $\alpha$ for the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for any compound studied, including for 224TMP.
+	While TraPPE and AUA4 (LJ 12-6 based potentials) under predict $\eta_{\rm liq}^{\rm sat}$ by 20~\% to 50~\% for all compounds studied, TAMie (Mie 14-6) and Potoff (Mie 16-6) predict $\eta_{\rm liq}^{\rm sat}$ within 10~\% for most compounds \cite{Postdoc_3}. For $\eta_{\rm liq}^{\rm comp}$, TAMie is the most reliable at predicting the viscosity-density dependence, while Potoff significantly over estimates $\eta_{\rm liq}^{\rm comp}$ with respect to density. However, since Potoff also over estimates pressure at high densities \cite{Postdoc_2}, the viscosity-pressure trend for Potoff is remarkably accurate even at pressures approaching 1000 MPa. In particular, the Potoff force field predicts the viscosity-pressure trend for 224TMP to within 10~\%. For this reason, we implement the Potoff Mie 16-6 force field to predict $\eta$ and $\alpha$ for the challenge compound. We should note, however, that our previous study did not provide any definitive evidence that the Potoff force field could predict a super-Arrhenius trend for any compound studied, including for 224TMP.
 	 
-	One of the entry guidelines for IFPSC is ``an analysis of the uncertainty in the calculated results.'' Traditionally, simulation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to data post-processing. This class of uncertainty is referred to as ``numerical uncertainty'' (frequently referred to as ``statistical uncertainty'') \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. Two other classes of uncertainty, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty'') are typically ignored in uncertainty quantification (UQ) due to the increased computational cost \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. The latter refers to the uncertainty associated with the choice of force field functional form, while the former refers to the uncertainty in the force field parameters for a given force field functional form.
+	One of the entry guidelines for IFPSC is ``an analysis of the uncertainty in the calculated results.'' Traditionally, simulation uncertainties are limited to the random fluctuations of simulation output and/or the uncertainty related to data post-processing. This class of uncertainty is referred to as ``numerical uncertainty'' (also frequently referred to as ``statistical uncertainty'') \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. Two other classes of uncertainty, namely, ``parameter uncertainty'' and ``functional form uncertainty'' (also referred to as ``model uncertainty'') are typically ignored in uncertainty quantification (UQ) due to the increased computational cost \cite{Bay_Deriv,Bay_MD,Bay_UQ,Mess4}. The latter refers to the uncertainty associated with the choice of force field functional form, while the former refers to the uncertainty in the force field parameters for a given force field functional form.
 	
 	%, although they are often larger than numerical uncertainty
 	
@@ -328,9 +328,16 @@
 
     \subsubsection{Potoff force field}
 	
-	The Potoff Mie $\lambda$-6 force field utilizes united-atom (UA) sites, where 2,2,4-trimethylhexane is represented with CH$_3$, CH$_2$, CH, and C UA sites. Neighboring UA sites are separated by a fixed 0.154 nm bond length. Note that we observed in our previous study that $\eta$ increases by several percent when flexible bonds are employed instead of fixed bonds. Therefore, the choice of fixed bonds was not arbitrary and is a possible source of uncertainty for which we did not rigorously account. The primary reason we utilize fixed bonds is to reduce the fluctuations in the stress tensor and, thereby, improve the precision of the viscosity estimate.
+	The Potoff Mie $\lambda$-6 force field utilizes united-atom (UA) sites, where 2,2,4-trimethylhexane is represented with CH$_3$, CH$_2$, CH, and C UA sites (see Figure \ref{fig:224TMH}). Neighboring UA sites are separated by a fixed 0.154 nm bond length. Note that we observed in our previous study that $\eta$ increases by several percent when flexible bonds are employed instead of fixed bonds. Therefore, the choice of fixed bonds was not arbitrary and is a possible source of uncertainty for which we did not rigorously account. The primary reason we utilize fixed bonds is to reduce the fluctuations in the stress tensor and, thereby, decrease the numerical uncertainty of the viscosity estimate.
 	
-	The angular contribution to energy is computed using a harmonic potential:
+	\begin{figure}[htb!]
+		\centering
+		\includegraphics[width=3.2in]{UA_IFPSC10}
+		\caption{United-atom representation of the challenge compound, 2,2,4-trimethylhexane. All bond lengths are 0.154 nm.} 
+		\label{fig:224TMH}
+	\end{figure}
+	
+	The angular contribution to internal energy is computed using a harmonic potential:
 	\begin{equation}
 	u^{\rm bend} = \frac{k_\theta}{2} \left(\theta-\theta_0\right)^2
 	\end{equation}
@@ -433,7 +440,7 @@
 	
 	%$0.075 \times \max(u^{\rm tors}_{A_{\rm s}=0})$
 	
-	As the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $. Thus, unlike Nieto-Draghi et al., we do not propose that the torsional barriers must be increased unilaterally. Instead, we assume that $A_{\rm s}$ follows a skewed distribution with a mean value near zero and the lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum barrier height for the non-shifted Potoff torsional potential. The MCMC-nb-tors parameters are sampled from this distribution. The rationale for the $A_{\rm s}$ distribution is presented in Supporting Information. 
+	As the Potoff Mie 16-6 potential is already quite reliable for predicting viscosity, we would expect significant over prediction of viscosity if we coupled the Potoff Mie 16-6 potential with $A_{\rm s}/k_{\rm B} \gg 0 $. Thus, unlike Nieto-Draghi et al., we do not propose that the torsional barriers must be increased unilaterally. Instead, we assume that $A_{\rm s}$ follows a skewed distribution with a mean value near zero and lower and upper 95~\% confidence intervals corresponding to -15~\% and +40~\% of the maximum barrier height for the non-shifted Potoff torsional potential. The MCMC-nb-tors parameters are sampled from this distribution. The rationale for the $A_{\rm s}$ distribution is presented in Supporting Information. 
 	
 	% Section \ref{Results}. 
 	
@@ -450,9 +457,10 @@
 		\label{fig:dihedral_uncertainty}
 	\end{figure}
 
-	Figure \ref{fig:nonbonded_uncertainty} depicts the MCMC non-bonded parameters for CH$_3$, CH$_2$, CH, and C united-atom sites ($\epsilon_{\rm CH_3}$, $\sigma_{\rm CH_3}$, $\epsilon_{\rm CH_2}$, $\sigma_{\rm CH_2}$, $\epsilon_{\rm CH}$, $\sigma_{\rm CH}$, $\epsilon_{\rm C}$, and $\sigma_{\rm C}$) which are used for MCMC-nb and MCMC-nb-tors. Note that $\lambda_{\rm CH_3} = \lambda_{\rm CH_2} = \lambda_{\rm CH} = \lambda_{\rm C} = 16$. Parameters are assumed to be transferable, e.g., the CH$_2$ MCMC parameters do not depend on the CH$_3$ MCMC parameters. The MCMC non-bonded parameters for CH$_3$ and CH$_2$ sites were reported previously \cite{Postdoc_2}. These parameters were obtained using a likelihood function based on saturated liquid density and saturated vapor pressure data for ethane, propane, \textit{n}-butane, and \textit{n}-octane. By contrast, the MCMC parameters for CH and C sites were obtained from the scoring function reported by Mick et al. \cite{Potoff_branched} that depends on several vapor-liquid coexistence properties for a diverse set of branched alkanes. Details regarding the generation of MCMC parameter sets from the scoring function are found in Supporting Information. An important observation from Figure \ref{fig:nonbonded_uncertainty} is that the ranges of MCMC sampled CH and C non-bonded parameters are considerably larger (on a percent basis) than those for CH$_3$ and CH$_2$.
-	
-	
+	Figure \ref{fig:nonbonded_uncertainty} depicts the MCMC non-bonded parameters for CH$_3$, CH$_2$, CH, and C united-atom sites ($\epsilon_{\rm CH_3}$, $\sigma_{\rm CH_3}$, $\epsilon_{\rm CH_2}$, $\sigma_{\rm CH_2}$, $\epsilon_{\rm CH}$, $\sigma_{\rm CH}$, $\epsilon_{\rm C}$, and $\sigma_{\rm C}$) which are used for MCMC-nb and MCMC-nb-tors. Note that $\lambda_{\rm CH_3} = \lambda_{\rm CH_2} = \lambda_{\rm CH} = \lambda_{\rm C} = 16$. Parameters are assumed to be transferable, e.g., the CH$_2$ MCMC parameters do not depend on the CH$_3$ MCMC parameters. An important observation from Figure \ref{fig:nonbonded_uncertainty} is that the ranges of MCMC sampled CH and C non-bonded parameters are considerably larger (on a percent basis) than those for CH$_3$ and CH$_2$.
+
+	The MCMC non-bonded parameters for CH$_3$ and CH$_2$ sites were reported previously using a likelihood function based on saturated liquid density and saturated vapor pressure data for ethane, propane, \textit{n}-butane, and \textit{n}-octane \cite{Postdoc_2}. By contrast, the MCMC parameters for CH and C sites were obtained from the scoring function reported by Mick et al. \cite{Potoff_branched} that depends on several vapor-liquid coexistence properties for a diverse set of branched alkanes. Details regarding the generation of MCMC parameter sets from the scoring function are found in Section \ref{SI:MCMC from scoring function} of Supporting Information.
+		
 %	Translating the scoring function into a Bayesian context is achieved by modeling the $\epsilon$-$\sigma$ CH and C uncertainties with a multivariate normal distribution, where the covariance matrix was obtained by assuming that the ``generalized'' CH and C parameter set should not be distinguishable (at the 95~\% confidence level) from the ``long'' parameter set.
 	
 %    We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
@@ -571,7 +579,7 @@
 			$\tau_{T}$ (ps) & 1.0 & 1.0 & 1.0 & 1.0 \\ \hline
 			Barostat & Berendsen \cite{Berendsen1984} & Parrinello-Rahman \cite{Nose1983,Parrinello1981} & N/A & N/A \\ \hline
 			$\tau_{P}$ (ps) & 1.0 & 5.0 & N/A & N/A \\ \hline
-			$\zeta_{P}$ (1/bar) & 4.5E-5 & 4.5E-5 & N/A & N/A \\
+			$\zeta_{P}$ (1/bar) & 4.5 $\times 10^{-5}$ & 4.5 $\times 10^{-5}$ & N/A & N/A \\
 			\hline
 		\end{tabular}
 		%    	\end{center} 
@@ -593,15 +601,15 @@
 				500 & 8 \\
 				600 & 8 \\			     
 				700 & 16 \\
-				800 & 32 \\
-				900 & 32 \\
-				1000 & 48 \\
+				800 & 48 \\
+				900 & 64 \\
+				1000 & 96 \\
 				\hline        
 			\end{tabular}
 		\end{center}
 	\end{table}
 	
-	A large number of replicate simulations are required at each state point to improve the precision and to provide more rigorous estimates of uncertainty \cite{Maginn2018,Zhang2015}. We utilize between 40 and 80 independent replicates, where a greater number of replicates are needed for more viscous systems, i.e. at higher pressures. Each Potoff replicate simulation utilizes the same force field parameters, whereas MCMC-nb and MCMC-nb-tors utilize different parameter sets for each replicate (see Figures \ref{fig:dihedral_uncertainty} and \ref{fig:nonbonded_uncertainty}). To ensure independence between replicates, the entire series of simulation stages is repeated. The energy minimization stages start with a different pseudo-random configuration and the initial velocities are randomized for the $NPT$ and $NVT$ equilibration stages. The replicates, therefore, sample from a distribution of densities (i.e., box sizes) for a given pressure. 
+	A large number of replicate simulations are required at each state point to quantify and reduce the numerical uncertainty \cite{Maginn2018,Zhang2015}. We utilize between 40 and 80 independent replicates, where a greater number of replicates are needed for more viscous systems, i.e. at higher pressures. Each Potoff replicate simulation utilizes the same force field parameters, whereas MCMC-nb and MCMC-nb-tors utilize different parameter sets for each replicate (see Figures \ref{fig:dihedral_uncertainty} and \ref{fig:nonbonded_uncertainty}). To ensure independence between replicates, the entire series of simulation stages is repeated. The energy minimization stages start with a different pseudo-random configuration and the initial velocities are randomized for the $NPT$ and $NVT$ equilibration stages. The replicates, therefore, sample from a distribution of densities (i.e., box sizes) for a given pressure. 
 	
 	%each replicate having a different box size (i.e., density) for the $NVT$ stages.
 	
@@ -613,7 +621,7 @@
 	\begin{equation} \label{eq:Green_Kubo}
 	\eta(t) = \frac{V}{k_{\rm B} T N_{\rm reps}} \sum_{n=1}^{N_{\rm reps}} \int_{0}^{t}dt'\left\langle \tau_{\alpha\beta,n}(t') \tau_{\alpha\beta,n}(0)\right\rangle_{t_0,\alpha\beta}
 	\end{equation} 
-	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over twelve different time origins $(t_0)$ and all three unique off-diagonal $\tau_{\alpha\beta}$ components. For a precise integration of Equation \ref{eq:Green_Kubo}, $\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps). 
+	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over twelve different time origins $(t_0)$ and all three unique off-diagonal $\tau_{\alpha\beta}$ components. For an accurate integration of Equation \ref{eq:Green_Kubo}, $\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for $P \le 700$ MPa. Less-frequent recording is required to avoid unmanageable file sizes for the three highest pressures, as these systems require significantly longer simulations. Specifically, we record $\tau_{\alpha\beta,n}$ every 18 fs (9 time-steps) for $P = 800$ MPa, every 24 fs (12 time-steps) for $P = 900$ MPa, and every 36 fs (18 time-steps) for $P = 1000$ MPa. We validate the reliability of using less-frequent recordings at high pressures in Section \ref{SI:Output frequency} of Supporting Information.  
 	
 %	Equation \ref{eq:Green_Kubo} also averages $N_{\rm reps}$ independent replicate simulations.
 	
@@ -623,7 +631,7 @@
 	\begin{equation} \label{eq: Double exponential}
 	\eta(t) = A \alpha \tau_1 \left(1-\exp{(-t/\tau_1)}\right) + A (1-\alpha) \tau_2 \left(1-\exp{(-t/\tau_2)}\right)
 	\end{equation}
-	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$. See our previous work for details regarding the fitting procedure \cite{Postdoc_3}. 
+	where $A, \alpha, \tau_1, $ and $\tau_2$ are fitting parameters and $\eta^\infty = A \alpha \tau_1 + A (1-\alpha) \tau_2$. Our previous work provides details regarding the fitting procedure \cite{Postdoc_3}. 
 	
 %	 We fit Equation \ref{eq: Double exponential} using a weighted sum-squared-error objective function where the weights are equal to the inverse of the squared standard deviation $(\sigma^2_{\eta})$. The standard deviation with respect to time of the replicate simulations is fit to the model $A t^{b}$, where $A$ and $b$ are fitting parameters. To improve the fit of Equation \ref{eq: Double exponential}, we employ both a long-time and short-time cut-off. Specifically, only data for $t > 3$ ps are included in the fit, while data where $\eta(t) > 0.4 \times \eta^{\infty}$ are excluded \cite{Maginn2018,Zhang2015}. 
 	 
@@ -652,7 +660,7 @@
 	\begin{equation} \label{eq:Roelands}
 	\eta = \eta_p \left(\frac{\eta_0}{\eta_p}\right)^{\left(\frac{P_p - P}{P_p}\right)^Z}
 	\end{equation}
-	where $\eta_0$ and $Z$ are fitting parameters and $\eta_p = 6.31 \times 10^-5$ Pa-s and $P_p = -0.196$ GPa. The third model is an alternative form of Equation \ref{eq:Roelands} where $\eta_p$ and $P_p$ are additional fitting parameters (rather than fixed constants). This four parameter Roelands equation, which we refer to as ``Roelands-Modified,'' is more flexible than the standard Roelands model and can predict super-Arrhenius behavior. The fourth model is a hybrid McEwen-Paluch expression \cite{Bair2016}	
+	where $\eta_0$ and $Z$ are fitting parameters and $\eta_p = 6.31 \times 10^{-5}$ Pa-s and $P_p = -0.196$ GPa. The third model is an alternative form of Equation \ref{eq:Roelands} where $\eta_p$ and $P_p$ are additional fitting parameters (rather than fixed constants). This four parameter Roelands equation, which we refer to as ``Roelands-Modified,'' is more flexible than the standard Roelands model and can predict super-Arrhenius behavior. The fourth model is a hybrid McEwen-Paluch expression \cite{Bair2016}	
 	\begin{equation} \label{eq:McEwen-Paluch}
 	\eta = \eta_0 \left(1 + \frac{a_0}{q} P\right)^q \exp\left(\frac{C_{\rm F} P}{P_\infty - P}\right)
 	\end{equation}
@@ -695,10 +703,10 @@
 	
 	The values from Table \ref{tab:tabulated_values} are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the MCMC-nb-tors values and the available experimental viscosity at atmospheric pressure \cite{TDE}. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between the McEwen-Paluch empirical model fit and the simulation results, experimental data point, and the other three empirical model fits. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties and for quantifying the discrepancy between the various empirical models.
 	
-	\begin{figure}[htb!]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[width=3.2in]{viscosity_pressure_results.pdf}
-		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference \cite{TDE}.}
+		\caption{Viscosity-pressure results for Potoff (red squares), MCMC-nb (green circles), and MCMC-nb-tors (blue diamonds). Top panel plots log$_{10}(\eta)$-$P$ where different line colors and styles represent different empirical model fits (Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}) to MCMC-nb-tors values. Bottom panel is a percent deviation plot relative to the McEwen-Paluch fit. Experimental viscosity point at atmospheric pressure is included as a reference \cite{TDE}. Error bars represent 95~\% confidence intervals obtained from bootstrap re-sampling. Experimental uncertainty is smaller than the symbol size.}
 		\label{fig:viscosity_pressure}
 	\end{figure}
 	
@@ -734,7 +742,7 @@
 	
 %	Although the deviations from the hybrid McEwen-Paluch model fit to the simulation results are significantly lower than those of the Roelands and Barus models, this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models.
 	
-	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models (see Figures \ref{fig:viscosity_pressure} and \ref{fig:cross_validation}), this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model is actually over fit to our simulation results. 
+	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models (see Figures \ref{fig:viscosity_pressure} and \ref{fig:cross_validation}), this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model actually over fits our simulation results. 
 	
 	To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the MCMC-nb-tors simulation results (9 state points) are included in the training set while 30~\% (4 state points) are excluded for the testing set. The complete set of $\eta$ values also varies for each round of cross-validation according to the $\eta$ bootstrap uncertainties. 
 	
@@ -745,7 +753,7 @@
 		\label{fig:cross_validation}
 	\end{figure}
 	
-	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models are over fit to the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set was ``easier'' than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, there is strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope of $\alpha$ with respect to $P$ changes signs, we cannot conclude whether an inflection point precedes the super-Arrhenius region.
+	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models over fit the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set was ``easier'' than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, there is strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope of $\alpha$ with respect to $P$ changes signs, we cannot conclude whether an inflection point precedes the super-Arrhenius region.
 	
 	%	an inflection point followed by super-Arrhenius behavior 
 	
@@ -822,8 +830,6 @@
 	Commercial equipment, instruments, or materials are identified only in order to adequately specify certain procedures. In no case does such identification imply recommendation or endorsement by NIST, nor does it imply that the products identified are necessarily the best available for the intended purpose.
 	
 	Partial contribution of NIST, an agency of the United States government; not subject to copyright in the United States.
-	
-	\section*{References}
 	
 	\bibliographystyle{unsrt}
 	\bibliography{IFPSC_10_references}

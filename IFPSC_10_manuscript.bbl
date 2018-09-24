@@ -102,7 +102,7 @@ Carlos Nieto-Draghi, Anthony Bocahut, Beno{\^i}t Creton, Pascal Have, Aziz
 Richard~A. Messerly, Michael~R. Shirts, and Andrei~F. Kazakov.
 \newblock Uncertainty quantification confirms unreliable extrapolation toward
   high pressures for united-atom {Mie} $\lambda$-6 force field.
-\newblock {\em Journal of Chemical Physics}, Pending publication, 2018.
+\newblock {\em The Journal of Chemical Physics}, 149(11):114109, 2018.
 
 \bibitem{Bay_Deriv}
 F.~Rizzi, H.~N. Najm, B.~J. Debusschere, K.~Sargsyan, M.~Salloum,
@@ -232,6 +232,7 @@ Edward~J. Maginn, Richard~A. Messerly, Daniel~J. Carlson, Daniel~R. Roe, and
   {S}elf-diffusivity and viscosity from equilibrium molecular dynamics v1.
 \newblock {\em Living Journal of Computational Molecular Science}, Pending
   publication, 2018.
+\newblock https://github.com/ejmaginn/TransportCheckList.
 
 \bibitem{Zhang2015}
 Yong Zhang, Akihito Otani, and Edward~J. Maginn.
@@ -254,7 +255,7 @@ C.J.A. Roelands.
 \bibitem{TDE}
 Michael Frenkel, Robert~D. Chirico, Vladimir Diky, Xinjian Yan, Qian Dong, and
   Chris Muzny.
-\newblock Thermodata engine {(TDE):} software implementation of the dynamic
+\newblock {ThermoData Engine (TDE): S}oftware implementation of the dynamic
   data evaluation concept.
 \newblock {\em Journal of Chemical Information and Modeling}, 45(4):816--838,
   2005.

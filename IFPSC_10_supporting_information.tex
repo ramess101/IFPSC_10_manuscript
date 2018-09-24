@@ -239,7 +239,7 @@
 	\begin{equation} \label{eq:log-alpha}
 	\ln(\alpha) = \ln(L(D|\theta_{\rm new})) - \ln(L(D|\theta_{\rm old}))
 	\end{equation}
-	By contrast, Mick et al. optimize the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. This section describes how we translate the scoring function into a log-likelihood function to enable direct application of MCMC.
+	By contrast, Mick et al. optimize the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. This section describes how we translate the scoring function into a log-likelihood function, to then implement in MCMC.
 	
 	\subsection{Derivation}
 		
@@ -272,7 +272,7 @@
 	\ln(\alpha) = WSSE(\theta_{\rm old}) - WSSE(\theta_{\rm new})
 	\end{equation}
 	
-	Potoff's scoring function $(S)$ is not simply the sum-squared-error or even the weighted-sum-squared-error. $S$ is expressed in terms of the absolute percent deviation and different properties are assigned different weights that are not necessarily the inverse variance ($\sigma_i^{-2}$). Therefore, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution for neither constant nor varying $\sigma$. However, we can still apply the maximum likelihood criterion for Potoff's scoring function such that
+	Potoff's scoring function $(S)$ is not simply the sum-squared-error or even the weighted-sum-squared-error. $S$ is expressed in terms of the absolute percent deviation and each property is assigned a different weight that is not necessarily the inverse variance ($\sigma_i^{-2}$). Therefore, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution for neither constant nor varying $\sigma$. However, we can still apply the maximum likelihood criterion for Potoff's scoring function such that
 %	\begin{multline} \label{eq:scoring-likelihood}
 %	L(D|\theta) = \prod_i C_i \exp\left[w_i|y(\theta)-D_i|\right] = C \exp\left[\sum_i w_i|y(\theta)-D_i|\right] \\ = C \exp\left(-S(\theta)\right)
 %	\end{multline}
@@ -456,7 +456,7 @@
 
     \subsection{Implementation}
 
-    With Equation \ref{eq:log-score}, all that remains to perform MCMC is a way to compute $S$ for any $\theta$. This is achieved by smoothing/interpolating the raw scoring function values (utilizing SciPy's RectBivariateSpline function in the interpolation sub-package) over the two-dimensional grids of $\epsilon_{\rm CH}$-$\sigma_{\rm CH}$ and $\epsilon_{\rm C}$-$\sigma_{\rm C}$. The values of $S$ were obtained through private communication with Potoff's group. Only the scoring function values from the ``long'' CH and C parameters are utilized in this study. Using the ``generalized'' or ``short'' scoring function values would result in a different MCMC sampling of $\epsilon$ and $\sigma$.
+    With Equation \ref{eq:log-score}, all that remains to perform MCMC is a way to compute $S$ for any $\theta$. This is achieved by smoothing/interpolating the raw scoring function values (utilizing SciPy's RectBivariateSpline function in the interpolation sub-package\footnote{https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RectBivariateSpline.html}) over the two-dimensional grids of $\epsilon_{\rm CH}$-$\sigma_{\rm CH}$ and $\epsilon_{\rm C}$-$\sigma_{\rm C}$. The values of $S$ were obtained through private communication with Potoff's group. Only the scoring function values from the ``long'' CH and C parameters are utilized in this study. Using the ``generalized'' or ``short'' scoring function values would result in a different MCMC sampling of $\epsilon$ and $\sigma$.
 	
 	The optimal ``long'' CH parameter is on the boundary of the grid tested by Mick et al. Therefore, we do not have any scoring function values from simulation for $\epsilon_{\rm CH} < 14$ K. A similar problem is faced for $\epsilon_{\rm C} < 0.8$ K and $\sigma_{\rm C} > 0.63$ nm but, fortunately, these regions are rarely sampled by the MCMC algorithm. To overcome the challenge of extrapolating outside of the domain where $S(\theta)$ is available, we fit $\ln(S(\theta))$ to a multi-variate normal distribution. This approach works well for the CH parameters because the CH scoring function has a fairly normal shape. While the assumption of normality is worse for $S$ over the $\epsilon_{\rm C}$-$\sigma_{\rm C}$ parameter space, this does not significantly affect our results because of the infrequent sampling of this extrapolation region.   
 
@@ -550,6 +550,20 @@
 		\caption{Green-Kubo integrals with respect to time. Top, middle, and bottom panels depict, respectively, low, intermediate, and high pressure/viscosity simulations where respective simulation times of 1 to 4 ns, 8 to 16 ns, and 24 to 48 ns are required to observe a Green-Kubo plateau.}
 		\label{fig:running_integrals}
 	\end{figure}
+
+    \clearpage
+    \newpage
+
+    \section{Output frequency} \label{SI:Output frequency}
+    
+    Figure \ref{fig:compare_output_frequency} presents the average Green-Kubo integral for different output frequencies. 	
+    
+    \begin{figure}[htb!]
+    	\centering
+%    	\includegraphics[width=2.6in]{GreenKubo_integrals.pdf}
+    	\caption{Green-Kubo integrals with respect to time for different output frequencies.}
+    	\label{fig:compare_output_frequency}
+    \end{figure}
 
 % depicts lower pressure/viscosity simulations where 1 to 4 ns simulations are sufficiently long. Middle panel depic Bottom panel depicts higher pressure/viscosity simulations where 8 to 48 ns simulations are required to observe a Green-Kubo plateau.
 		
