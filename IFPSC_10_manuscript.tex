@@ -407,16 +407,17 @@
 
 \normalsize
 	
-	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen2017} for $\epsilon$ and $\sigma$ and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
+	Non-bonded parameters between two different site types (i.e., cross-interactions) are determined using Lorentz-Berthelot combining rules \cite{Allen2017} for $\epsilon$ and $\sigma$:
+	% and an arithmetic mean for the repulsive exponent $\lambda$ (as recommended in Reference \citenum{Mie}):
 	\begin{equation} \label{eq:Lorentz-Berthelot_eps}
 	\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}
 	\end{equation}
 	\begin{equation} \label{eq:Lorentz-Berthelot_sig}
 	\sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}
 	\end{equation}
-	\begin{equation} \label{eq:Lorentz-Berthelot_lam}
-	\lambda_{ij} = \frac{\lambda_{ii} + \lambda_{jj}}{2}
-	\end{equation}
+%	\begin{equation} \label{eq:Lorentz-Berthelot_lam}
+%	\lambda_{ij} = \frac{\lambda_{ii} + \lambda_{jj}}{2}
+%	\end{equation}
 	where the $ij$ subscript refers to cross-interactions and the subscripts $ii$ and $jj$ refer to same-site interactions. 
 	
 %	The MCMC Mie 16-6 parameters for CH$_3$ and CH$_2$ were reported previously \cite{Postdoc_2}. Reference BLANK assumed that the CH$_3$ parameters were transferable from ethane for longer \textit{n}-alkanes. The CH$_2$ parameters were obtained from propane, \textit{n}-butane, and \textit{n}-octane. The data included in the analysis were saturated liquid densities and saturated vapor pressures over a reduced temperature range of 0.45 to 0.85, as available in ThermoData Engine (TDE). 
@@ -456,7 +457,7 @@
 	
 %    We apply the common assumption of transferability between UA sites, which implies that the parameter correlation between different UA sites, e.g., between $\sigma_{\rm CH_3}$ and $\sigma_{\rm CH}$, is assumed to be negligible. In other words, we only account for the parameter correlation between $\epsilon_{ii}$-$\sigma_{ii}$ sets of the same UA site. The reason for this assumption is the reduced complexity of performing four independent two-dimensional MCMC runs compared to one eight-dimensional MCMC run.
     
-    \begin{figure}[htb!]
+    \begin{figure}[H]
     	\centering
     	\includegraphics[width=6.4in]{MCMC_nonbonded.pdf}
     	\caption{Uncertainty in non-bonded parameters determined with Markov Chain Monte Carlo (MCMC). The Potoff generalized and S/L parameters are also included as a reference \cite{Mie,Potoff_branched}. Top left, top right, bottom left, and bottom right panels correspond to CH$_3$, CH$_2$, CH, and C parameters, respectively. Note in Reference \citenum{Potoff_branched} that a small discrepancy exists between the generalized C parameters in Table 1 and the optimal region depicted in Figure 1. The generalized C parameters shown here were obtained from private communication of tabulated scoring function values and are, thus, slightly different than those reported in Reference \citenum{Potoff_branched}.}		
@@ -754,7 +755,7 @@
 	Table \ref{tab:smoothed_values} is included to facilitate scoring our entry for the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Table \ref{tab:smoothed_values} provides ``smoothed'' $\eta$ and $\alpha$ values calculated with the McEwen-Paluch fit to our simulation results. The uncertainties reflect both the simulation and experimental pressure uncertainties. Note that the uncertainty in $\eta$ at 1000 MPa is considerably larger than other state points. As the simulation pressure is nearly 30 MPa lower than the prescribed 1000 MPa (see Table \ref{tab:tabulated_values}), the increased uncertainty in the McEwen-Paluch fit is caused by this extrapolation to 1000 MPa.
 	
 	\begin{table}[htb!]
-		\caption{Smoothed simulation results for the purpose of scoring our entry to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Uncertainties are expressed at the 95~\% confidence level. Pressure uncertainties are those reported for the experimental measurements.} \label{tab:smoothed_values}
+		\caption{Recommended simulation results for the purpose of scoring our entry to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Uncertainties are expressed at the 95~\% confidence level. Pressure uncertainties are those reported for the experimental measurements.} \label{tab:smoothed_values}
 		\begin{center}
 			\begin{tabular}{|c|c|c|}
 				\hline
@@ -814,7 +815,7 @@
 	
 	\section*{Acknowledgments}
 	
-	We would like to acknowledge Jeffrey J. Potoff and Mohammad S. Barhaghi for their invaluable contributions to this study. We are also grateful for the internal review provided by Alta Y. Fang and Ian H. Bell of the National Institute of Standards and Technology (NIST). 
+	We would like to acknowledge Jeffrey J. Potoff and Mohammad S. Barhaghi for their invaluable insights regarding the Potoff force field. We are grateful for the internal review provided by Alta Y. Fang, Andrei F. Kazakov, and Ian H. Bell of the National Institute of Standards and Technology (NIST). We also appreciate the useful discussions and recommendations from Edward J. Maginn of The University of Notre Dame, Michael R. Shirts of The University of Colorado, J. Ilja Siepmann of The University of Minnesota, Jarod M. Younker of ExxonMobil, and John D. Chodera of the Memorial Sloan Kettering Cancer Center. 
 	
 	This research was performed while Richard A. Messerly held a National Research Council (NRC) Postdoctoral Research Associateship at NIST and while Michelle C. Anderson held a Summer Undergraduate Research Fellowship (SURF) position at NIST. 
 

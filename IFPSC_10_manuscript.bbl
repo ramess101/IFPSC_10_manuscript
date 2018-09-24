@@ -180,17 +180,17 @@ Berk Hess.
 \newblock {\em Journal of Chemical Theory and Computation}, 4(1):116--122,
   2008.
 
+\bibitem{Hockney1974}
+R.W Hockney, S.P Goel, and J.W Eastwood.
+\newblock Quiet high-resolution computer models of a plasma.
+\newblock {\em Journal of Computational Physics}, 14(2):148 -- 158, 1974.
+
 \bibitem{Swope1982}
 William~C. Swope, Hans~C. Andersen, Peter~H. Berens, and Kent~R. Wilson.
 \newblock A computer simulation method for the calculation of equilibrium
   constants for the formation of physical clusters of molecules{: A}pplication
   to small water clusters.
 \newblock {\em The Journal of Chemical Physics}, 76(1):637--649, 1982.
-
-\bibitem{Hockney1974}
-R.W Hockney, S.P Goel, and J.W Eastwood.
-\newblock Quiet high-resolution computer models of a plasma.
-\newblock {\em Journal of Computational Physics}, 14(2):148 -- 158, 1974.
 
 \bibitem{Bussi2007}
 Giovanni Bussi, Davide Donadio, and Michele Parrinello.
