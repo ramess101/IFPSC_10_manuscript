@@ -746,7 +746,7 @@
 	
 	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models (see Figures \ref{fig:viscosity_pressure} and \ref{fig:cross_validation}), this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model actually over fits our simulation results. 
 	
-	To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the MCMC-nb-tors simulation results (9 state points) are included in the training set while 30~\% (4 state points) are excluded for the testing set. The complete set of $\eta$ values also varies for each round of cross-validation according to the $\eta$ bootstrap uncertainties. 
+	To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the MCMC-nb-tors simulation results (9 pressures) are included in the training set while 30~\% (4 pressures) are excluded for the testing set. The complete set of $\eta$ values also varies for each round of cross-validation according to the $\eta$ bootstrap uncertainties. 
 	
 	\begin{figure}[htb!]
 		\centering
@@ -821,7 +821,7 @@
 	
 	\section*{Supporting Information}
 	
-    Section \ref{SI:Gromacs input files} provides GROMACS input files. Section \ref{SI:MCMC from scoring function} describes how the CH and C non-bonded MCMC parameter sets are obtained. Section \ref{SI:MCMC_analysis} validates the MCMC-nb uncertainty quantification approach. Section \ref{SI:MCMC torsions} develops the $A_{\rm s}$ skewed distribution used for the MCMC-nb-tors torsional potentials. Section \ref{SI:Running integrals} presents the average Green-Kubo integrals for each state point.      
+    Section \ref{SI:Gromacs input files} provides GROMACS input files. Section \ref{SI:MCMC from scoring function} describes how the CH and C non-bonded MCMC parameter sets are obtained. Section \ref{SI:MCMC_analysis} validates the MCMC-nb uncertainty quantification approach. Section \ref{SI:MCMC torsions} develops the $A_{\rm s}$ skewed distribution used for the MCMC-nb-tors torsional potentials. Section \ref{SI:Tabulated_MCMC} provides tabulated values of the MCMC parameter sets. Section \ref{SI:Running integrals} presents the average Green-Kubo integrals for each state point. Section \ref{SI:Output frequency} investigates the impact of the output frequency at high pressures.
 	
 	\section*{Acknowledgments}
 	
@@ -832,6 +832,8 @@
 	Commercial equipment, instruments, or materials are identified only in order to adequately specify certain procedures. In no case does such identification imply recommendation or endorsement by NIST, nor does it imply that the products identified are necessarily the best available for the intended purpose.
 	
 	Partial contribution of NIST, an agency of the United States government; not subject to copyright in the United States.
+	
+	\section*{References}
 	
 	\bibliographystyle{unsrt}
 	\bibliography{IFPSC_10_references}
