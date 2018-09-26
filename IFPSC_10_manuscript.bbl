@@ -89,6 +89,12 @@ Philippe Ungerer, Christele Beauvais, Jerome Delhommelle, Anne Boutin, Bernard
   for \textit{n}-alkanes.
 \newblock {\em The Journal of Chemical Physics}, 112(12):5499--5510, 2000.
 
+\bibitem{Nieto2006}
+Carlos Nieto-Draghi, Philippe Ungerer, and Bernard Rousseau.
+\newblock Optimization of the anisotropic united atoms intermolecular potential
+  for \textit{n}-alkanes: Improvement of transport properties.
+\newblock {\em The Journal of Chemical Physics}, 125(4):044517, 2006.
+
 \bibitem{Nieto2008}
 Carlos Nieto-Draghi, Anthony Bocahut, Beno{\^i}t Creton, Pascal Have, Aziz
   Ghoufi, Aur{\'e}lie Wender, , Anne Boutin, Bernard Rousseau, and Laurent
@@ -140,12 +146,6 @@ Peter~A. Gordon.
   properties of hydrocarbons.
 \newblock {\em The Journal of Chemical Physics}, 125(1):014504, 2006.
 
-\bibitem{Nieto2006}
-Carlos Nieto-Draghi, Philippe Ungerer, and Bernard Rousseau.
-\newblock Optimization of the anisotropic united atoms intermolecular potential
-  for \textit{n}-alkanes: Improvement of transport properties.
-\newblock {\em The Journal of Chemical Physics}, 125(4):044517, 2006.
-
 \bibitem{Braga2012}
 Carlos Braga and Karl~P. Travis.
 \newblock Computer simulation of the role of torsional flexibility on mass and
@@ -179,6 +179,22 @@ Berk Hess.
   simulation.
 \newblock {\em Journal of Chemical Theory and Computation}, 4(1):116--122,
   2008.
+
+\bibitem{Leonard2018}
+Alison~N. Leonard, Andrew~C. Simmonett, Frank~C. Pickard, Jing Huang,
+  Richard~M. Venable, Jeffery~B. Klauda, Bernard~R. Brooks, and Richard~W.
+  Pastor.
+\newblock Comparison of additive and polarizable models with explicit treatment
+  of long-range {Lennard-Jones} interactions using alkane simulations.
+\newblock {\em Journal of Chemical Theory and Computation}, 14(2):948--958,
+  2018.
+
+\bibitem{Kim2018}
+Kang-Sahn Kim, Myung~Hoon Han, Changho Kim, Zhen Li, George~Em Karniadakis, and
+  Eok~Kyun Lee.
+\newblock Nature of intrinsic uncertainties in equilibrium molecular dynamics
+  estimation of shear viscosity for simple and complex fluids.
+\newblock {\em The Journal of Chemical Physics}, 149(4):044510, 2018.
 
 \bibitem{Hockney1974}
 R.W Hockney, S.P Goel, and J.W Eastwood.
@@ -259,5 +275,11 @@ Michael Frenkel, Robert~D. Chirico, Vladimir Diky, Xinjian Yan, Qian Dong, and
   data evaluation concept.
 \newblock {\em Journal of Chemical Information and Modeling}, 45(4):816--838,
   2005.
+
+\bibitem{Khabaz2018}
+Fardin Khabaz and Rajesh Khare.
+\newblock Molecular simulations of asphalt rheology{: A}pplication of
+  time-temperature superposition principle.
+\newblock {\em Journal of Rheology}, 62(4):941--954, 2018.
 
 \end{thebibliography}

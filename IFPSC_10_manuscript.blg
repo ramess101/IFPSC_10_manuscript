@@ -21,4 +21,8 @@ You're missing a field name---line 2508 of file IFPSC_10_references.bib
  : %URL = {https://doi.org/10.1080/08927022.2012.702423},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-(There were 4 error messages)
+Repeated entry---line 2885 of file IFPSC_10_references.bib
+ : @article{Kim2018
+ :                 ,
+I'm skipping whatever remains of this entry
+(There were 5 error messages)

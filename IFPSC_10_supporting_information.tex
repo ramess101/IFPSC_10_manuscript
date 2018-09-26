@@ -286,10 +286,11 @@
 	\begin{equation}
 	\ln(L(D|\theta)) = \ln(C) -S(\theta)
 	\end{equation}
-	and substitution into Equation \ref{eq:log-alpha} yields the MCMC acceptance probability for Potoff's scoring function
+	and substitution into Equation \ref{eq:log-alpha} yields the MCMC acceptance probability
 	\begin{equation} \label{eq:log-score}
 	\ln(\alpha) = S(\theta_{\rm old}) - S(\theta_{\rm new})
 	\end{equation}
+	which only depends on Potoff's scoring function, $S$.
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rough draft
 %	
@@ -494,7 +495,7 @@
 
 	\section{MCMC validation} \label{SI:MCMC_analysis}
 	
-	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, as in the main text, a single replicate simulation is performed for each MCMC-nb parameter set and the results are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, 40 replicate simulations are performed for each set of MCMC-nb parameters, bootstrap re-sampling is performed independently for each set of 40 replicates, and the overall uncertainty is obtained by combining the 40 bootstrapped distributions ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at 137 K and saturated liquid density using the Potoff force field. 
+	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, as in the main text, a single replicate simulation is performed for each MCMC-nb parameter set and the results are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, 40 replicate simulations are performed for 30 sets of MCMC-nb parameters, bootstrap re-sampling is performed independently for each set of 40 replicates, and the overall uncertainty is obtained by combining the 30 bootstrapped distributions ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at 137 K and saturated liquid density using the Potoff force field. 
 	
 	Figure \ref{fig:MCMC_validation} demonstrates that the uncertainties are nearly indistinguishable for the two methods. This provides empirical evidence that performing a single simulation with each MCMC parameter set provides the same uncertainty as performing numerous simulations with each MCMC parameter set. Also of interest is that the numerical uncertainties ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 1$) are much smaller than the overall uncertainties, suggesting that parameter uncertainty plays a larger role for ethane than for the challenge compound.
 	
@@ -523,9 +524,9 @@
 %	While Nieto-Draghi et al. propose that the internal and terminal torsions be increased by 15~\% and 40~\%, respectively,  
 	
 	
-	In this section, we develop the skewed distribution for $A_{\rm s}$, where the respective lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, unlike Nieto-Draghi et al., we consider $A_{\rm s} < 0$.
+	In this section, we develop the skewed normal distribution for $A_{\rm s}$, where the respective lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, unlike Nieto-Draghi et al., we also consider $A_{\rm s} < 0$.
 	
-	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. $A_{\rm s}$ is expressed as a percentage of the maximum for the non-shifted torsional potential. The viscosities in Figure \ref{fig:sensitivity_torsions} for 2,2,4-trimethylhexane are computed at 293 K and atmospheric pressure with 200 molecules and the Potoff force field. Also depicted is the only available experimental viscosity value at this temperature and pressure. 	 
+	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. $A_{\rm s}$ is expressed as a percentage of the maximum for the non-shifted torsional potential. The viscosities in Figure \ref{fig:sensitivity_torsions} for 2,2,4-trimethylhexane are computed at 293 K and atmospheric pressure with 200 molecules and the Potoff force field. Also depicted is the only available experimental viscosity value at the same temperature and saturation pressure. 	 
 	
 	\begin{figure}[htb!]
 		\centering
@@ -540,16 +541,16 @@
 	
 	By contrast, decreasing the torsional barriers by 40~\% does have a significant impact on the predicted viscosity. We attribute this to the \textit{gauche} barrier heights being approximately 40~\% the \textit{cis} barrier heights for the CH$_i$-CH$_2$-CH-CH$_j$ torsional potential. Therefore, reducing all barriers by 40~\% of the maximum torsional barrier nearly eliminates the equilibrium \textit{gauche} conformations (see Figure \ref{fig:dihedral_uncertainty} in the main text). Even a 15~\% reduction has an appreciable effect on $\eta$. For this reason, we do not recommend reducing the barrier heights by more than 15~\%.	
 	
-	The $A_{\rm s}$ parameter sets for MCMC-nb-tors are obtained using SciPy's skewnorm.rvs function in the stats sub-packaged \footnote{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skewnorm.html}. The parameter values supplied to this function are provided in Table BLANK.
+	The $A_{\rm s}$ parameter sets for MCMC-nb-tors are obtained using SciPy's skewnorm.rvs function in the stats sub-package\footnote{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skewnorm.html}. The parameter values supplied to this function are provided in Table \ref{tab:distribution_parameters}.
 	
 	\begin{table}[htb!]
-		\caption{Parameters for SciPy's skewnorm.rvs function to yield skewed distribution of $A_{\rm s$. Parameter names are those found in SciPy's documentation. ``a'' is the skewness, ``loc'' is the mean for the non-skewed (normal) distribution, and ``scale'' is the non-skewed (normal) standard deviation.} \label{tab:distribution_parameters}
+		\caption{Parameters for SciPy's skewnorm.rvs function to yield skewed distribution of $A_{\rm s}$. Parameter names are those found in SciPy's documentation. ``a'' is the skewness, ``loc'' is the mean for the non-skewed (normal) distribution, and ``scale'' is the non-skewed (normal) standard deviation.} \label{tab:distribution_parameters}
 		\begin{center}
 			\begin{tabular}{|c|c|c|c|}
 				\hline
-				Torsion sites & $\rm{a}$ & 	$\rm{loc}$ & $\rm{scale}$ \\ \hline
-				CH$_i$-CH$_2$-CH-CH$_j$ &  & & \\
-				CH$_i$-CH$_2$-C-CH$_j$ & & & \\
+				Torsion sites & $\rm a$ & $\rm loc$ & $\rm scale$ (K) \\ \hline
+				CH$_i$-CH$_2$-CH-CH$_j$ & 1.25 & 0 & $\approx$ 310.6 \\
+				CH$_i$-CH$_2$-C-CH$_j$ & 1.25 & 0 & $\approx$ 164.7 \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -816,12 +817,12 @@
 	
 	\section{Green-Kubo integrals} \label{SI:Running integrals}
 		
-	Figure \ref{fig:running_integrals} presents the average Green-Kubo integral for all thirteen state points. Note that much longer simulations are required for high pressures/viscosities (bottom panel) than for low pressure/viscosities (top panel). 	
+	Figure \ref{fig:running_integrals} presents the average Green-Kubo integral for all thirteen state points. Much longer simulations are required for high $P$ and $\eta$ (bottom panel) than for low $P$ and $\eta$ (top panel). 	
 	
 	\begin{figure}[htb!]
 		\centering
 				\includegraphics[width=2.6in]{GreenKubo_integrals.pdf}
-		\caption{Green-Kubo integrals with respect to time. Top, middle, and bottom panels depict, respectively, low, intermediate, and high pressure/viscosity simulations where respective simulation times of 1 to 4 ns, 8 to 16 ns, and 24 to 48 ns are required to observe a Green-Kubo plateau.}
+		\caption{Green-Kubo integrals with respect to time. Top, middle, and bottom panels depict, respectively, low, intermediate, and high pressure/viscosity simulations where respective simulation times of 1 to 2 ns, 4 to 16 ns, and 48 to 96 ns are required to observe a Green-Kubo plateau.}
 		\label{fig:running_integrals}
 	\end{figure}
 
