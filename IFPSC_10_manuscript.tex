@@ -231,7 +231,7 @@
 		
 		\begin{abstract}
 			
-			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates obtained with equilibrium molecular dynamics for 2,2,4-trimethylhexane at 293 K and over a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting faster-than-exponential, a.k.a. super-Arrhenius, behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
+			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates obtained with equilibrium molecular dynamics for 2,2,4-trimethylhexane at 293 K and over a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified, and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting faster-than-exponential, a.k.a. super-Arrhenius, behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
 			
 			%Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results. 		
 			
@@ -315,7 +315,7 @@
 	
 		\subsection{Force field} \label{Force Field}
 	
-	We utilize the Potoff force field as it provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes that are similar to the challenge compound \cite{Postdoc_3}. In addition, we quantify the uncertainty in $\eta$ that is inherited from uncertainties in the non-bonded Mie 16-6 and torsional parameters. The parameter uncertainties are obtained using Bayesian inference Markov Chain Monte Carlo (MCMC). This UQ analysis is performed sequentially. First, we account for only the non-bonded uncertainties (referred to as MCMC-nb). Then, we include both the non-bonded and torsional uncertainties (MCMC-nb-tors). This sequential approach provides insight into which source of uncertainty has a greater impact on $\eta$.
+	We utilize the Potoff force field, as it provides reliable estimates of the $\eta$-$P$ dependence for normal and branched alkanes that are similar to the challenge compound \cite{Postdoc_3}. In addition, we quantify the uncertainty in $\eta$ that is inherited from uncertainties in the non-bonded Mie 16-6 and torsional parameters. The parameter uncertainties are obtained using Bayesian inference Markov Chain Monte Carlo (MCMC). This UQ analysis is performed sequentially. First, we account for only the non-bonded uncertainties (referred to as MCMC-nb). Then, we include both the non-bonded and torsional uncertainties (MCMC-nb-tors). This sequential approach provides insight into which source of uncertainty has a greater impact on $\eta$.
 	
 %	 and are subsequently propagate these force field parameter uncertainties when predicting $\eta$.
 	
@@ -436,7 +436,7 @@
 
     \subsubsection{Parameter uncertainty} \label{sec:parameter_uncertainty}
 
-	Nieto-Draghi et al. set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (with the \textit{cis} conformation) for the terminal and internal torsions, respectively \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason why Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). 
+	Nieto-Draghi et al. set $A_{\rm s}$ equal to 40\% and 15\% of the maximum dihedral barrier (with the \textit{cis} conformation) for the terminal and internal torsions, respectively \cite{Nieto2006,Nieto2008}. For example, this corresponds to $A_{\rm s}/k_{\rm B} \approx 1000$ K and $\approx 375$ K for the CH$_3$-CH$_2$-CH$_2$-CH$_2$ and CH$_2$-CH$_2$-CH$_2$-CH$_2$ torsional potentials, respectively. The primary reason Nieto-Draghi et al. increase the torsional barrier, i.e., $A_{\rm s} > 0$, is because AUA4 under predicts $\eta$ by approximately 20~\% to 40~\%. However, despite the relatively large increase in the torsional barriers, the modified force field (AUA4m) typically provides only marginal improvement of 5~\% to 15~\% compared to AUA4 (see Tables 4 and 5 of Reference \citenum{Nieto2008}). 
 	
 	% The primary reason why Nieto-Draghi et al. introduce this additional term is to increase the torsional barriers and, thereby, increase the viscosity obtained with the AUA4m force field, which systematically under predicts $\eta$ by around 30~\%. Despite the fairly large increase in torsional barrier,
 	
@@ -695,25 +695,25 @@
 %				$T$ (K) & 	$\rho$ (kg/m$^3$) & 	$P$ (MPa) & 	$\eta_{\rm Potoff}$ (mPa-s) & 	$\eta_{\rm MCMC-nb}$ (mPa-s) & 	$\eta_{\rm MCMC-nb-tors}$ (mPa-s) \\ \hline
 				\multicolumn{1}{|c}{$T$ (K)} & \multicolumn{1}{|c}{$\rho$ (kg/m$^3$)} & \multicolumn{1}{|c}{$P$ (MPa)} & \multicolumn{3}{|c|}{$\eta$ (10$^{-3}$ Pa-s)} \\ \hline
 				 &  &  & Potoff & MCMC-nb & MCMC-nb-tors \\ \hline 
-				292.854$_{0.095}$ & 	716.46$_{0.46}$ & 	-2.08$_{0.83}$ & 	0.605$_{0.045}$ & 	0.555$_{0.016}$ & 	0.572$_{0.025}$ \\
-				292.851$_{0.085}$ & 	734.67$_{0.44}$ & 	22.9$_{1.1}$ & 	0.803$^{0.078}_{0.098}$ & 	0.743$_{0.029}$ & 	0.751$_{0.028}$ \\
-				292.847$_{0.089}$ & 	749.22$_{0.45}$ & 	47.9$_{1.2}$ & 	0.957$^{0.076}_{0.061}$ & 	0.970$_{0.037}$ & 	0.932$_{0.033}$ \\
-				292.85$_{0.10}$ & 	772.24$_{0.37}$ & 	98.3$_{1.3}$ & 	1.60$_{0.14}$ & 	1.43$^{0.066}_{0.21}$ & 	1.426$_{0.065}$ \\
-				292.838$_{0.088}$ & 	790.25$_{0.35}$ & 	148.3$_{1.6}$ & 	2.18$^{0.24}_{0.19}$ & 	2.134$_{0.098}$ & 	2.18$^{0.28}_{0.21}$ \\
-				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.28$^{0.34}_{0.52}$ & 	4.36$_{0.38}$ \\
-				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.61$_{0.79}$ & 	-- \\
-				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	26.6$^{3.8}_{3.1}$ & 	28.5$_{2.7}$ & 	-- \\
+				292.854$_{0.095}$ & 	716.46$_{0.46}$ & 	-2.08$_{0.83}$ & 	0.605$_{0.045}$ & 	0.565$^{0.048}_{0.038}$ & 	0.578$^{0.059}_{0.043}$ \\
+				292.851$_{0.085}$ & 	734.67$_{0.44}$ & 	22.9$_{1.1}$ & 	0.803$^{0.078}_{0.098}$ & 	0.786$^{0.079}_{0.062}$ & 	0.763$^{0.087}_{0.056}$ \\
+				292.847$_{0.089}$ & 	749.22$_{0.45}$ & 	47.9$_{1.2}$ & 	0.957$^{0.076}_{0.061}$ & 	0.965$^{0.099}_{0.070}$ & 	1.014$_{0.091}$ \\
+				292.85$_{0.10}$ & 	772.24$_{0.37}$ & 	98.3$_{1.3}$ & 	1.60$_{0.14}$ & 	1.50$_{0.11}$ & 	1.59$_{0.13}$ \\
+				292.838$_{0.088}$ & 	790.25$_{0.35}$ & 	148.3$_{1.6}$ & 	2.18$^{0.24}_{0.19}$ & 	2.10$^{0.21}_{0.17}$ & 	2.18$^{0.28}_{0.21}$ \\
+				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.25$_{0.34}$ & 	4.36$_{0.38}$ \\
+				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.5$_{1.2}$ & 	14.1$_{1.2}$ \\
+				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	26.6$^{3.8}_{3.1}$ & 	28.5$_{2.7}$ & 	28.6$_{3.1}$ \\
 				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	65.0$_{9.6}$ & 	66.2$_{7.5}$ & 	-- \\
 				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	164$_{21}$ & 	-- & 	-- \\
 				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	795$_{11}$ & 	450$^{42}_{25}$ & 	-- & 	-- \\
-				292.738$_{0.022}$ & 	912.7$_{1.0}$ & 	882$_{11}$ & 	1096$^{165}_{125}$ & 	-- & 	-- \\
+				292.738$_{0.022}$ & 	912.7$_{1.0}$ & 	901$_{11}$ & 	1390$^{165}_{125}$ & 	-- & 	-- \\
 				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3200$_{643}$ & 	-- & 	-- \\
 				\hline
 			\end{tabular}
 		\end{center} 
 	\end{table}
 	
-	The values from Table \ref{tab:tabulated_values} are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the Potoff values and the available experimental viscosity at saturation pressure \cite{TDE}. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between the McEwen-Paluch empirical model fit $(\eta_{\rm MP})$ and the simulation results, experimental data point, and the other three empirical model fits. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties and for visualizing the goodness of fit with the various empirical models.
+	The values from Table \ref{tab:tabulated_values} are also depicted in Figure \ref{fig:viscosity_pressure} along with the model fits to the Potoff values and the available experimental viscosity at saturation pressure \cite{TDE}. An inflection point, suggesting super-Arrhenius behavior, is observed in the top panel of Figure \ref{fig:viscosity_pressure} around 200 MPa. The bottom panel of Figure \ref{fig:viscosity_pressure} presents the percent deviation between the McEwen-Paluch empirical model fit $(\eta_{\rm MP})$ and the simulation results, experimental data point, and the other three empirical model fits. This panel is useful for comparing the Potoff, MCMC-nb, and MCMC-nb-tors uncertainties and for visualizing the goodness of fit with the various empirical models. For example, note that both the McEwen-Paluch and Roelands-Modified fits agree with nearly all of the simulation values to within their corresponding uncertainties. 
 	
 	\clearpage
 	\newpage
@@ -791,19 +791,19 @@
 			\begin{tabular}{|c|c|c|}
 				\hline
 				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
-				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	12.98$_{0.35}$ \\
-				25.0$_{1.0}$ & 	0.790$_{0.011}$ & 	10.314$_{0.040}$ \\
-				50.0$_{1.0}$ & 	1.005$_{0.012}$ & 	9.020$_{0.073}$ \\
-				100.0$_{1.0}$ & 	1.524$_{0.019}$ & 	7.837$_{0.074}$ \\
-				150.0$_{1.0}$ & 	2.224$_{0.033}$ & 	7.360$_{0.043}$ \\
-				250.0$_{1.0}$ & 	4.569$_{0.070}$ & 	7.139$_{0.042}$ \\
-				400.0$_{1.6}$ & 	13.61$_{0.28}$ & 	7.508$_{0.075}$ \\
-				500.0$_{2.0}$ & 	29.52$_{0.82}$ & 	7.996$_{0.077}$ \\
-				600.0$_{2.4}$ & 	67.7$_{2.4}$ & 	8.637$_{0.068}$ \\
-				700.0$_{2.8}$ & 	166.9$_{7.2}$ & 	9.434$_{0.094}$ \\
-				800.0$_{3.2}$ & 	449$_{23}$ & 	10.41$_{0.18}$ \\
-				900.0$_{3.6}$ & 	1347$_{96.2}$ & 	11.58$_{0.32}$ \\
-				1000.0$_{4.0}$ & 	4596$_{476}$ & 	13.01$_{0.48}$ \\
+				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	12.7$_{1.4}$ \\
+				25.0$_{1.0}$ & 	0.799$_{0.017}$ & 	10.165$_{0.079}$ \\
+				50.0$_{1.0}$ & 	1.012$_{0.018}$ & 	8.92$_{0.22}$ \\
+				100.0$_{1.0}$ & 	1.530$_{0.027}$ & 	7.79$_{0.20}$ \\
+				150.0$_{1.0}$ & 	2.229$_{0.051}$ & 	7.33$_{0.11}$ \\
+				250.0$_{1.0}$ & 	4.57$_{0.11}$ & 	7.14$_{0.10}$ \\
+				400.0$_{1.6}$ & 	13.65$_{0.42}$ & 	7.53$_{0.19}$ \\
+				500.0$_{2.0}$ & 	29.7$_{1.4}$ & 	8.02$_{0.19}$ \\
+				600.0$_{2.4}$ & 	68.2$_{4.4}$ & 	8.66$_{0.17}$ \\
+				700.0$_{2.8}$ & 	169$_{13}$ & 	9.46$_{0.22}$ \\
+				800.0$_{3.2}$ & 	455$_{42}$ & 	10.43$_{0.43}$ \\
+				900.0$_{3.6}$ & 	1367$_{173}$ & 	11.60$_{0.79}$ \\
+				1000.0$_{4.0}$ & 	4667$_{888}$ & 	13.0$_{1.2}$ \\
 				
 %				Old values
 %				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	13.66$_{0.32}$ \\
@@ -830,7 +830,7 @@
     
 %    For 224TMH, the CH$_3$ parameters contribute to the majority of non-bonded interactions (both between different molecules as well as the 1-5 and 1-6 interactions within the same molecule). Therefore, the relatively small uncertainties assigned to the CH$_3$ parameters (recall Figure \ref{fig:nonbonded_uncertainty}) are likely the cause for the negligible impact of non-bonded uncertainties.
     
-    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Previous studies suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we do not observe such a strong dependence. Specifically, the required increase in the torsional barriers is between 80~\% and 100~\% to achieve an increase of approximately 10~\% in viscosity (see Section \ref{SI:MCMC torsions} of Supporting Information).
+    By contrast, no clear explanation exists for why the torsional parameter uncertainties do not affect the overall uncertainty in $\eta$. Nieto-Draghi et al. suggest that a 15~\% to 40~\% increase in the torsional barriers should increase the viscosities appreciably for similar compounds \cite{Nieto2006,Nieto2008}. However, we do not observe such a strong dependence. Specifically, the required increase in the torsional barriers is between 80~\% and 100~\% to achieve an increase of approximately 10~\% in viscosity (see Section \ref{SI:MCMC torsions} of Supporting Information).
     
     % We propose that the discrepancy between our findings and those of Nieto-Draghi et al. arises as a consequence of differences between the force field forms
     
