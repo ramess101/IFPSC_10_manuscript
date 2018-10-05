@@ -609,8 +609,8 @@
 				500 & 8 \\
 				600 & 8 \\			     
 				700 & 16 \\
-				800 & 48 \\
-				900 & 64 \\
+				800 & 64 \\
+				900 & 72 \\
 				1000 & 96 \\
 				\hline        
 			\end{tabular}
@@ -682,7 +682,7 @@
 		
 	\section{Results} \label{Results}    
 	
-	Table \ref{tab:tabulated_values} provides tabulated values for viscosity $(\eta)$ and density $(\rho)$ for Potoff, MCMC-nb, and MCMC-nb-tors at the prescribed temperature $(T)$ and pressure $(P)$. The uncertainties (expressed at the 95~\% confidence level) for $T$, $\rho$, and $P$ are computed with the standard deviation of the replicate simulation averages, while those for $\eta$ are obtained from bootstrap re-sampling. Note that the average temperature slightly decreases with increasing pressure, but $T$ is always within the 0.3 K uncertainty stipulated by the IFPSC10 experimental measurements. Also, the average pressures tend to be lower than the prescribed pressure. For most state points, however, the combined uncertainty in pressure from experiment (the greater of 1 MPa and 0.4~\%) and simulation is sufficient to account for this discrepancy. 
+	Table \ref{tab:tabulated_values} provides tabulated values for viscosity $(\eta)$ and density $(\rho)$ for Potoff, MCMC-nb, and MCMC-nb-tors at the prescribed temperature $(T)$ and pressure $(P)$. Table \ref{tab:tabulated_values} also contains an additional state point between 900 and 1000 MPa (ca. 973 MPa). We include this value to reduce the uncertainties in the empirical model fits at high pressures. The uncertainties (expressed at the 95~\% confidence level) for $T$, $\rho$, and $P$ are computed with the standard deviation of the replicate simulation averages, while those for $\eta$ are obtained from bootstrap re-sampling. Note that the average temperature slightly decreases with increasing pressure, but $T$ is always within the 0.3 K uncertainty stipulated by the IFPSC10 experimental measurements. Also, the average pressures tend to be lower than the prescribed pressure. For most state points, however, the combined uncertainty in pressure from experiment (the greater of 1 MPa and 0.4~\%) and simulation is sufficient to account for this discrepancy. 
 	
 	\begin{table}[htb!]
 		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors. Subscripts and superscripts (when present) correspond to the lower and upper 95~\% confidence intervals, respectively. If only a subscript is present the lower and upper uncertainties are approximately equal (i.e., the bootstrap distribution is essentially symmetric) and only the average uncertainty is reported.} \label{tab:tabulated_values}
@@ -704,10 +704,11 @@
 				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.5$_{1.2}$ & 	14.1$_{1.2}$ \\
 				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	26.6$^{3.8}_{3.1}$ & 	28.5$_{2.7}$ & 	28.6$_{3.1}$ \\
 				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	65.0$_{9.6}$ & 	66.2$_{7.5}$ & 	-- \\
-				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	164$_{21}$ & 	-- & 	-- \\
-				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	795$_{11}$ & 	450$^{42}_{25}$ & 	-- & 	-- \\
-				292.738$_{0.022}$ & 	914.4$_{1.0}$ & 	899$_{11}$ & 	1390$^{165}_{125}$ & 	-- & 	-- \\
-				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3200$_{643}$ & 	-- & 	-- \\
+				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	175$_{29}$ & 	-- & 	-- \\
+				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	806$_{14}$ & 	501$_{68}$ & 	-- & 	-- \\
+				292.738$_{0.022}$ & 	914.4$_{1.0}$ & 	899$_{11}$ & 	1480$_{306}$ & 	-- & 	-- \\
+				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3528$_{372}$ & 	-- & 	-- \\
+				292.719$_{0.013}$ & 	923.7$_{1.2}$ & 	1000$_{17}$ & 	6107$_{554}$ & 	-- & 	-- \\
 				\hline
 			\end{tabular}
 		\end{center} 
