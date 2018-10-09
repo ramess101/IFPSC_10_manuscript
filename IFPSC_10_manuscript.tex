@@ -231,7 +231,7 @@
 		
 		\begin{abstract}
 			
-			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates obtained with equilibrium molecular dynamics for 2,2,4-trimethylhexane at 293 K and over a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified, and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting faster-than-exponential, a.k.a. super-Arrhenius, behavior with an inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
+			In response to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge, we report viscosity $(\eta)$ estimates obtained with equilibrium molecular dynamics for 2,2,4-trimethylhexane at 293 K and over a range of pressures $(P)$ from 0.1 MPa to 1000 MPa. The Potoff force field is utilized in this study, as a previous study demonstrated that it provides reliable estimates of $\eta$ with respect to $P$. Whereas most studies report only the uncertainties associated with random fluctuations in the simulation output and subsequent data analysis, we investigate the effect of uncertainties arising from the force field non-bonded and torsional parameters. The pressure-viscosity coefficient as a function of pressure is reported for several different empirical models, namely, McEwen-Paluch, Roelands, Roelands-Modified, and Barus. Although the uncertainties increase substantially with increasing pressure, cross-validation model selection provides quantitative evidence supporting faster-than-exponential, a.k.a. super-Arrhenius, behavior with an apparent inflection point in a log$_{10}(\eta)$-$P$ plot around 200 MPa.  
 			
 			%Cross-validation model selection is employed to verify that a super-Arrhenius empirical equation is required to reproduce simulation results. 		
 			
@@ -533,7 +533,7 @@
 	
     We utilize the same simulation specifications as our previous study \cite{Postdoc_3}. The general simulation specifications are provided in Table \ref{tab:sim_specs}. Good performance is achieved with a relatively long time-step of 2 fs because there are no fast vibrating modes. Specifically, all bond lengths are fixed and the UA model does not include explicit hydrogen sites. Bonds are constrained using LINear Constraint Solver (LINCS) with a LINCS-order of eight \cite{Hess1998,Hess2008}. 
        
-    Note that we employ a 1.4 nm non-bonded cut-off with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term) instead of the 1.0 nm cut-off utilized by Potoff's group \cite{Mie,Potoff_branched}. Although a 1.0 nm cut-off is reliable for most compounds, it can lead to spurious viscosity estimates and even unstable simulations for large molecules, e.g., \textit{n}-dodecane \cite{Postdoc_3}. For this reason, we incur the additional computational cost with the longer cut-off so as to avoid any unforeseen simulation anomalies \cite{Leonard2018}. 
+    Note that we employ a 1.4 nm non-bonded cut-off with analytical tail corrections (where GROMACS only includes the contribution from the $r^{-6}$ term) instead of the 1.0 nm cut-off utilized by Potoff's group \cite{Mie,Potoff_branched}. Although a 1.0 nm cut-off is reliable for most compounds, it can lead to spurious viscosity estimates and even unstable simulations for large molecules, e.g., \textit{n}-hexadecane and \textit{n}-docosane \cite{Postdoc_3}. For this reason, we incur the additional computational cost with the longer cut-off so as to avoid any unforeseen simulation anomalies \cite{Leonard2018}. 
 	
 	Finite size effects for viscosity are typically negligible with a 200 or 400 molecule system \cite{Postdoc_3,Kim2018}. The Potoff simulations utilize the larger system size only for $P \le 500$ MPa, while the smaller system size is favored at higher pressures due to the significant increase in simulation time (see Table \ref{tab:production times}). To reduce the computational cost, the MCMC-nb and MCMC-nb-tors simulations use 200 molecules at each pressure. Note that because viscosity is a collective property the uncertainty does not depend on the number of molecules.
 	 
@@ -555,7 +555,9 @@
 		\end{center}
 	\end{table}
 
-	We perform a sequence of six simulation stages: energy minimization, $NPT$ equilibration, $NPT$ production, energy minimization, $NVT$ equilibration, and $NVT$ production. The average box size from the $NPT$ production stage is utilized in the second energy minimization and subsequent $NVT$ stages. Table \ref{tab:thermostats_barostats} lists the integrators, thermostats, barostats, and simulation time used for each $NPT$ and $NVT$ equilibration and production stage. These specifications are also the same as our previous study, with the exception of the $NVT$ production simulation times, which are state point dependent. The specific production times for the $NVT$ production stage are provided in Table \ref{tab:production times}.
+	We perform a sequence of six simulation stages: energy minimization, $NPT$ equilibration, $NPT$ production, energy minimization, $NVT$ equilibration, and $NVT$ production. The average box size from the $NPT$ production stage is utilized in the second energy minimization and subsequent $NVT$ stages. Table \ref{tab:thermostats_barostats} lists the integrators, thermostats, barostats, and simulation time used for each $NPT$ and $NVT$ equilibration and production stage. These specifications are also the same as our previous study, with the exception of the $NVT$ production simulation times, which are state point dependent. The specific production times for the $NVT$ production stage are provided in Table \ref{tab:production times}. Note in Table \ref{tab:production times} that we include simulations at an additional pressure of 975 MPa to reduce the uncertainties in our high pressure viscosity estimates. 
+	
+	%in the empirical model fits at high pressures.
 
 %	\begin{table}[htbp!]
 %		\caption{Simulation specifications for equilibration (Equil.) and production (Prod.) stages.} \label{tab:thermostats_barostats}
@@ -611,6 +613,7 @@
 				700 & 16 \\
 				800 & 64 \\
 				900 & 72 \\
+				975 & 96 \\
 				1000 & 96 \\
 				\hline        
 			\end{tabular}
@@ -631,7 +634,7 @@
 	\end{equation} 
 	where $t$ is time, $V$ is volume, $N_{\rm reps}$ is the number of independent replicate simulations, $\alpha$ and $\beta$ are $x, y, $ or $z$ Cartesian coordinates, $\tau_{\alpha\beta,n}$ is the $\alpha$-$\beta$ off-diagonal atomic stress tensor element for the $n^{\rm th}$ replicate, and $\langle \cdots \rangle_{t_0,\alpha\beta}$ denotes an average over twelve different time origins $(t_0)$ and all three unique off-diagonal $\tau_{\alpha\beta}$ components. 
 	
-	For an accurate integration of Equation \ref{eq:Green_Kubo}, $\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for $P \le 700$ MPa. Less-frequent recording of $\tau_{\alpha\beta,n}$ is required to avoid unmanageable file sizes for the three highest pressures, as these systems require significantly longer simulations. Specifically, we record $\tau_{\alpha\beta,n}$ every 18 fs (9 time-steps) for $P = 800$ MPa, every 24 fs (12 time-steps) for $P = 900$ MPa, and every 36 fs (18 time-steps) for $P = 1000$ MPa. We validate the results at high pressures with less-frequent recording of $\tau_{\alpha\beta,n}$ in Section \ref{SI:Output frequency} of Supporting Information.  
+	For an accurate integration of Equation \ref{eq:Green_Kubo}, $\tau_{\alpha\beta,n}$ is recorded every 6 fs (3 time-steps) for $P \le 700$ MPa. Less-frequent recording of $\tau_{\alpha\beta,n}$ is required to avoid unmanageable file sizes for the three highest pressures, as these systems require significantly longer simulations. Specifically, we record $\tau_{\alpha\beta,n}$ every 18 fs (9 time-steps) for $P = 800$ MPa, every 24 fs (12 time-steps) for $P = 900$ MPa, and every 36 fs (18 time-steps) for $P = 975$ and $1000$ MPa. We validate the results at high pressures with less-frequent recording of $\tau_{\alpha\beta,n}$ in Section \ref{SI:Output frequency} of Supporting Information.  
 	
 %	Equation \ref{eq:Green_Kubo} also averages $N_{\rm reps}$ independent replicate simulations.
 	
@@ -682,7 +685,9 @@
 		
 	\section{Results} \label{Results}    
 	
-	Table \ref{tab:tabulated_values} provides tabulated values for viscosity $(\eta)$ and density $(\rho)$ for Potoff, MCMC-nb, and MCMC-nb-tors at the prescribed temperature $(T)$ and pressure $(P)$. Table \ref{tab:tabulated_values} also contains an additional state point between 900 and 1000 MPa (ca. 973 MPa). We include this value to reduce the uncertainties in the empirical model fits at high pressures. The uncertainties (expressed at the 95~\% confidence level) for $T$, $\rho$, and $P$ are computed with the standard deviation of the replicate simulation averages, while those for $\eta$ are obtained from bootstrap re-sampling. Note that the average temperature slightly decreases with increasing pressure, but $T$ is always within the 0.3 K uncertainty stipulated by the IFPSC10 experimental measurements. Also, the average pressures tend to be lower than the prescribed pressure. For most state points, however, the combined uncertainty in pressure from experiment (the greater of 1 MPa and 0.4~\%) and simulation is sufficient to account for this discrepancy. 
+	Table \ref{tab:tabulated_values} provides tabulated values for viscosity $(\eta)$ and density $(\rho)$ for Potoff, MCMC-nb, and MCMC-nb-tors at the prescribed temperature $(T)$ and pressure $(P)$. The uncertainties (expressed at the 95~\% confidence level) for $T$, $\rho$, and $P$ are computed with the standard deviation of the replicate simulation averages, while those for $\eta$ are obtained from bootstrap re-sampling. Note that the average temperature slightly decreases with increasing pressure, but $T$ is always within the 0.3 K uncertainty stipulated by the IFPSC10 experimental measurements. Also, the average pressures tend to be lower than the prescribed pressure. For most state points, however, the combined uncertainty in pressure from experiment (the greater of 1 MPa and 0.4~\%) and simulation is sufficient to account for this discrepancy. 
+	
+	%Table \ref{tab:tabulated_values} also contains simulation results at an additional pressure of approximately 975 MPa. We include this state point to reduce the uncertainties in the empirical model fits at high pressures.
 	
 	\begin{table}[htb!]
 		\caption{Simulation results for Potoff, MCMC-nb, and MCMC-nb-tors. Subscripts and superscripts (when present) correspond to the lower and upper 95~\% confidence intervals, respectively. If only a subscript is present the lower and upper uncertainties are approximately equal (i.e., the bootstrap distribution is essentially symmetric) and only the average uncertainty is reported.} \label{tab:tabulated_values}
@@ -703,12 +708,12 @@
 				292.819$_{0.096}$ & 	818.22$_{0.31}$ & 	248.5$_{2.0}$ & 	4.56$_{0.45}$ & 	4.25$_{0.34}$ & 	4.36$_{0.38}$ \\
 				292.816$_{0.090}$ & 	849.17$_{0.38}$ & 	398.7$_{2.7}$ & 	13.5$_{1.2}$ & 	12.5$_{1.2}$ & 	14.1$_{1.2}$ \\
 				292.790$_{0.099}$ & 	865.64$_{0.49}$ & 	498.4$_{4.6}$ & 	26.6$^{3.8}_{3.1}$ & 	28.5$_{2.7}$ & 	28.6$_{3.1}$ \\
-				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	65.0$_{9.6}$ & 	66.2$_{7.5}$ & 	-- \\
+				292.774$_{0.055}$ & 	879.9$_{1.2}$ & 	598.5$_{9.5}$ & 	65.0$_{9.6}$ & 	66.2$_{7.5}$ & 	61.8$^{6.8}_{4.8}$ \\
 				292.763$_{0.041}$ & 	892.6$_{1.2}$ & 	698$_{10}$ & 	175$_{29}$ & 	-- & 	-- \\
-				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	806$_{14}$ & 	501$_{68}$ & 	-- & 	-- \\
-				292.738$_{0.022}$ & 	914.4$_{1.0}$ & 	899$_{11}$ & 	1480$_{306}$ & 	-- & 	-- \\
+				292.752$_{0.026}$ & 	903.5$_{1.1}$ & 	806$_{14}$ & 	523$_{68}$ & 	-- & 	-- \\
+				292.738$_{0.022}$ & 	914.4$_{1.0}$ & 	899$_{11}$ & 	1480$_{206}$ & 	-- & 	-- \\
 				292.725$_{0.020}$ & 	921.2$_{1.1}$ & 	973$_{16}$ & 	3528$_{372}$ & 	-- & 	-- \\
-				292.719$_{0.013}$ & 	923.7$_{1.2}$ & 	1000$_{17}$ & 	6107$_{554}$ & 	-- & 	-- \\
+				292.719$_{0.013}$ & 	923.7$_{1.2}$ & 	1000$_{17}$ & 	4948$_{554}$ & 	-- & 	-- \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -760,7 +765,7 @@
 	
 	Although the hybrid McEwen-Paluch model clearly reproduces the simulation results with lower deviations than those of the Roelands and Barus models (see Figures \ref{fig:viscosity_pressure} and \ref{fig:cross_validation}), this should be anticipated considering the McEwen-Paluch model has five fitting parameters while the Barus and Roelands models only have two. Note that the four parameter Roelands-Modified model also has lower deviations than the Roelands and Barus models. Therefore, it is possible that the McEwen-Paluch model actually over fits our simulation results. 
 	
-	To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the Potoff simulation results (9 pressures) are included in the training set while 30~\% (4 pressures) are excluded for the testing set. The $\eta$ value at a given pressure is randomly sampled from the bootstrapped simulation uncertainties, such that the complete set of 13 $\eta$ values varies for each round of cross-validation.
+	To assess this possibility, Figure \ref{fig:cross_validation} presents the cross-validation results for each model. Specifically, we implement a Monte Carlo cross-validation scheme where thousands of random sub-samples are selected for the training and testing set. Approximately 70~\% of the Potoff simulation results (10 pressures) are included in the training set while 30~\% (4 pressures) are excluded for the testing set. The $\eta$ value at a given pressure is randomly sampled from the bootstrapped simulation uncertainties, such that the complete set of 14 $\eta$ values varies for each round of cross-validation.
 	
 	% Specifically, according to the $\eta$ bootstrap uncertainties. 
 	
@@ -771,14 +776,16 @@
 		\label{fig:cross_validation}
 	\end{figure}
 	
-	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models over fit the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set is ``easier'' to fit than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, Figre \ref{fig:cross_validation} provides strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope of $\alpha$ with respect to $P$ changes signs, there exists some doubt whether an inflection point precedes the super-Arrhenius region.
+	The left panel of Figure \ref{fig:cross_validation} demonstrates that the mean-squared-error (MSE) for the training set is approximately equal to the MSE for the testing set of each model, suggesting that none of the models over fit the data. Note that, although somewhat counter intuitive, MSE$_{\rm test} < $ MSE$_{\rm train}$ typically denotes that the training set is ``easier'' to fit than the testing set. The right panel shows that only the Roelands-Modified model has a similar MSE to that of the McEwen-Paluch model for the same testing set. As both the Roelands-Modified and McEwen-Paluch models predict super-Arrhenius behavior, Figure \ref{fig:cross_validation} provides strong statistical evidence that the Potoff force field predicts super-Arrhenius behavior. However, as the Roelands-Modified model does not predict that the slope of $\alpha$ with respect to $P$ changes signs, there exists some doubt whether an inflection point precedes the super-Arrhenius region.
 	
 	%	an inflection point followed by super-Arrhenius behavior 
 	
 	%	To quantitatively verify that the Potoff-MCMC force field predicts super-Arrhenius behavior at high pressures, we perform cross-validation between Equations BLANK and BLANK. 
 	%	
 	
-	Table \ref{tab:smoothed_values} is included to facilitate scoring our entry for the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Table \ref{tab:smoothed_values} provides ``smoothed'' $\eta$ and $\alpha$ values calculated with the McEwen-Paluch fit $(\eta_{\rm MP})$ to the Potoff simulation results. As our initial fit under estimated the Potoff $\eta$ value at atmospheric pressure, the values in Table \ref{tab:smoothed_values} are obtained by constraining $\eta_0$ in Equation \ref{eq:McEwen-Paluch} to reproduce the simulated viscosity at $P = 0.1$ MPa. Note that the uncertainty in $\eta$ at 1000 MPa is considerably larger than at the other pressures. As the simulation pressure is nearly 30 MPa lower than the prescribed 1000 MPa (see Table \ref{tab:tabulated_values}), the increased uncertainty in the McEwen-Paluch fit is caused by this extrapolation to 1000 MPa.
+	Table \ref{tab:smoothed_values} is included to facilitate scoring our entry for the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Table \ref{tab:smoothed_values} provides ``smoothed'' $\eta$ and $\alpha$ values calculated with the McEwen-Paluch fit $(\eta_{\rm MP})$ to the Potoff simulation results. As our initial fit under estimated the Potoff $\eta$ value at atmospheric pressure, the values in Table \ref{tab:smoothed_values} are obtained by constraining $\eta_0$ in Equation \ref{eq:McEwen-Paluch} to reproduce the simulated viscosity at $P = 0.1$ MPa. Note that, despite performing simulations at both 975 and 1000 MPa, the uncertainty in $\eta$ at 1000 MPa is considerably larger than at the other pressures. 
+	
+	%Recall that simulation results at 975 MPa  As the simulation pressure is nearly 30 MPa lower than the prescribed 1000 MPa (see Table \ref{tab:tabulated_values}), the increased uncertainty in the McEwen-Paluch fit is caused by this extrapolation to 1000 MPa.
 	
 	The uncertainties in Table \ref{tab:smoothed_values} reflect both the simulation and experimental pressure uncertainties. Specifically, the McEwen-Paluch model is fit thousands of times using bootstrap re-sampling. Each fit is subsequently evaluated at $P^{\rm exp} \pm u_P^{\rm exp}$, where $u_P^{\rm exp}$ is the reported uncertainty in the experimental pressure $(P^{\rm exp})$. The lower and upper 95~\% confidence intervals are obtained from the distributions of $\eta_{\rm MP}$ computed at $P^{\rm exp} - u_P^{\rm exp}$ and $P^{\rm exp} + u_P^{\rm exp}$, respectively.
 	
@@ -787,24 +794,40 @@
 	%  over a range of  different values of $P$ that are sampled from a normal distribution with the standard deviation equal to $. 
 	
 	\begin{table}[htb!]
-		\caption{Recommended simulation results for the purpose of scoring our entry to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Uncertainties are expressed at the 95~\% confidence level. Pressure uncertainties are those reported for the experimental measurements.} \label{tab:smoothed_values}
+		\caption{Recommended (smoothed) values for the purpose of scoring our entry to the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Uncertainties are expressed at the 95~\% confidence level. Pressure uncertainties are those reported for the experimental measurements.} \label{tab:smoothed_values}
 		\begin{center}
 			\begin{tabular}{|c|c|c|}
 				\hline
 				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
-				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	12.7$_{1.4}$ \\
-				25.0$_{1.0}$ & 	0.799$_{0.017}$ & 	10.165$_{0.079}$ \\
-				50.0$_{1.0}$ & 	1.012$_{0.018}$ & 	8.92$_{0.22}$ \\
-				100.0$_{1.0}$ & 	1.530$_{0.027}$ & 	7.79$_{0.20}$ \\
-				150.0$_{1.0}$ & 	2.229$_{0.051}$ & 	7.33$_{0.11}$ \\
-				250.0$_{1.0}$ & 	4.57$_{0.11}$ & 	7.14$_{0.10}$ \\
-				400.0$_{1.6}$ & 	13.65$_{0.42}$ & 	7.53$_{0.19}$ \\
-				500.0$_{2.0}$ & 	29.7$_{1.4}$ & 	8.02$_{0.19}$ \\
-				600.0$_{2.4}$ & 	68.2$_{4.4}$ & 	8.66$_{0.17}$ \\
-				700.0$_{2.8}$ & 	169$_{13}$ & 	9.46$_{0.22}$ \\
-				800.0$_{3.2}$ & 	455$_{42}$ & 	10.43$_{0.43}$ \\
-				900.0$_{3.6}$ & 	1367$_{173}$ & 	11.60$_{0.79}$ \\
-				1000.0$_{4.0}$ & 	4667$_{888}$ & 	13.0$_{1.2}$ \\
+				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	13.1$_{1.8}$ \\
+				25.0$_{1.0}$ & 	0.801$_{0.018}$ & 	10.168$_{0.091}$ \\
+				50.0$_{1.0}$ & 	1.014$_{0.018}$ & 	8.87$_{0.26}$ \\
+				100.0$_{1.0}$ & 	1.528$_{0.028}$ & 	7.74$_{0.23}$ \\
+				150.0$_{1.0}$ & 	2.222$_{0.055}$ & 	7.31$_{0.11}$ \\
+				250.0$_{1.0}$ & 	4.56$_{0.12}$ & 	7.16$_{0.11}$ \\
+				400.0$_{1.6}$ & 	13.68$_{0.39}$ & 	7.59$_{0.21}$ \\
+				500.0$_{2.0}$ & 	29.9$_{1.5}$ & 	8.10$_{0.22}$ \\
+				600.0$_{2.4}$ & 	69.5$_{4.8}$ & 	8.77$_{0.18}$ \\
+				700.0$_{2.8}$ & 	174$_{15}$ & 	9.58$_{0.20}$ \\
+				800.0$_{3.2}$ & 	475$_{44}$ & 	10.57$_{0.41}$ \\
+				900.0$_{3.6}$ & 	1449$_{177}$ & 	11.77$_{0.78}$ \\
+				1000.0$_{4.0}$ & 	5040$_{863}$ & 	13.2$_{1.1}$ \\
+				
+% 				Old values
+%				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
+%				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	12.7$_{1.4}$ \\
+%				25.0$_{1.0}$ & 	0.799$_{0.017}$ & 	10.165$_{0.079}$ \\
+%				50.0$_{1.0}$ & 	1.012$_{0.018}$ & 	8.92$_{0.22}$ \\
+%				100.0$_{1.0}$ & 	1.530$_{0.027}$ & 	7.79$_{0.20}$ \\
+%				150.0$_{1.0}$ & 	2.229$_{0.051}$ & 	7.33$_{0.11}$ \\
+%				250.0$_{1.0}$ & 	4.57$_{0.11}$ & 	7.14$_{0.10}$ \\
+%				400.0$_{1.6}$ & 	13.65$_{0.42}$ & 	7.53$_{0.19}$ \\
+%				500.0$_{2.0}$ & 	29.7$_{1.4}$ & 	8.02$_{0.19}$ \\
+%				600.0$_{2.4}$ & 	68.2$_{4.4}$ & 	8.66$_{0.17}$ \\
+%				700.0$_{2.8}$ & 	169$_{13}$ & 	9.46$_{0.22}$ \\
+%				800.0$_{3.2}$ & 	455$_{42}$ & 	10.43$_{0.43}$ \\
+%				900.0$_{3.6}$ & 	1367$_{173}$ & 	11.60$_{0.79}$ \\
+%				1000.0$_{4.0}$ & 	4667$_{888}$ & 	13.0$_{1.2}$ \\
 				
 %				Old values
 %				0.1$_{1.0}$ & 	0.605$_{0.045}$ & 	13.66$_{0.32}$ \\
@@ -855,7 +878,9 @@
 	
 %	The slow system dynamics (i.e., long rotational relaxation times) at high pressures require extremely long simulations and a large number of replicates. An attractive alternative is the so-called time-temperature superposition method, where simulations are performed at higher temperatures (to enhance the configurational sampling) and the viscosity at 293 K is obtained through extrapolation \citenum{Liu2015}. Despite some obvious benefits, we are wary of the inordinately large uncertainties that this method can produce (see Figure 11 of Ref. \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. For this reason, we choose the more arduous brute-force approach.
 	
-	The slow system dynamics (i.e., long rotational relaxation times) at high pressures require extremely long simulations and a large number of replicates. Two attractive alternatives exist to enhance the configuration sampling by performing simulations at higher temperatures. The viscosity at the desired temperature is then obtained indirectly. For example, the so-called time-temperature superposition method combines the shear rate dependent viscosity at different (higher) temperatures into a single master curve for estimating viscosity at any temperature \cite{Khabaz2018}. However, we do not implement this approach as it is only applicable to NEMD simulations. An even simpler method, which is compatible with both NEMD and EMD, is to fit the high-temperature viscosity values with an empirical model, e.g., the Vogel-Fulcher-Tammann-Hesse (VFTH) equation, and to then extrapolate to the desired temperature \cite{Liu2015,Khabaz2018}. Despite some obvious benefits, we are wary of the inordinately large uncertainties that this method can produce (see Figure 11 of Reference \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. For this reason, we choose the more arduous brute-force approach.	
+	The slow system dynamics (i.e., long rotational relaxation times) at high pressures require extremely long simulations. Two attractive alternatives exist to enhance the configuration sampling by performing simulations at higher temperatures. The viscosity at the desired temperature is then obtained indirectly. 
+	
+	For example, the so-called time-temperature superposition method (TTS) combines the shear rate dependent viscosity at different (higher) temperatures into a single master curve for estimating viscosity at any temperature \cite{Khabaz2018}. Unfortunately, TTS is only applicable to NEMD simulations. An even simpler method, which is compatible with both NEMD and EMD, is to fit high-temperature viscosity values with an empirical model, e.g., the Vogel-Fulcher-Tammann-Hesse (VFTH) equation, and to then extrapolate to the desired temperature \cite{Liu2015,Khabaz2018}. Despite some obvious benefits, we are wary of the inordinately large uncertainties that this method can produce (see Figure 11 of Reference \citenum{Liu2015}). Determining the existence of super-Arrhenius behavior necessitates manageable uncertainties at high pressures. Another clear disadvantage of both methods is the need to simulate at multiple temperatures, while IFPSC10 only requires viscosity estimates at 293 K. For these reasons, we choose the more direct brute-force approach.	
 	
 %	Although time-temperature superposition is an attractive alternative, we are weary of the inordinately large uncertainties that this method can produce. If there is any hope to determine the existence of super-Arrhenius behavior, the uncertainties at high pressures must be manageable. 
 %	
