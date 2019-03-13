@@ -140,17 +140,17 @@
 \newenvironment{myequation}{%
 	\addtocounter{equation}{-1}
 	\refstepcounter{defcounter}
-	\renewcommand\theequation{SI.\thedefcounter}
+	\renewcommand\theequation{S.\thedefcounter}
 	\begin{equation*}}
 {\end{equation*}}
 
-\renewcommand{\thefigure}{SI.\arabic{figure}}
+\renewcommand{\thefigure}{S.\arabic{figure}}
 
-\renewcommand{\thepage}{SI.\arabic{page}}
+\renewcommand{\thepage}{S.\arabic{page}}
 
-\renewcommand{\thesection}{SI.\Roman{section}}
+\renewcommand{\thesection}{S.\Roman{section}}
 
-\renewcommand{\thetable}{SI.\Roman{table}}
+\renewcommand{\thetable}{S.\Roman{table}}
 
 \makeatletter
 \newcommand*{\addFileDependency}[1]{% argument=file name and extension
@@ -197,7 +197,7 @@
 		%% \address{Address\fnref{label3}}
 		%% \fntext[label3]{}
 		
-		\title{Supporting Information: Mie 16-6 force field predicts viscosity with faster-than-exponential pressure dependence for 2,2,4-trimethylhexane}
+		\title{Supplementary Material: Mie 16-6 force field predicts viscosity with faster-than-exponential pressure dependence for 2,2,4-trimethylhexane}
 		
 		%% use optional labels to link authors explicitly to addresses:
 		%% \author[label1,label2]{}
@@ -221,10 +221,36 @@
 		\ead{elliot1@uakron.edu}
 				
 	\end{frontmatter}	
+
+	\section{Experimental data} \label{SI:Exp data}
+
+	\begin{table}[htb!]
+		\caption{Experimental data used for scoring the 10$^{\rm th}$ Industrial Fluid Properties Simulation Challenge. Details found at http://fluidproperties.org/10th-benchmarks.} \label{tab:smoothed_values}
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$P$ (MPa) & 	$\eta$ (10$^{-3}$ Pa-s) & 	$\alpha$ (1/GPa) \\ \hline
+				0.1$_{1.0}$ & 	0.64$_{0.02}$ & 	-- \\
+				25.0$_{1.0}$ & 	0.844$_{0.025}$ & 	-- \\
+				50.0$_{1.0}$ & 	1.101$_{0.033}$ & 	-- \\
+				100.0$_{1.0}$ & 	1.71$_{0.05}$ & 	-- \\
+				150.0$_{1.0}$ & 	2.54$_{0.08}$ & 	-- \\
+				250.0$_{1.0}$ & 	5.13$_{0.15}$ & 	-- \\
+				400.0$_{1.6}$ & 	15.0$_{0.5}$ & 	-- \\
+				500.0$_{2.0}$ & 	30.9$_{0.9}$ & 	-- \\
+				600.0$_{2.4}$ & 	62.9$_{1.9}$ & 	-- \\
+				700.0$_{2.8}$ & 	126.9$_{3.8}$ & 	-- \\
+				800.0$_{3.2}$ & 	264$_{8}$ & 	-- \\
+				900.0$_{3.6}$ & 	558$_{17}$ & 	7.52$_{0.23}$ \\
+				1000.0$_{4.0}$ & 	1187$_{36}$ & 	-- \\
+				\hline
+			\end{tabular}
+		\end{center} 
+	\end{table} 
 		
 	\section{Input files} \label{SI:Gromacs input files}
 	
-	We provide example input files for simulating 2,2,4-trimethylhexane at 293 K with the Potoff force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
+	We provide example input files for simulating 2,2,4-trimethylhexane at 293 K with the MiPPE force field in GROMACS (see attached .gro, .top, and .mdp files). Additionally, all files necessary to generate the results from this study can be found at \newline www.github.com/ramess101/IFPSC\_10.
 	
     \clearpage
 	\newpage
@@ -239,7 +265,7 @@
 	\begin{equation} \label{eq:log-alpha}
 	\ln(\alpha) = \ln(L(D|\theta_{\rm new})) - \ln(L(D|\theta_{\rm old}))
 	\end{equation}
-	By contrast, Mick et al. optimize the Potoff CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. This section describes how we translate the scoring function into a log-likelihood function, to then implement in MCMC.
+	By contrast, Mick et al. optimize the MiPPE CH and C parameters using a scoring function $(S)$ that weights the deviations for several different properties and their derivatives. This section describes how we translate the scoring function into a log-likelihood function, to then implement in MCMC.
 	
 	\subsection{Derivation}
 		
@@ -275,14 +301,14 @@
 	which only depends on $WSSE$.
 	
 	
-	Potoff's scoring function $(S)$ is not simply the sum-squared-error or even the weighted-sum-squared-error. $S$ is expressed in terms of the absolute percent deviation and each property is assigned a different weight that is not necessarily the inverse variance ($\sigma_i^{-2}$). Therefore, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution for neither constant nor varying $\sigma$. However, we can still apply the maximum likelihood criterion for Potoff's scoring function such that
+	The MiPPE scoring function $(S)$ is not simply the sum-squared-error or even the weighted-sum-squared-error. $S$ is expressed in terms of the absolute percent deviation and each property is assigned a different weight that is not necessarily the inverse variance ($\sigma_i^{-2}$). Therefore, minimizing $S$ is not equivalent to maximizing the likelihood of a normal distribution for neither constant nor varying $\sigma$. However, we can still apply the maximum likelihood criterion for the MiPPE scoring function such that
 %	\begin{multline} \label{eq:scoring-likelihood}
 %	L(D|\theta) = \prod_i C_i \exp\left[w_i|y(\theta)-D_i|\right] = C \exp\left[\sum_i w_i|y(\theta)-D_i|\right] \\ = C \exp\left(-S(\theta)\right)
 %	\end{multline}
 	\begin{equation} \label{eq:scoring-likelihood}
 	L(D|\theta) = \prod_i C_i \exp\left(w_i\left|\frac{y(\theta)-D_i}{D_i}\right|\right) = C \exp\left(\sum_i w_i\left|\frac{y(\theta)-D_i}{D_i}\right|\right) = C \exp\left(-S(\theta)\right)
 	\end{equation}
-	where $C_i$ and $C$ are normalization constants, and $w_i$ are the weights assigned by Potoff (e.g., 0.6135 for saturated liquid density). Note that although Equation \ref{eq:scoring-likelihood} utilizes an absolute percent deviation, rather than a weighted-sum-squared-error, the final expression is still analogous to Equation \ref{eq:weighted-likelihood}. Therefore, the log-likelihood for Potoff's scoring function is
+	where $C_i$ and $C$ are normalization constants, and $w_i$ are the weights assigned for MiPPE (e.g., 0.6135 for saturated liquid density). Note that although Equation \ref{eq:scoring-likelihood} utilizes an absolute percent deviation, rather than a weighted-sum-squared-error, the final expression is still analogous to Equation \ref{eq:weighted-likelihood}. Therefore, the log-likelihood for the MiPPE scoring function is
 	\begin{equation}
 	\ln(L(D|\theta)) = \ln(C) -S(\theta)
 	\end{equation}
@@ -290,7 +316,7 @@
 	\begin{equation} \label{eq:log-score}
 	\ln(\alpha) = S(\theta_{\rm old}) - S(\theta_{\rm new})
 	\end{equation}
-	which only depends on Potoff's scoring function, $S$.
+	which only depends on the MiPPE scoring function, $S$.
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Rough draft
 %	
@@ -495,7 +521,7 @@
 
 	\section{MCMC validation} \label{SI:MCMC_analysis}
 	
-	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, as in the main text, a single replicate simulation is performed for each MCMC-nb parameter set and the results are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, 40 replicate simulations are performed for 30 sets of MCMC-nb parameters, bootstrap re-sampling is performed independently for each set of 40 replicates, and the overall uncertainty is obtained by combining the 30 bootstrapped distributions ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at 137 K and saturated liquid density using the Potoff force field. 
+	This section validates the combined bootstrap re-sampling and MCMC approach. Specifically, we compare the uncertainties (depicted as histograms) obtained in two different manners. First, as in the main text, a single replicate simulation is performed for each MCMC-nb parameter set and the results are pooled together for bootstrap re-sampling ($N_{\rm reps} = 1$, $N_{\rm MCMC} = 40$). Second, 40 replicate simulations are performed for 30 sets of MCMC-nb parameters, bootstrap re-sampling is performed independently for each set of 40 replicates, and the overall uncertainty is obtained by combining the 30 bootstrapped distributions ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 30$). Due to the large amount of simulations required for this comparison, we perform this analysis on a simpler system, namely, ethane at 137 K and saturated liquid density using the MiPPE force field. 
 	
 	Figure \ref{fig:MCMC_validation} demonstrates that the uncertainties are nearly indistinguishable for the two methods. This provides empirical evidence that performing a single simulation with each MCMC parameter set provides the same uncertainty as performing numerous simulations with each MCMC parameter set. Also of interest is that the numerical uncertainties ($N_{\rm reps} = 40$, $N_{\rm MCMC} = 1$) are much smaller than the overall uncertainties, suggesting that parameter uncertainty plays a larger role for ethane than for the challenge compound.
 	
@@ -524,9 +550,9 @@
 %	While Nieto-Draghi et al. propose that the internal and terminal torsions be increased by 15~\% and 40~\%, respectively,  
 	
 	
-	In this section, we develop the skewed normal distribution for $A_{\rm s}$, where the respective lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with Potoff are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, unlike Nieto-Draghi et al., we also consider $A_{\rm s} < 0$.
+	In this section, we develop the skewed normal distribution for $A_{\rm s}$, where the respective lower and upper 95~\% confidence intervals correspond to -15~\% and +40~\% of the maximum torsional barrier. The viscosity values obtained with MiPPE are considerably higher than those obtained with AUA4. Therefore, it is feasible, especially at higher pressures, that the optimal value of $A_{\rm s}$ is negative, i.e., the viscosity may be too high and, thus, decreasing the torsional barriers might improve the viscosity estimates. For this reason, unlike Nieto-Draghi et al., we also consider $A_{\rm s} < 0$.
 	
-	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. $A_{\rm s}$ is expressed as a percentage of the maximum for the non-shifted torsional potential. The viscosities in Figure \ref{fig:sensitivity_torsions} for 2,2,4-trimethylhexane are computed at 293 K and atmospheric pressure with 200 molecules and the Potoff force field. Also depicted is the only available experimental viscosity value at the same temperature and saturation pressure. 	 
+	To determine the appropriate scaling of the torsional barriers, Figure \ref{fig:sensitivity_torsions} presents a sensitivity analysis of $\eta$ with respect to $A_{\rm s}$. $A_{\rm s}$ is expressed as a percentage of the maximum for the non-shifted torsional potential. The viscosities in Figure \ref{fig:sensitivity_torsions} for 2,2,4-trimethylhexane are computed at 293 K and atmospheric pressure with 200 molecules and the MiPPE force field. Also depicted is the only experimental viscosity value available in the NIST ThermoData Engine (TDE) prior to IFPSC10 at the same temperature and saturation pressure. 	 
 	
 	\begin{figure}[htb!]
 		\centering

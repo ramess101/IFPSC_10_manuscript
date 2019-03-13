@@ -1,7 +1,7 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Methods}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Force field}{section.2}% 3
-\BOOKMARK [3][-]{subsubsection.2.1.1}{Potoff force field}{subsection.2.1}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.1}{MiPPE force field}{subsection.2.1}% 4
 \BOOKMARK [3][-]{subsubsection.2.1.2}{Parameter uncertainty}{subsection.2.1}% 5
 \BOOKMARK [2][-]{subsection.2.2}{Simulation set-up}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.3}{Data analysis}{section.2}% 7
