@@ -525,7 +525,13 @@
 	
 	\subsection{Simulation set-up}
 		
-	Historically, non-equilibrium molecular dynamics (NEMD) has been preferred for highly viscous systems \cite{McCabe2001,Liu2015}. However, in our recent publication we successfully predicted the viscosity of 2,2,4-trimethylpentane at 293 K and 1000 MPa (the highest pressure required for the challenge) with equilibrium molecular dynamics (EMD) \cite{Postdoc_3}. Consistent with our previous study, we perform EMD simulations using GROMACS version 2018 with ``mixed'' (single and double) precision \cite{GROMACS_2018}. Example GROMACS input files (.top, .gro. and .mdp) with corresponding shell and Python scripts for preparing, running, and analyzing simulations are provided in Section \ref{SI:Gromacs input files} of Supplementary Material.
+%	Historically, non-equilibrium molecular dynamics (NEMD) has been preferred for highly viscous systems \cite{McCabe2001,Liu2015}. However, in our recent publication we successfully predicted the viscosity of 2,2,4-trimethylpentane at 293 K and 1000 MPa (the highest pressure required for the challenge) with equilibrium molecular dynamics (EMD) \cite{Postdoc_3}. 
+
+%Although non-equilibrium molecular dynamics (NEMD) is a common approach for simulating highly viscous systems \cite{McCabe2001,Liu2015}, we utilize equilibrium molecular dynamics (EMD) in this study. In our recent publication, we successfully implemented EMD to predict the viscosity of 2,2,4-trimethylpentane at 293 K and 1000 MPa (the highest pressure required for the challenge) \cite{Postdoc_3}.
+
+In our recent publication, we successfully implemented equilibrium molecular dynamics (EMD) to predict the viscosity of 2,2,4-trimethylpentane at 293 K and 1000 MPa (the highest pressure required for the challenge) \cite{Postdoc_3}. Although non-equilibrium molecular dynamics (NEMD) is a common approach for simulating highly viscous systems \cite{McCabe2001,Liu2015}, NEMD and EMD should yield consistent results when applied properly. We chose to utilize EMD to further demonstrate the performance of this method at extreme pressures. 
+
+Consistent with our previous study, we perform EMD simulations using GROMACS version 2018 with ``mixed'' (single and double) precision \cite{GROMACS_2018}. Example GROMACS input files (.top, .gro. and .mdp) with corresponding shell and Python scripts for preparing, running, and analyzing simulations are provided in Section \ref{SI:Gromacs input files} of Supplementary Material.
 	
 %	GROMACS is compiled using GNU 7.3.0, OpenMPI enabled, and GPU support disabled. The simulations are run using Linux 4.4.0-112-generic x86\_64 on an Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz machine. 
 	
@@ -770,7 +776,7 @@
 
 As expected, the traditional Barus $\alpha$ value is constant with respect to pressure. By contrast, the Roelands $\alpha$ value actually decreases with increasing pressure, while the Roelands-Modified $\alpha$ value increases with respect to pressure but without a change from negative to positive slope. Only the McEwen-Paluch $\alpha$ value shows the marked change in slope which corresponds to an inflection point in the log$_{10}(\eta)$-$P$ plot. 
 
-Note that the $\alpha$ magnitudes for all empirical models are reasonable (i.e., similar in magnitude to other lubricants \cite{Mundy1996,McCabe2001,Liu2015}) over the entire range of pressures. In comparison with the IFPSC10 experimental value at 900 MPa ($\alpha$ = 7.52), however, the MiPPE simulation results overestimate the pressure-viscosity dependence at high pressures.
+Note that the $\alpha$ magnitudes for all empirical models are reasonable (i.e., similar in magnitude to other lubricants \cite{Mundy1996,McCabe2001,Liu2015}) over the entire range of pressures. In comparison with the IFPSC10 experimental value at 900 MPa ($\alpha$ = 7.52 1/GPa), however, the MiPPE simulation results overestimate the pressure-viscosity dependence at high pressures.
 
 % Equations \ref{eq:Barus}, \ref{eq:Roelands}, and \ref{eq:McEwen-Paluch}.
 	
@@ -863,7 +869,7 @@ Note that the $\alpha$ magnitudes for all empirical models are reasonable (i.e.,
 	
     \section{Discussion} \label{Discussion/Limitations}   
 
-    Although the MiPPE viscosities for 224TMH are quantitatively reliable for $P \le 600$ MPa, the percent deviation relative to experiment is approximately 300\% at 1000 MPa. The rapid increase in $\eta$ with respect to $P$ also results in over prediction of the pressure-viscosity coefficient $(\alpha)$ at 900 MPa (11.77 compared to the IFPSC10 experimental value of 7.52). We suspect that this poor performance at the highest pressures is caused by the Mie 16-6 potential being overly repulsive at short distances \cite{Postdoc_3,Postdoc_2}. For this reason, MiPPE is more likely to predict super-Arrhenius behavior than traditional Lennard-Jones 12-6 force fields. Note that, as demonstrated in our previous study \cite{Postdoc_2}, we also expect the densities reported in Table \ref{tab:tabulated_values} at high pressures to be significantly lower than experimental densities.
+    Although the MiPPE viscosities for 224TMH are quantitatively reliable for $P \le 600$ MPa, the percent deviation relative to experiment is approximately 300\% at 1000 MPa. The rapid increase in $\eta$ with respect to $P$ also results in over prediction of the pressure-viscosity coefficient $(\alpha)$ at 900 MPa (11.77 1/GPa compared to the IFPSC10 experimental value of 7.52 1/GPa). We suspect that this poor performance at the highest pressures is caused by the Mie 16-6 potential being overly repulsive at short distances \cite{Postdoc_3,Postdoc_2}. For this reason, MiPPE is more likely to predict super-Arrhenius behavior than traditional Lennard-Jones 12-6 force fields. Note that, as demonstrated in our previous study \cite{Postdoc_2}, we also expect the densities reported in Table \ref{tab:tabulated_values} at high pressures to be significantly lower than experimental densities.
     
     It is surprising that both the non-bonded and torsional parameter uncertainties are negligible compared to the numerical uncertainties in $\eta$ (see Figure \ref{fig:viscosity_pressure}). A possible explanation for why the non-bonded parameter uncertainty has a negligible impact on $\eta$ is that the CH$_3$ uncertainties are considerably smaller than those for CH$_2$, CH, and C (see Figure \ref{fig:nonbonded_uncertainty}). As 224TMH consists primarily of CH$_3$ sites, the larger uncertainties in CH$_2$, CH, and C appear to not affect the results significantly. 
     
