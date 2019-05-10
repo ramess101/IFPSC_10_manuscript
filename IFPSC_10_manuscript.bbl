@@ -276,10 +276,26 @@ Michael Frenkel, Robert~D. Chirico, Vladimir Diky, Xinjian Yan, Qian Dong, and
 \newblock {\em Journal of Chemical Information and Modeling}, 45(4):816--838,
   2005.
 
+\bibitem{Galliero2014}
+Guillaume Galliero.
+\newblock Equilibrium, interfacial and transport properties of n-alkanes{:
+  T}owards the simplest coarse grained molecular model.
+\newblock {\em Chemical Engineering Research and Design}, 92(12):3031 -- 3037,
+  2014.
+\newblock Special Issue: Advances in Thermodynamics for Chemical Process and
+  Product Design.
+
 \bibitem{Khabaz2018}
 Fardin Khabaz and Rajesh Khare.
 \newblock Molecular simulations of asphalt rheology{: A}pplication of
   time-temperature superposition principle.
 \newblock {\em Journal of Rheology}, 62(4):941--954, 2018.
+
+\bibitem{Voeltzel2016}
+Nicolas Voeltzel, Philippe Vergne, Nicolas Fillot, Nathalie Bouscharain, and
+  Laurent Joly.
+\newblock Rheology of an ionic liquid with variable carreau exponent{: A} full
+  picture by molecular simulation with experimental contribution.
+\newblock {\em Tribology Letters}, 64(2):25, Oct 2016.
 
 \end{thebibliography}
